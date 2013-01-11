@@ -139,8 +139,8 @@
     }
     
     // Configure the cell
-    cell.textLabel.text = [NSString stringWithFormat:@"Nieuwsbrief: %@", [object objectForKey:@"name"]];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"Gepubliceerd: %@", [[SBSStyle longStyleDateFormatter] stringFromDate:[object objectForKey:@"publishedAt"]]];
+    cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"News letter: %@", nil), [object objectForKey:@"name"]];
+    cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Published: %@", nil), [[SBSStyle longStyleDateFormatter] stringFromDate:[object objectForKey:@"publishedAt"]]];
     
     return cell;
 }

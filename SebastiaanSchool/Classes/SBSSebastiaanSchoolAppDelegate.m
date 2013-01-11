@@ -90,14 +90,14 @@
 
 -(UIViewController *) createNewsLetterController {
     SBSNewsLetterTableViewController *controller = [[SBSNewsLetterTableViewController alloc] initWithStyle:UITableViewStylePlain];
-    controller.title = @"Nieuwsbrief";
+    controller.title = NSLocalizedString(@"News letter", nil);
     
     return [self createNavControllerWithRootController:controller andTabTitle:controller.title];
 }
 
 -(UIViewController *) createRootViewController {
     SBSRootViewController *controller = [[SBSRootViewController alloc] init];
-    controller.title = @"Root";
+    controller.title = NSLocalizedString(@"Root", nil);
     
     return [self createNavControllerWithRootController:controller andTabTitle:controller.title];
 }
