@@ -1,0 +1,11 @@
+{
+    "applications": {
+        "Seb@stiaan School": {
+            "applicationId": "your_app_id", 
+            "masterKey": "your_master_key"
+        }, 
+        "_default": {
+            "link": "Seb@stiaan School"
+        }
+    }
+}
