@@ -32,6 +32,7 @@
 		4ADC935716A00CBF00DAA972 /* GeneratedConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADC935616A00CBF00DAA972 /* GeneratedConstants.m */; };
 		4ADC936E16A022B500DAA972 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ADC936D16A022B500DAA972 /* Icon.png */; };
 		4ADC937016A022C000DAA972 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ADC936F16A022C000DAA972 /* Icon@2x.png */; };
+		4ADFE4E816A0A36100EDAD2A /* SBSStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADFE4E716A0A36100EDAD2A /* SBSStyle.m */; };
 		6332375415E438E900AE2736 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6332375315E438E900AE2736 /* libsqlite3.dylib */; };
 		6372FF531613CC3C002132AF /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6372FF521613CC3C002132AF /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		6372FF561613CC42002132AF /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6372FF551613CC42002132AF /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -78,6 +79,8 @@
 		4ADC936D16A022B500DAA972 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		4ADC936F16A022C000DAA972 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		4ADC937B16A0283B00DAA972 /* SBSSebastiaanSchoolAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBSSebastiaanSchoolAppDelegate.h; sourceTree = "<group>"; };
+		4ADFE4E616A0A36100EDAD2A /* SBSStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBSStyle.h; sourceTree = "<group>"; };
+		4ADFE4E716A0A36100EDAD2A /* SBSStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBSStyle.m; sourceTree = "<group>"; };
 		6332375315E438E900AE2736 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		6372FF521613CC3C002132AF /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		6372FF551613CC42002132AF /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
@@ -176,6 +179,8 @@
 				4A1966A016A086910011EFBF /* SBSNewsLetterTableViewController.m */,
 				4A1966A616A08DAE0011EFBF /* SBSNewsLetterViewController.h */,
 				4A1966A716A08DAE0011EFBF /* SBSNewsLetterViewController.m */,
+				4ADFE4E616A0A36100EDAD2A /* SBSStyle.h */,
+				4ADFE4E716A0A36100EDAD2A /* SBSStyle.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -296,6 +301,7 @@
 				4ADC935716A00CBF00DAA972 /* GeneratedConstants.m in Sources */,
 				4A1966A116A086910011EFBF /* SBSNewsLetterTableViewController.m in Sources */,
 				4A1966A816A08DAE0011EFBF /* SBSNewsLetterViewController.m in Sources */,
+				4ADFE4E816A0A36100EDAD2A /* SBSStyle.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
