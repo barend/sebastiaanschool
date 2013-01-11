@@ -22,16 +22,8 @@
     [PFACL setDefaultACL:defaultACL withAccessForCurrentUser:YES];
     
     // Override point for customization after application launch.
-    
-    SBSNewsLetterTableViewController *newsLettersController = [[SBSNewsLetterTableViewController alloc] initWithStyle:UITableViewStylePlain];
-    newsLettersController.title = @"Nieuwsbrief";
-    UINavigationController *newsLetterNavController = [[UINavigationController alloc] initWithRootViewController:newsLettersController];
-    newsLetterNavController.tabBarItem.title = @"Nieuwsbrief";
-    [self.rootViewController addChildViewController:newsLetterNavController];
-    
-    SBSRootViewController *rootViewController = [[SBSRootViewController alloc] init];
-    rootViewController.tabBarItem.title = @"Root";
-    [self.rootViewController addChildViewController:rootViewController];
+    [self.rootViewController addChildViewController:[self createNewsLetterController]];
+    [self.rootViewController addChildViewController:[self createRootViewController]];
     
     self.window.rootViewController = self.rootViewController;
     [self.window makeKeyAndVisible];
@@ -94,14 +86,38 @@
      */
 }
 
+#pragma mark - UIViewController creation
+
+-(UIViewController *) createNewsLetterController {
+    SBSNewsLetterTableViewController *controller = [[SBSNewsLetterTableViewController alloc] initWithStyle:UITableViewStylePlain];
+    controller.title = @"Nieuwsbrief";
+    
+    return [self createNavControllerWithRootController:controller andTabTitle:controller.title];
+}
+
+-(UIViewController *) createRootViewController {
+    SBSRootViewController *controller = [[SBSRootViewController alloc] init];
+    controller.title = @"Root";
+    
+    return [self createNavControllerWithRootController:controller andTabTitle:controller.title];
+}
+
+-(UINavigationController *) createNavControllerWithRootController:(UIViewController *)rootController andTabTitle:(NSString *) tabTitle {
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:rootController];
+    navController.navigationBar.tintColor = [SBSStyle sebastiaanBlueColor];
+    navController.tabBarItem.title = tabTitle;
+
+    return navController;
+}
+
 
 #pragma mark - ()
 
 - (void)subscribeFinished:(NSNumber *)result error:(NSError *)error {
     if ([result boolValue]) {
-        NSLog(@"ParseStarterProject successfully subscribed to push notifications on the broadcast channel.");
+        NSLog(@"Sebastiaan app successfully subscribed to push notifications on the broadcast channel.");
     } else {
-        NSLog(@"ParseStarterProject failed to subscribe to push notifications on the broadcast channel.");
+        NSLog(@"Sebastiaan app failed to subscribe to push notifications on the broadcast channel.");
     }
 }
 
