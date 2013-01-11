@@ -7,5 +7,7 @@
 #
 #  Created by Jeroen Leenarts on 11-01-13.
 #
-PARSE_APPLICATION_ID="Dummy"
-PARSE_CLIENT_KEY="Dummy"
+export PARSE_APPLICATION_ID="Dummy"
+export PARSE_CLIENT_KEY="Dummy"
+export PARSE_REST_API_KEY="Dummy"
+
