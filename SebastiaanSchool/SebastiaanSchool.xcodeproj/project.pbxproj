@@ -18,17 +18,18 @@
 		09BEF34C13D51C3F001BBCDB /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09BEF34B13D51C3F001BBCDB /* Security.framework */; };
 		2FCDD6B014A573F500295AAC /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FCDD6AF14A573F500295AAC /* QuartzCore.framework */; };
 		4998650515BF305000803E05 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4998650415BF305000803E05 /* StoreKit.framework */; };
+		4A1966A116A086910011EFBF /* SBSNewsLetterTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A1966A016A086910011EFBF /* SBSNewsLetterTableViewController.m */; };
+		4A1966A816A08DAE0011EFBF /* SBSNewsLetterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A1966A716A08DAE0011EFBF /* SBSNewsLetterViewController.m */; };
+		4A3B996016A0830600241D4C /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A3B995F16A0830600241D4C /* MainWindow.xib */; };
+		4A3B996216A0834400241D4C /* SBSRootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A3B996116A0834400241D4C /* SBSRootViewController.xib */; };
 		4ADC932E16A0050600DAA972 /* SBSSebastiaanSchoolAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADC931E16A0050600DAA972 /* SBSSebastiaanSchoolAppDelegate.m */; };
 		4ADC932F16A0050600DAA972 /* SBSRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADC932016A0050600DAA972 /* SBSRootViewController.m */; };
 		4ADC933016A0050600DAA972 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ADC932216A0050600DAA972 /* Default-568h@2x.png */; };
 		4ADC933116A0050600DAA972 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ADC932316A0050600DAA972 /* Default.png */; };
 		4ADC933216A0050600DAA972 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ADC932416A0050600DAA972 /* Default@2x.png */; };
 		4ADC933316A0050600DAA972 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4ADC932516A0050600DAA972 /* InfoPlist.strings */; };
-		4ADC933616A0050600DAA972 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4ADC932B16A0050600DAA972 /* Entitlements.plist */; };
 		4ADC933B16A0063700DAA972 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADC933A16A0063700DAA972 /* main.m */; };
 		4ADC935716A00CBF00DAA972 /* GeneratedConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADC935616A00CBF00DAA972 /* GeneratedConstants.m */; };
-		4ADC936416A014DF00DAA972 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4ADC936016A014DF00DAA972 /* MainWindow.xib */; };
-		4ADC936516A014DF00DAA972 /* SBSRootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4ADC936216A014DF00DAA972 /* SBSRootViewController.xib */; };
 		4ADC936E16A022B500DAA972 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ADC936D16A022B500DAA972 /* Icon.png */; };
 		4ADC937016A022C000DAA972 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ADC936F16A022C000DAA972 /* Icon@2x.png */; };
 		6332375415E438E900AE2736 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6332375315E438E900AE2736 /* libsqlite3.dylib */; };
@@ -52,6 +53,13 @@
 		09BEF34B13D51C3F001BBCDB /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		2FCDD6AF14A573F500295AAC /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		4998650415BF305000803E05 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		4A19669F16A086910011EFBF /* SBSNewsLetterTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBSNewsLetterTableViewController.h; sourceTree = "<group>"; };
+		4A1966A016A086910011EFBF /* SBSNewsLetterTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBSNewsLetterTableViewController.m; sourceTree = "<group>"; };
+		4A1966A616A08DAE0011EFBF /* SBSNewsLetterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBSNewsLetterViewController.h; sourceTree = "<group>"; };
+		4A1966A716A08DAE0011EFBF /* SBSNewsLetterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBSNewsLetterViewController.m; sourceTree = "<group>"; };
+		4A3B995B16A0781900241D4C /* SebastiaanSchool.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = SebastiaanSchool.entitlements; sourceTree = "<group>"; };
+		4A3B995F16A0830600241D4C /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
+		4A3B996116A0834400241D4C /* SBSRootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SBSRootViewController.xib; sourceTree = "<group>"; };
 		4ADC931E16A0050600DAA972 /* SBSSebastiaanSchoolAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBSSebastiaanSchoolAppDelegate.m; sourceTree = "<group>"; };
 		4ADC931F16A0050600DAA972 /* SBSRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBSRootViewController.h; sourceTree = "<group>"; };
 		4ADC932016A0050600DAA972 /* SBSRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBSRootViewController.m; sourceTree = "<group>"; };
@@ -59,7 +67,6 @@
 		4ADC932316A0050600DAA972 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		4ADC932416A0050600DAA972 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		4ADC932616A0050600DAA972 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		4ADC932B16A0050600DAA972 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 		4ADC933716A0062900DAA972 /* SebastiaanSchool-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "SebastiaanSchool-Info.plist"; sourceTree = "<group>"; };
 		4ADC933916A0063000DAA972 /* SBSSebastiaanSchool-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SBSSebastiaanSchool-Prefix.pch"; sourceTree = "<group>"; };
 		4ADC933A16A0063700DAA972 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -68,8 +75,6 @@
 		4ADC935616A00CBF00DAA972 /* GeneratedConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GeneratedConstants.m; path = "derived-sources/GeneratedConstants.m"; sourceTree = SOURCE_ROOT; };
 		4ADC935C16A0121B00DAA972 /* setEnv-Example.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "setEnv-Example.sh"; sourceTree = "<group>"; };
 		4ADC935E16A012C000DAA972 /* setEnv.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = setEnv.sh; sourceTree = "<group>"; };
-		4ADC936116A014DF00DAA972 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainWindow.xib; sourceTree = "<group>"; };
-		4ADC936316A014DF00DAA972 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SBSRootViewController.xib; sourceTree = "<group>"; };
 		4ADC936D16A022B500DAA972 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		4ADC936F16A022C000DAA972 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		4ADC937B16A0283B00DAA972 /* SBSSebastiaanSchoolAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBSSebastiaanSchoolAppDelegate.h; sourceTree = "<group>"; };
@@ -112,6 +117,7 @@
 		09ABC06213A1D52D009C3FCF = {
 			isa = PBXGroup;
 			children = (
+				4A3B995B16A0781900241D4C /* SebastiaanSchool.entitlements */,
 				4ADC936F16A022C000DAA972 /* Icon@2x.png */,
 				4ADC936D16A022B500DAA972 /* Icon.png */,
 				4ADC934816A00B4300DAA972 /* bin */,
@@ -166,6 +172,10 @@
 				4ADC931E16A0050600DAA972 /* SBSSebastiaanSchoolAppDelegate.m */,
 				4ADC931F16A0050600DAA972 /* SBSRootViewController.h */,
 				4ADC932016A0050600DAA972 /* SBSRootViewController.m */,
+				4A19669F16A086910011EFBF /* SBSNewsLetterTableViewController.h */,
+				4A1966A016A086910011EFBF /* SBSNewsLetterTableViewController.m */,
+				4A1966A616A08DAE0011EFBF /* SBSNewsLetterViewController.h */,
+				4A1966A716A08DAE0011EFBF /* SBSNewsLetterViewController.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -173,13 +183,12 @@
 		4ADC932116A0050600DAA972 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4A3B996116A0834400241D4C /* SBSRootViewController.xib */,
+				4A3B995F16A0830600241D4C /* MainWindow.xib */,
 				4ADC932216A0050600DAA972 /* Default-568h@2x.png */,
 				4ADC932316A0050600DAA972 /* Default.png */,
 				4ADC932416A0050600DAA972 /* Default@2x.png */,
 				4ADC932516A0050600DAA972 /* InfoPlist.strings */,
-				4ADC936016A014DF00DAA972 /* MainWindow.xib */,
-				4ADC936216A014DF00DAA972 /* SBSRootViewController.xib */,
-				4ADC932B16A0050600DAA972 /* Entitlements.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -250,11 +259,10 @@
 				4ADC933116A0050600DAA972 /* Default.png in Resources */,
 				4ADC933216A0050600DAA972 /* Default@2x.png in Resources */,
 				4ADC933316A0050600DAA972 /* InfoPlist.strings in Resources */,
-				4ADC933616A0050600DAA972 /* Entitlements.plist in Resources */,
-				4ADC936416A014DF00DAA972 /* MainWindow.xib in Resources */,
-				4ADC936516A014DF00DAA972 /* SBSRootViewController.xib in Resources */,
 				4ADC936E16A022B500DAA972 /* Icon.png in Resources */,
 				4ADC937016A022C000DAA972 /* Icon@2x.png in Resources */,
+				4A3B996016A0830600241D4C /* MainWindow.xib in Resources */,
+				4A3B996216A0834400241D4C /* SBSRootViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,6 +294,8 @@
 				4ADC932F16A0050600DAA972 /* SBSRootViewController.m in Sources */,
 				4ADC933B16A0063700DAA972 /* main.m in Sources */,
 				4ADC935716A00CBF00DAA972 /* GeneratedConstants.m in Sources */,
+				4A1966A116A086910011EFBF /* SBSNewsLetterTableViewController.m in Sources */,
+				4A1966A816A08DAE0011EFBF /* SBSNewsLetterViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,22 +308,6 @@
 				4ADC932616A0050600DAA972 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		4ADC936016A014DF00DAA972 /* MainWindow.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4ADC936116A014DF00DAA972 /* Base */,
-			);
-			name = MainWindow.xib;
-			sourceTree = "<group>";
-		};
-		4ADC936216A014DF00DAA972 /* SBSRootViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4ADC936316A014DF00DAA972 /* Base */,
-			);
-			name = SBSRootViewController.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -362,6 +356,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_ENTITLEMENTS = SebastiaanSchool.entitlements;
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -382,6 +377,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_ENTITLEMENTS = SebastiaanSchool.entitlements;
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

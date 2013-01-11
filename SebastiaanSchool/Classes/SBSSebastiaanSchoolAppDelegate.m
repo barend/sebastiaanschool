@@ -1,6 +1,7 @@
 #import <Parse/Parse.h>
 #import "SBSSebastiaanSchoolAppDelegate.h"
 #import "SBSRootViewController.h"
+#import "SBSNewsLetterTableViewController.h"
 
 @implementation SBSSebastiaanSchoolAppDelegate
 
@@ -21,7 +22,17 @@
     [PFACL setDefaultACL:defaultACL withAccessForCurrentUser:YES];
     
     // Override point for customization after application launch.
-     
+    
+    SBSNewsLetterTableViewController *newsLettersController = [[SBSNewsLetterTableViewController alloc] initWithStyle:UITableViewStylePlain];
+    newsLettersController.title = @"Nieuwsbrief";
+    UINavigationController *newsLetterNavController = [[UINavigationController alloc] initWithRootViewController:newsLettersController];
+    newsLetterNavController.tabBarItem.title = @"Nieuwsbrief";
+    [self.rootViewController addChildViewController:newsLetterNavController];
+    
+    SBSRootViewController *rootViewController = [[SBSRootViewController alloc] init];
+    rootViewController.tabBarItem.title = @"Root";
+    [self.rootViewController addChildViewController:rootViewController];
+    
     self.window.rootViewController = self.rootViewController;
     [self.window makeKeyAndVisible];
     
@@ -34,7 +45,6 @@
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)newDeviceToken {
     [PFPush storeDeviceToken:newDeviceToken];
     [PFPush subscribeToChannelInBackground:@"" target:self selector:@selector(subscribeFinished:error:)];
-    [PFPush subscribeToChannelInBackground:@"test"];
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
