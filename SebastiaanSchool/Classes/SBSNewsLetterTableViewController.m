@@ -136,6 +136,13 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        
+        UIView * const newSelectedBackgroundView = [[UIView alloc] initWithFrame:cell.bounds];
+        newSelectedBackgroundView.backgroundColor = [SBSStyle sebastiaanBlueColor];
+        newSelectedBackgroundView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+        cell.selectedBackgroundView = newSelectedBackgroundView;
+
+        cell.selectedBackgroundView.backgroundColor = [SBSStyle sebastiaanBlueColor];
     }
     
     // Configure the cell
