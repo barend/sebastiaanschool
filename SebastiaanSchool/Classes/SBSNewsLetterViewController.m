@@ -12,6 +12,7 @@
 
 @property (nonatomic, strong) PFObject * newsLetter;
 @property (nonatomic, strong) UIWebView * webView;
+@property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
 
 @end
 
@@ -33,6 +34,14 @@
     self.webView.scalesPageToFit = YES;
     self.webView.delegate = self;
     [self.view addSubview:self.webView];
+    
+    self.activityIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    self.activityIndicator.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleLeftMargin;
+    CGRect activityFrame = self.activityIndicator.frame;
+    activityFrame.origin.y = (self.view.bounds.size.height - activityFrame.size.height) / 2.0f;
+    activityFrame.origin.x = (self.view.bounds.size.width - activityFrame.size.width) / 2.0f;
+    self.activityIndicator.frame = CGRectIntegral(activityFrame);
+    [self.view addSubview:self.activityIndicator];
 }
 
 - (void)viewDidLoad
@@ -55,6 +64,7 @@
 #pragma mark - UIWebView delegate implementation
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
     NSLog(@"Error web");
+    [self.activityIndicator stopAnimating];
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
@@ -64,10 +74,12 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     NSLog(@"Finish web");
+    [self.activityIndicator stopAnimating];
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView {
     NSLog(@"Start web");
+    [self.activityIndicator startAnimating];
 }
 
 @end
