@@ -139,19 +139,12 @@
     }
     
     // Configure the cell
-    cell.textLabel.text = [object objectForKey:@"name"];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"Gepubliceerd: %@", [object objectForKey:@"publishedAt"]];
+    cell.textLabel.text = [NSString stringWithFormat:@"Nieuwsbrief: %@", [object objectForKey:@"name"]];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"Gepubliceerd: %@", [[SBSStyle longStyleDateFormatter] stringFromDate:[object objectForKey:@"publishedAt"]]];
     
     return cell;
 }
 
-
-/*
- // Override if you need to change the ordering of objects in the table.
- - (PFObject *)objectAtIndex:(NSIndexPath *)indexPath {
- return [objects objectAtIndex:indexPath.row];
- }
- */
 
 /*
  // Override to customize the look of the cell that allows the user to load the next page of objects.
@@ -197,21 +190,6 @@
  }
  */
 
-/*
- // Override to support rearranging the table view.
- - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
- {
- }
- */
-
-/*
- // Override to support conditional rearranging of the table view.
- - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
- {
- // Return NO if you do not want the item to be re-orderable.
- return YES;
- }
- */
 
 #pragma mark - Table view delegate
 

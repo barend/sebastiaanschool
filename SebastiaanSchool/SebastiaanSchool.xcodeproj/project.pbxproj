@@ -27,7 +27,6 @@
 		4ADC933016A0050600DAA972 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ADC932216A0050600DAA972 /* Default-568h@2x.png */; };
 		4ADC933116A0050600DAA972 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ADC932316A0050600DAA972 /* Default.png */; };
 		4ADC933216A0050600DAA972 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ADC932416A0050600DAA972 /* Default@2x.png */; };
-		4ADC933316A0050600DAA972 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4ADC932516A0050600DAA972 /* InfoPlist.strings */; };
 		4ADC933B16A0063700DAA972 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADC933A16A0063700DAA972 /* main.m */; };
 		4ADC935716A00CBF00DAA972 /* GeneratedConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADC935616A00CBF00DAA972 /* GeneratedConstants.m */; };
 		4ADC936E16A022B500DAA972 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ADC936D16A022B500DAA972 /* Icon.png */; };
@@ -67,7 +66,6 @@
 		4ADC932216A0050600DAA972 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		4ADC932316A0050600DAA972 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		4ADC932416A0050600DAA972 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		4ADC932616A0050600DAA972 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4ADC933716A0062900DAA972 /* SebastiaanSchool-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "SebastiaanSchool-Info.plist"; sourceTree = "<group>"; };
 		4ADC933916A0063000DAA972 /* SBSSebastiaanSchool-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SBSSebastiaanSchool-Prefix.pch"; sourceTree = "<group>"; };
 		4ADC933A16A0063700DAA972 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -193,7 +191,6 @@
 				4ADC932216A0050600DAA972 /* Default-568h@2x.png */,
 				4ADC932316A0050600DAA972 /* Default.png */,
 				4ADC932416A0050600DAA972 /* Default@2x.png */,
-				4ADC932516A0050600DAA972 /* InfoPlist.strings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -263,7 +260,6 @@
 				4ADC933016A0050600DAA972 /* Default-568h@2x.png in Resources */,
 				4ADC933116A0050600DAA972 /* Default.png in Resources */,
 				4ADC933216A0050600DAA972 /* Default@2x.png in Resources */,
-				4ADC933316A0050600DAA972 /* InfoPlist.strings in Resources */,
 				4ADC936E16A022B500DAA972 /* Icon.png in Resources */,
 				4ADC937016A022C000DAA972 /* Icon@2x.png in Resources */,
 				4A3B996016A0830600241D4C /* MainWindow.xib in Resources */,
@@ -306,17 +302,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		4ADC932516A0050600DAA972 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4ADC932616A0050600DAA972 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		09ABC08C13A1D52E009C3FCF /* Debug */ = {

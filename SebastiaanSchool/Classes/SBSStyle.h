@@ -12,4 +12,6 @@
 
 + (UIColor *)sebastiaanBlueColor;
 
++ (NSDateFormatter *)longStyleDateFormatter;
+
 @end
