@@ -24,12 +24,14 @@
 		4A3B996216A0834400241D4C /* SBSRootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A3B996116A0834400241D4C /* SBSRootViewController.xib */; };
 		4A71D3AD16A152A800A11C80 /* SBSContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A71D3AC16A152A800A11C80 /* SBSContactViewController.m */; };
 		4A71D3B616A155D100A11C80 /* SBSInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A71D3B516A155D100A11C80 /* SBSInfoViewController.m */; };
-		4A71D3BD16A1596F00A11C80 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A71D3BC16A1596F00A11C80 /* Icon-72.png */; };
-		4A71D3BF16A1597600A11C80 /* Icon-144.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A71D3BE16A1597600A11C80 /* Icon-144.png */; };
 		4A71D3C416A15C6B00A11C80 /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A71D3C016A15C6B00A11C80 /* Default-Landscape@2x~ipad.png */; };
 		4A71D3C516A15C6B00A11C80 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A71D3C116A15C6B00A11C80 /* Default-Landscape~ipad.png */; };
 		4A71D3C616A15C6B00A11C80 /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A71D3C216A15C6B00A11C80 /* Default-Portrait@2x~ipad.png */; };
 		4A71D3C716A15C6B00A11C80 /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A71D3C316A15C6B00A11C80 /* Default-Portrait~ipad.png */; };
+		4A71D3CC16A15CDF00A11C80 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A71D3C816A15CDF00A11C80 /* Icon-72.png */; };
+		4A71D3CD16A15CDF00A11C80 /* Icon-144.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A71D3C916A15CDF00A11C80 /* Icon-144.png */; };
+		4A71D3CE16A15CDF00A11C80 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A71D3CA16A15CDF00A11C80 /* Icon.png */; };
+		4A71D3CF16A15CDF00A11C80 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A71D3CB16A15CDF00A11C80 /* Icon@2x.png */; };
 		4AC3F7F616A0AF2600452D33 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4AC3F7F816A0AF2600452D33 /* Localizable.strings */; };
 		4AC3F7FC16A0AFBB00452D33 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4AC3F7FE16A0AFBB00452D33 /* InfoPlist.strings */; };
 		4ADC932E16A0050600DAA972 /* SBSSebastiaanSchoolAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADC931E16A0050600DAA972 /* SBSSebastiaanSchoolAppDelegate.m */; };
@@ -39,8 +41,6 @@
 		4ADC933216A0050600DAA972 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ADC932416A0050600DAA972 /* Default@2x.png */; };
 		4ADC933B16A0063700DAA972 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADC933A16A0063700DAA972 /* main.m */; };
 		4ADC935716A00CBF00DAA972 /* GeneratedConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADC935616A00CBF00DAA972 /* GeneratedConstants.m */; };
-		4ADC936E16A022B500DAA972 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ADC936D16A022B500DAA972 /* Icon.png */; };
-		4ADC937016A022C000DAA972 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ADC936F16A022C000DAA972 /* Icon@2x.png */; };
 		4ADFE4E816A0A36100EDAD2A /* SBSStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADFE4E716A0A36100EDAD2A /* SBSStyle.m */; };
 		6332375415E438E900AE2736 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6332375315E438E900AE2736 /* libsqlite3.dylib */; };
 		6372FF531613CC3C002132AF /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6372FF521613CC3C002132AF /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -75,12 +75,14 @@
 		4A71D3AC16A152A800A11C80 /* SBSContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBSContactViewController.m; sourceTree = "<group>"; };
 		4A71D3B416A155D100A11C80 /* SBSInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBSInfoViewController.h; sourceTree = "<group>"; };
 		4A71D3B516A155D100A11C80 /* SBSInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBSInfoViewController.m; sourceTree = "<group>"; };
-		4A71D3BC16A1596F00A11C80 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
-		4A71D3BE16A1597600A11C80 /* Icon-144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-144.png"; sourceTree = "<group>"; };
 		4A71D3C016A15C6B00A11C80 /* Default-Landscape@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape@2x~ipad.png"; sourceTree = "<group>"; };
 		4A71D3C116A15C6B00A11C80 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
 		4A71D3C216A15C6B00A11C80 /* Default-Portrait@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait@2x~ipad.png"; sourceTree = "<group>"; };
 		4A71D3C316A15C6B00A11C80 /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait~ipad.png"; sourceTree = "<group>"; };
+		4A71D3C816A15CDF00A11C80 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
+		4A71D3C916A15CDF00A11C80 /* Icon-144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-144.png"; sourceTree = "<group>"; };
+		4A71D3CA16A15CDF00A11C80 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		4A71D3CB16A15CDF00A11C80 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		4AC3F7F716A0AF2600452D33 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4AC3F7F916A0AF3800452D33 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4AC3F7FD16A0AFBB00452D33 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -98,8 +100,6 @@
 		4ADC935616A00CBF00DAA972 /* GeneratedConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GeneratedConstants.m; path = "derived-sources/GeneratedConstants.m"; sourceTree = SOURCE_ROOT; };
 		4ADC935C16A0121B00DAA972 /* setEnv-Example.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "setEnv-Example.sh"; sourceTree = "<group>"; };
 		4ADC935E16A012C000DAA972 /* setEnv.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = setEnv.sh; sourceTree = "<group>"; };
-		4ADC936D16A022B500DAA972 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
-		4ADC936F16A022C000DAA972 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		4ADC937B16A0283B00DAA972 /* SBSSebastiaanSchoolAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBSSebastiaanSchoolAppDelegate.h; sourceTree = "<group>"; };
 		4ADFE4E616A0A36100EDAD2A /* SBSStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBSStyle.h; sourceTree = "<group>"; };
 		4ADFE4E716A0A36100EDAD2A /* SBSStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBSStyle.m; sourceTree = "<group>"; };
@@ -143,10 +143,6 @@
 			isa = PBXGroup;
 			children = (
 				4A3B995B16A0781900241D4C /* SebastiaanSchool.entitlements */,
-				4ADC936D16A022B500DAA972 /* Icon.png */,
-				4A71D3BC16A1596F00A11C80 /* Icon-72.png */,
-				4ADC936F16A022C000DAA972 /* Icon@2x.png */,
-				4A71D3BE16A1597600A11C80 /* Icon-144.png */,
 				4A15DA9616A0AE4200D8EB86 /* SebastiaanSchool-Info.plist */,
 				4AC3F7FE16A0AFBB00452D33 /* InfoPlist.strings */,
 				4ADC934816A00B4300DAA972 /* bin */,
@@ -219,6 +215,10 @@
 			children = (
 				4A3B996116A0834400241D4C /* SBSRootViewController.xib */,
 				4A3B995F16A0830600241D4C /* MainWindow.xib */,
+				4A71D3CA16A15CDF00A11C80 /* Icon.png */,
+				4A71D3C816A15CDF00A11C80 /* Icon-72.png */,
+				4A71D3CB16A15CDF00A11C80 /* Icon@2x.png */,
+				4A71D3C916A15CDF00A11C80 /* Icon-144.png */,
 				4ADC932216A0050600DAA972 /* Default-568h@2x.png */,
 				4ADC932316A0050600DAA972 /* Default.png */,
 				4ADC932416A0050600DAA972 /* Default@2x.png */,
@@ -297,18 +297,18 @@
 				4ADC933016A0050600DAA972 /* Default-568h@2x.png in Resources */,
 				4ADC933116A0050600DAA972 /* Default.png in Resources */,
 				4ADC933216A0050600DAA972 /* Default@2x.png in Resources */,
-				4ADC936E16A022B500DAA972 /* Icon.png in Resources */,
-				4ADC937016A022C000DAA972 /* Icon@2x.png in Resources */,
 				4A3B996016A0830600241D4C /* MainWindow.xib in Resources */,
 				4A3B996216A0834400241D4C /* SBSRootViewController.xib in Resources */,
 				4AC3F7F616A0AF2600452D33 /* Localizable.strings in Resources */,
 				4AC3F7FC16A0AFBB00452D33 /* InfoPlist.strings in Resources */,
-				4A71D3BD16A1596F00A11C80 /* Icon-72.png in Resources */,
-				4A71D3BF16A1597600A11C80 /* Icon-144.png in Resources */,
 				4A71D3C416A15C6B00A11C80 /* Default-Landscape@2x~ipad.png in Resources */,
 				4A71D3C516A15C6B00A11C80 /* Default-Landscape~ipad.png in Resources */,
 				4A71D3C616A15C6B00A11C80 /* Default-Portrait@2x~ipad.png in Resources */,
 				4A71D3C716A15C6B00A11C80 /* Default-Portrait~ipad.png in Resources */,
+				4A71D3CC16A15CDF00A11C80 /* Icon-72.png in Resources */,
+				4A71D3CD16A15CDF00A11C80 /* Icon-144.png in Resources */,
+				4A71D3CE16A15CDF00A11C80 /* Icon.png in Resources */,
+				4A71D3CF16A15CDF00A11C80 /* Icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
