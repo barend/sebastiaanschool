@@ -24,6 +24,12 @@
 		4A3B996216A0834400241D4C /* SBSRootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A3B996116A0834400241D4C /* SBSRootViewController.xib */; };
 		4A71D3AD16A152A800A11C80 /* SBSContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A71D3AC16A152A800A11C80 /* SBSContactViewController.m */; };
 		4A71D3B616A155D100A11C80 /* SBSInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A71D3B516A155D100A11C80 /* SBSInfoViewController.m */; };
+		4A71D3BD16A1596F00A11C80 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A71D3BC16A1596F00A11C80 /* Icon-72.png */; };
+		4A71D3BF16A1597600A11C80 /* Icon-144.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A71D3BE16A1597600A11C80 /* Icon-144.png */; };
+		4A71D3C416A15C6B00A11C80 /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A71D3C016A15C6B00A11C80 /* Default-Landscape@2x~ipad.png */; };
+		4A71D3C516A15C6B00A11C80 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A71D3C116A15C6B00A11C80 /* Default-Landscape~ipad.png */; };
+		4A71D3C616A15C6B00A11C80 /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A71D3C216A15C6B00A11C80 /* Default-Portrait@2x~ipad.png */; };
+		4A71D3C716A15C6B00A11C80 /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A71D3C316A15C6B00A11C80 /* Default-Portrait~ipad.png */; };
 		4AC3F7F616A0AF2600452D33 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4AC3F7F816A0AF2600452D33 /* Localizable.strings */; };
 		4AC3F7FC16A0AFBB00452D33 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4AC3F7FE16A0AFBB00452D33 /* InfoPlist.strings */; };
 		4ADC932E16A0050600DAA972 /* SBSSebastiaanSchoolAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADC931E16A0050600DAA972 /* SBSSebastiaanSchoolAppDelegate.m */; };
@@ -69,6 +75,12 @@
 		4A71D3AC16A152A800A11C80 /* SBSContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBSContactViewController.m; sourceTree = "<group>"; };
 		4A71D3B416A155D100A11C80 /* SBSInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBSInfoViewController.h; sourceTree = "<group>"; };
 		4A71D3B516A155D100A11C80 /* SBSInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBSInfoViewController.m; sourceTree = "<group>"; };
+		4A71D3BC16A1596F00A11C80 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
+		4A71D3BE16A1597600A11C80 /* Icon-144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-144.png"; sourceTree = "<group>"; };
+		4A71D3C016A15C6B00A11C80 /* Default-Landscape@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape@2x~ipad.png"; sourceTree = "<group>"; };
+		4A71D3C116A15C6B00A11C80 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
+		4A71D3C216A15C6B00A11C80 /* Default-Portrait@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait@2x~ipad.png"; sourceTree = "<group>"; };
+		4A71D3C316A15C6B00A11C80 /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait~ipad.png"; sourceTree = "<group>"; };
 		4AC3F7F716A0AF2600452D33 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4AC3F7F916A0AF3800452D33 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4AC3F7FD16A0AFBB00452D33 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -131,8 +143,10 @@
 			isa = PBXGroup;
 			children = (
 				4A3B995B16A0781900241D4C /* SebastiaanSchool.entitlements */,
-				4ADC936F16A022C000DAA972 /* Icon@2x.png */,
 				4ADC936D16A022B500DAA972 /* Icon.png */,
+				4A71D3BC16A1596F00A11C80 /* Icon-72.png */,
+				4ADC936F16A022C000DAA972 /* Icon@2x.png */,
+				4A71D3BE16A1597600A11C80 /* Icon-144.png */,
 				4A15DA9616A0AE4200D8EB86 /* SebastiaanSchool-Info.plist */,
 				4AC3F7FE16A0AFBB00452D33 /* InfoPlist.strings */,
 				4ADC934816A00B4300DAA972 /* bin */,
@@ -208,6 +222,10 @@
 				4ADC932216A0050600DAA972 /* Default-568h@2x.png */,
 				4ADC932316A0050600DAA972 /* Default.png */,
 				4ADC932416A0050600DAA972 /* Default@2x.png */,
+				4A71D3C016A15C6B00A11C80 /* Default-Landscape@2x~ipad.png */,
+				4A71D3C116A15C6B00A11C80 /* Default-Landscape~ipad.png */,
+				4A71D3C216A15C6B00A11C80 /* Default-Portrait@2x~ipad.png */,
+				4A71D3C316A15C6B00A11C80 /* Default-Portrait~ipad.png */,
 				4AC3F7F816A0AF2600452D33 /* Localizable.strings */,
 			);
 			path = Resources;
@@ -285,6 +303,12 @@
 				4A3B996216A0834400241D4C /* SBSRootViewController.xib in Resources */,
 				4AC3F7F616A0AF2600452D33 /* Localizable.strings in Resources */,
 				4AC3F7FC16A0AFBB00452D33 /* InfoPlist.strings in Resources */,
+				4A71D3BD16A1596F00A11C80 /* Icon-72.png in Resources */,
+				4A71D3BF16A1597600A11C80 /* Icon-144.png in Resources */,
+				4A71D3C416A15C6B00A11C80 /* Default-Landscape@2x~ipad.png in Resources */,
+				4A71D3C516A15C6B00A11C80 /* Default-Landscape~ipad.png in Resources */,
+				4A71D3C616A15C6B00A11C80 /* Default-Portrait@2x~ipad.png in Resources */,
+				4A71D3C716A15C6B00A11C80 /* Default-Portrait~ipad.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -404,7 +428,9 @@
 				GCC_PREFIX_HEADER = "SBSSebastiaanSchool-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "SebastiaanSchool-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -424,7 +450,9 @@
 				GCC_PREFIX_HEADER = "SBSSebastiaanSchool-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "SebastiaanSchool-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};
