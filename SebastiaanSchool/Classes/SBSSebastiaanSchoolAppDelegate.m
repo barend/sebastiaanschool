@@ -2,6 +2,8 @@
 #import "SBSSebastiaanSchoolAppDelegate.h"
 #import "SBSRootViewController.h"
 #import "SBSNewsLetterTableViewController.h"
+#import "SBSContactViewController.h"
+#import "SBSInfoViewController.h"
 
 @implementation SBSSebastiaanSchoolAppDelegate
 
@@ -22,8 +24,10 @@
     [PFACL setDefaultACL:defaultACL withAccessForCurrentUser:YES];
     
     // Override point for customization after application launch.
+    [self.rootViewController addChildViewController:[self createInfoViewController]];
     [self.rootViewController addChildViewController:[self createNewsLetterController]];
     [self.rootViewController addChildViewController:[self createRootViewController]];
+    [self.rootViewController addChildViewController:[self createContactViewController]];
     
     self.window.rootViewController = self.rootViewController;
     [self.window makeKeyAndVisible];
@@ -88,6 +92,14 @@
 
 #pragma mark - UIViewController creation
 
+-(UIViewController *) createInfoViewController {
+    SBSInfoViewController *controller = [[SBSInfoViewController alloc] init];
+    controller.title = NSLocalizedString(@"Seb@stiaan", nil);
+    
+    return [self createNavControllerWithRootController:controller andTabTitle:controller.title];
+}
+
+
 -(UIViewController *) createNewsLetterController {
     SBSNewsLetterTableViewController *controller = [[SBSNewsLetterTableViewController alloc] initWithStyle:UITableViewStylePlain];
     controller.title = NSLocalizedString(@"News letter", nil);
@@ -98,6 +110,13 @@
 -(UIViewController *) createRootViewController {
     SBSRootViewController *controller = [[SBSRootViewController alloc] init];
     controller.title = NSLocalizedString(@"Root", nil);
+    
+    return [self createNavControllerWithRootController:controller andTabTitle:controller.title];
+}
+
+-(UIViewController *) createContactViewController {
+    SBSContactViewController *controller = [[SBSContactViewController alloc] init];
+    controller.title = NSLocalizedString(@"Contact", nil);
     
     return [self createNavControllerWithRootController:controller andTabTitle:controller.title];
 }
