@@ -32,6 +32,7 @@
 		4A71D3CD16A15CDF00A11C80 /* Icon-144.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A71D3C916A15CDF00A11C80 /* Icon-144.png */; };
 		4A71D3CE16A15CDF00A11C80 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A71D3CA16A15CDF00A11C80 /* Icon.png */; };
 		4A71D3CF16A15CDF00A11C80 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A71D3CB16A15CDF00A11C80 /* Icon@2x.png */; };
+		4A71D3DA16A3123F00A11C80 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A71D3D916A3123F00A11C80 /* MessageUI.framework */; };
 		4AC3F7F616A0AF2600452D33 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4AC3F7F816A0AF2600452D33 /* Localizable.strings */; };
 		4AC3F7FC16A0AFBB00452D33 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4AC3F7FE16A0AFBB00452D33 /* InfoPlist.strings */; };
 		4ADC932E16A0050600DAA972 /* SBSSebastiaanSchoolAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADC931E16A0050600DAA972 /* SBSSebastiaanSchoolAppDelegate.m */; };
@@ -83,6 +84,7 @@
 		4A71D3C916A15CDF00A11C80 /* Icon-144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-144.png"; sourceTree = "<group>"; };
 		4A71D3CA16A15CDF00A11C80 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		4A71D3CB16A15CDF00A11C80 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		4A71D3D916A3123F00A11C80 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		4AC3F7F716A0AF2600452D33 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4AC3F7F916A0AF3800452D33 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4AC3F7FD16A0AFBB00452D33 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A71D3DA16A3123F00A11C80 /* MessageUI.framework in Frameworks */,
 				97E18B1F1624CB5700B17A67 /* CoreLocation.framework in Frameworks */,
 				6372FF581613CC47002132AF /* AdSupport.framework in Frameworks */,
 				6372FF561613CC42002132AF /* Social.framework in Frameworks */,
@@ -142,6 +145,7 @@
 		09ABC06213A1D52D009C3FCF = {
 			isa = PBXGroup;
 			children = (
+				4A71D3D916A3123F00A11C80 /* MessageUI.framework */,
 				4A3B995B16A0781900241D4C /* SebastiaanSchool.entitlements */,
 				4A15DA9616A0AE4200D8EB86 /* SebastiaanSchool-Info.plist */,
 				4AC3F7FE16A0AFBB00452D33 /* InfoPlist.strings */,

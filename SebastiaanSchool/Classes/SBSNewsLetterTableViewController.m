@@ -100,8 +100,6 @@
         newSelectedBackgroundView.backgroundColor = [SBSStyle sebastiaanBlueColor];
         newSelectedBackgroundView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
         cell.selectedBackgroundView = newSelectedBackgroundView;
-
-        cell.selectedBackgroundView.backgroundColor = [SBSStyle sebastiaanBlueColor];
     }
     
     // Configure the cell
