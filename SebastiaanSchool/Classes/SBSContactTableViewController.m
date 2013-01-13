@@ -83,7 +83,7 @@
         query.cachePolicy = kPFCachePolicyCacheThenNetwork;
     }
     
-//    [query orderByDescending:@"ordering"];
+    [query orderByAscending:@"order"];
     
     return query;
 }
