@@ -96,7 +96,9 @@
     SBSInfoViewController *controller = [[SBSInfoViewController alloc] init];
     controller.title = NSLocalizedString(@"Seb@stiaan", nil);
     
-    return [self createNavControllerWithRootController:controller andTabTitle:controller.title];
+    UINavigationController * navController =  [self createNavControllerWithRootController:controller];
+    navController.tabBarItem.title = controller.title;
+    return navController;
 }
 
 
@@ -104,27 +106,32 @@
     SBSNewsLetterTableViewController *controller = [[SBSNewsLetterTableViewController alloc] initWithStyle:UITableViewStylePlain];
     controller.title = NSLocalizedString(@"News letter", nil);
     
-    return [self createNavControllerWithRootController:controller andTabTitle:controller.title];
+    UINavigationController * navController =  [self createNavControllerWithRootController:controller];
+    navController.tabBarItem.title = controller.title;
+    return navController;
 }
 
 -(UIViewController *) createRootViewController {
     SBSRootViewController *controller = [[SBSRootViewController alloc] init];
     controller.title = NSLocalizedString(@"Root", nil);
     
-    return [self createNavControllerWithRootController:controller andTabTitle:controller.title];
+    UINavigationController * navController =  [self createNavControllerWithRootController:controller];
+    navController.tabBarItem.title = controller.title;
+    return navController;
 }
 
 -(UIViewController *) createContactViewController {
     SBSContactTableViewController *controller = [[SBSContactTableViewController alloc] init];
     controller.title = NSLocalizedString(@"Contact", nil);
     
-    return [self createNavControllerWithRootController:controller andTabTitle:controller.title];
+    UINavigationController * navController = [self createNavControllerWithRootController:controller];
+    navController.tabBarItem.title = controller.title;
+    return navController;
 }
 
--(UINavigationController *) createNavControllerWithRootController:(UIViewController *)rootController andTabTitle:(NSString *) tabTitle {
+-(UINavigationController *) createNavControllerWithRootController:(UIViewController *)rootController {
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:rootController];
     navController.navigationBar.tintColor = [SBSStyle sebastiaanBlueColor];
-    navController.tabBarItem.title = tabTitle;
 
     return navController;
 }
