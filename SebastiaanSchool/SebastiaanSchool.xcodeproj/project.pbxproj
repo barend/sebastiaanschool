@@ -22,7 +22,7 @@
 		4A1966A816A08DAE0011EFBF /* SBSNewsLetterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A1966A716A08DAE0011EFBF /* SBSNewsLetterViewController.m */; };
 		4A3B996016A0830600241D4C /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A3B995F16A0830600241D4C /* MainWindow.xib */; };
 		4A3B996216A0834400241D4C /* SBSRootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A3B996116A0834400241D4C /* SBSRootViewController.xib */; };
-		4A71D3AD16A152A800A11C80 /* SBSContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A71D3AC16A152A800A11C80 /* SBSContactViewController.m */; };
+		4A71D3AD16A152A800A11C80 /* SBSContactTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A71D3AC16A152A800A11C80 /* SBSContactTableViewController.m */; };
 		4A71D3B616A155D100A11C80 /* SBSInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A71D3B516A155D100A11C80 /* SBSInfoViewController.m */; };
 		4A71D3C416A15C6B00A11C80 /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A71D3C016A15C6B00A11C80 /* Default-Landscape@2x~ipad.png */; };
 		4A71D3C516A15C6B00A11C80 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A71D3C116A15C6B00A11C80 /* Default-Landscape~ipad.png */; };
@@ -72,8 +72,8 @@
 		4A3B995B16A0781900241D4C /* SebastiaanSchool.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = SebastiaanSchool.entitlements; sourceTree = "<group>"; };
 		4A3B995F16A0830600241D4C /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		4A3B996116A0834400241D4C /* SBSRootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SBSRootViewController.xib; sourceTree = "<group>"; };
-		4A71D3AB16A152A800A11C80 /* SBSContactViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBSContactViewController.h; sourceTree = "<group>"; };
-		4A71D3AC16A152A800A11C80 /* SBSContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBSContactViewController.m; sourceTree = "<group>"; };
+		4A71D3AB16A152A800A11C80 /* SBSContactTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBSContactTableViewController.h; sourceTree = "<group>"; };
+		4A71D3AC16A152A800A11C80 /* SBSContactTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBSContactTableViewController.m; sourceTree = "<group>"; };
 		4A71D3B416A155D100A11C80 /* SBSInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBSInfoViewController.h; sourceTree = "<group>"; };
 		4A71D3B516A155D100A11C80 /* SBSInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBSInfoViewController.m; sourceTree = "<group>"; };
 		4A71D3C016A15C6B00A11C80 /* Default-Landscape@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape@2x~ipad.png"; sourceTree = "<group>"; };
@@ -206,8 +206,8 @@
 				4A1966A716A08DAE0011EFBF /* SBSNewsLetterViewController.m */,
 				4ADFE4E616A0A36100EDAD2A /* SBSStyle.h */,
 				4ADFE4E716A0A36100EDAD2A /* SBSStyle.m */,
-				4A71D3AB16A152A800A11C80 /* SBSContactViewController.h */,
-				4A71D3AC16A152A800A11C80 /* SBSContactViewController.m */,
+				4A71D3AB16A152A800A11C80 /* SBSContactTableViewController.h */,
+				4A71D3AC16A152A800A11C80 /* SBSContactTableViewController.m */,
 				4A71D3B416A155D100A11C80 /* SBSInfoViewController.h */,
 				4A71D3B516A155D100A11C80 /* SBSInfoViewController.m */,
 			);
@@ -347,7 +347,7 @@
 				4A1966A116A086910011EFBF /* SBSNewsLetterTableViewController.m in Sources */,
 				4A1966A816A08DAE0011EFBF /* SBSNewsLetterViewController.m in Sources */,
 				4ADFE4E816A0A36100EDAD2A /* SBSStyle.m in Sources */,
-				4A71D3AD16A152A800A11C80 /* SBSContactViewController.m in Sources */,
+				4A71D3AD16A152A800A11C80 /* SBSContactTableViewController.m in Sources */,
 				4A71D3B616A155D100A11C80 /* SBSInfoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

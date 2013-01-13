@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
 
-@interface SBSContactViewController : PFQueryTableViewController <MFMailComposeViewControllerDelegate>
+@interface SBSContactTableViewController : PFQueryTableViewController <MFMailComposeViewControllerDelegate>
 
 @end

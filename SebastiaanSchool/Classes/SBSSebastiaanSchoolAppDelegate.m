@@ -2,7 +2,7 @@
 #import "SBSSebastiaanSchoolAppDelegate.h"
 #import "SBSRootViewController.h"
 #import "SBSNewsLetterTableViewController.h"
-#import "SBSContactViewController.h"
+#import "SBSContactTableViewController.h"
 #import "SBSInfoViewController.h"
 
 @implementation SBSSebastiaanSchoolAppDelegate
@@ -115,7 +115,7 @@
 }
 
 -(UIViewController *) createContactViewController {
-    SBSContactViewController *controller = [[SBSContactViewController alloc] init];
+    SBSContactTableViewController *controller = [[SBSContactTableViewController alloc] init];
     controller.title = NSLocalizedString(@"Contact", nil);
     
     return [self createNavControllerWithRootController:controller andTabTitle:controller.title];

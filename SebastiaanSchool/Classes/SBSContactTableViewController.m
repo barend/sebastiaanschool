@@ -6,13 +6,13 @@
 //
 //
 
-#import "SBSContactViewController.h"
+#import "SBSContactTableViewController.h"
 
-@interface SBSContactViewController ()
+@interface SBSContactTableViewController ()
 
 @end
 
-@implementation SBSContactViewController
+@implementation SBSContactTableViewController
 
 
 - (void)didReceiveMemoryWarning
