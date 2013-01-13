@@ -4,6 +4,7 @@
 #import "SBSNewsLetterTableViewController.h"
 #import "SBSContactTableViewController.h"
 #import "SBSInfoViewController.h"
+#import "SBSStaffViewController.h"
 
 @implementation SBSSebastiaanSchoolAppDelegate
 
@@ -23,11 +24,19 @@
     
     [PFACL setDefaultACL:defaultACL withAccessForCurrentUser:YES];
     
+    //TODO make a nice property and utility out of this.
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    BOOL enableStaffLogin = [defaults boolForKey:@"enableStaffLogin"];
+    
     // Override point for customization after application launch.
     [self.rootViewController addChildViewController:[self createInfoViewController]];
     [self.rootViewController addChildViewController:[self createNewsLetterController]];
     [self.rootViewController addChildViewController:[self createRootViewController]];
     [self.rootViewController addChildViewController:[self createContactViewController]];
+    
+    if (enableStaffLogin) {
+        [self.rootViewController addChildViewController:[self createStaffViewController]];
+    }
     
     self.window.rootViewController = self.rootViewController;
     [self.window makeKeyAndVisible];
@@ -128,6 +137,16 @@
     navController.tabBarItem.title = controller.title;
     return navController;
 }
+
+-(UIViewController *) createStaffViewController {
+    SBSStaffViewController *controller = [[SBSStaffViewController alloc] init];
+    controller.title = NSLocalizedString(@"Personeel", nil);
+    
+    UINavigationController * navController =  [self createNavControllerWithRootController:controller];
+    navController.tabBarItem.title = controller.title;
+    return navController;
+}
+
 
 -(UINavigationController *) createNavControllerWithRootController:(UIViewController *)rootController {
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:rootController];

@@ -23,6 +23,7 @@
 		4A3B996016A0830600241D4C /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A3B995F16A0830600241D4C /* MainWindow.xib */; };
 		4A3B996216A0834400241D4C /* SBSRootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A3B996116A0834400241D4C /* SBSRootViewController.xib */; };
 		4A4EA04B16A34CA400F12406 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4A4EA04A16A34CA400F12406 /* Settings.bundle */; };
+		4A4EA05116A3543E00F12406 /* SBSStaffViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A4EA05016A3543E00F12406 /* SBSStaffViewController.m */; };
 		4A71D3AD16A152A800A11C80 /* SBSContactTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A71D3AC16A152A800A11C80 /* SBSContactTableViewController.m */; };
 		4A71D3B616A155D100A11C80 /* SBSInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A71D3B516A155D100A11C80 /* SBSInfoViewController.m */; };
 		4A71D3C416A15C6B00A11C80 /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A71D3C016A15C6B00A11C80 /* Default-Landscape@2x~ipad.png */; };
@@ -74,6 +75,8 @@
 		4A3B995F16A0830600241D4C /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		4A3B996116A0834400241D4C /* SBSRootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SBSRootViewController.xib; sourceTree = "<group>"; };
 		4A4EA04A16A34CA400F12406 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		4A4EA04F16A3543E00F12406 /* SBSStaffViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBSStaffViewController.h; sourceTree = "<group>"; };
+		4A4EA05016A3543E00F12406 /* SBSStaffViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBSStaffViewController.m; sourceTree = "<group>"; };
 		4A71D3AB16A152A800A11C80 /* SBSContactTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBSContactTableViewController.h; sourceTree = "<group>"; };
 		4A71D3AC16A152A800A11C80 /* SBSContactTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBSContactTableViewController.m; sourceTree = "<group>"; };
 		4A71D3B416A155D100A11C80 /* SBSInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBSInfoViewController.h; sourceTree = "<group>"; };
@@ -212,6 +215,8 @@
 				4A71D3AC16A152A800A11C80 /* SBSContactTableViewController.m */,
 				4A71D3B416A155D100A11C80 /* SBSInfoViewController.h */,
 				4A71D3B516A155D100A11C80 /* SBSInfoViewController.m */,
+				4A4EA04F16A3543E00F12406 /* SBSStaffViewController.h */,
+				4A4EA05016A3543E00F12406 /* SBSStaffViewController.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -353,6 +358,7 @@
 				4ADFE4E816A0A36100EDAD2A /* SBSStyle.m in Sources */,
 				4A71D3AD16A152A800A11C80 /* SBSContactTableViewController.m in Sources */,
 				4A71D3B616A155D100A11C80 /* SBSInfoViewController.m in Sources */,
+				4A4EA05116A3543E00F12406 /* SBSStaffViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

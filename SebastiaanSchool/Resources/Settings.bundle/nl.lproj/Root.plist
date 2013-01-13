@@ -8,7 +8,7 @@
 			<key>DefaultValue</key>
 			<false/>
 			<key>Key</key>
-			<string>enable_staff_login</string>
+			<string>enableStaffLogin</string>
 			<key>Title</key>
 			<string>Personeel login</string>
 			<key>Type</key>
