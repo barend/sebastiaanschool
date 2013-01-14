@@ -2,8 +2,7 @@
 //  GeneratedConstants.h
 //  ING
 //
-//  Created by Andrew Snare on 25/1/2012.
-//  Copyright (c) 2012 ING. All rights reserved.
+//  Created by Jeroen Leenarts on 25/1/2012.
 //
 
 // The values of these constants are generated as part of the build process.
