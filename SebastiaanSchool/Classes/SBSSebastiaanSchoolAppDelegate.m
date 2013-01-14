@@ -140,7 +140,7 @@
 
 -(UIViewController *) createStaffViewController {
     SBSStaffViewController *controller = [[SBSStaffViewController alloc] init];
-    controller.title = NSLocalizedString(@"Personeel", nil);
+    controller.title = NSLocalizedString(@"Staff", nil);
     
     UINavigationController * navController =  [self createNavControllerWithRootController:controller];
     navController.tabBarItem.title = controller.title;
