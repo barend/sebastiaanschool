@@ -1,6 +1,5 @@
 //
 //  GeneratedConstants.h
-//  ING
 //
 //  Created by Jeroen Leenarts on 25/1/2012.
 //
