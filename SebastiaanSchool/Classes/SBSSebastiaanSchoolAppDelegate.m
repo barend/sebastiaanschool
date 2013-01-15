@@ -111,6 +111,7 @@
     
     UINavigationController * navController =  [self createNavControllerWithRootController:controller];
     navController.tabBarItem.title = controller.title;
+    navController.tabBarItem.image = [UIImage imageNamed:@"287-at"];
     return navController;
 }
 
@@ -121,6 +122,7 @@
     
     UINavigationController * navController =  [self createNavControllerWithRootController:controller];
     navController.tabBarItem.title = controller.title;
+    navController.tabBarItem.image = [UIImage imageNamed:@"162-receipt"];
     return navController;
 }
 
@@ -130,6 +132,7 @@
     
     UINavigationController * navController =  [self createNavControllerWithRootController:controller];
     navController.tabBarItem.title = controller.title;
+    navController.tabBarItem.image = [UIImage imageNamed:@"275-broadcast"];
     return navController;
 }
 
@@ -139,6 +142,7 @@
     
     UINavigationController * navController = [self createNavControllerWithRootController:controller];
     navController.tabBarItem.title = controller.title;
+    navController.tabBarItem.image = [UIImage imageNamed:@"123-id-card"];
     return navController;
 }
 
@@ -148,6 +152,7 @@
     
     UINavigationController * navController = [self createNavControllerWithRootController:controller];
     navController.tabBarItem.title = controller.title;
+    navController.tabBarItem.image = [UIImage imageNamed:@"259-list"];
     return navController;
 }
 
@@ -157,6 +162,7 @@
     
     UINavigationController * navController =  [self createNavControllerWithRootController:controller];
     navController.tabBarItem.title = controller.title;
+    navController.tabBarItem.image = [UIImage imageNamed:@"237-key"];
     return navController;
 }
 
