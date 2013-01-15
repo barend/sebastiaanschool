@@ -90,7 +90,7 @@
     }
     
     // Configure the cell
-    cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Bulletin: %@", nil), [object objectForKey:@"name"]];
+    cell.textLabel.text = [object objectForKey:@"title"];
     cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Published: %@", nil), [[SBSStyle longStyleDateFormatter] stringFromDate:[object objectForKey:@"publishedAt"]]];
     
     return cell;
