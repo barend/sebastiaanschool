@@ -142,8 +142,8 @@
     NSString *emailRecipient = [selectedContactItem objectForKey:@"email"];
 
     if ([emailRecipient length] ==0) {
-        NSString *title = NSLocalizedString(@"Geen mail adres bekend", nil);
-        NSString *message = [NSString stringWithFormat:NSLocalizedString(@"Van %@ is geen email adres bekend.", nil),displayName ];
+        NSString *title = NSLocalizedString(@"Unknown email addres", nil);
+        NSString *message = [NSString stringWithFormat:NSLocalizedString(@"No email address of %@ on file.", nil),displayName ];
         
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:title message:message delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil];
         
@@ -155,8 +155,8 @@
         UIPasteboard *pb = [UIPasteboard generalPasteboard];
         [pb setString:emailRecipient];
         
-        NSString *title = NSLocalizedString(@"Uw toestel kan geen email versturen", nil);
-        NSString *message = [NSString stringWithFormat:NSLocalizedString(@"Het email adres %@ van %@ is gekopieerd.", nil), emailRecipient, displayName ];
+        NSString *title = NSLocalizedString(@"Your device can not send email", nil);
+        NSString *message = [NSString stringWithFormat:NSLocalizedString(@"The email address %@ of %@ has been copied to the pasteboard.", nil), emailRecipient, displayName ];
         
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:title message:message delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil];
         
@@ -166,7 +166,7 @@
     }
 
     
-    NSString *messageBody = [NSString stringWithFormat:NSLocalizedString(@"Beste %@,\n\n", nil), displayName];
+    NSString *messageBody = [NSString stringWithFormat:NSLocalizedString(@"Dear %@,\n\n", nil), displayName];
     // To address
     NSArray *toRecipents = @[emailRecipient];
     
