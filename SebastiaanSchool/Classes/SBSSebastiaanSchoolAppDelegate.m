@@ -1,6 +1,6 @@
 #import <Parse/Parse.h>
 #import "SBSSebastiaanSchoolAppDelegate.h"
-#import "SBSRootViewController.h"
+#import "SBSBulletinViewController.h"
 #import "SBSNewsLetterTableViewController.h"
 #import "SBSContactTableViewController.h"
 #import "SBSInfoViewController.h"
@@ -31,7 +31,7 @@
     // Override point for customization after application launch.
     [self.rootViewController addChildViewController:[self createInfoViewController]];
     [self.rootViewController addChildViewController:[self createNewsLetterController]];
-    [self.rootViewController addChildViewController:[self createRootViewController]];
+    [self.rootViewController addChildViewController:[self createBulletinViewController]];
     [self.rootViewController addChildViewController:[self createContactViewController]];
     
     if (enableStaffLogin) {
@@ -120,9 +120,9 @@
     return navController;
 }
 
--(UIViewController *) createRootViewController {
-    SBSRootViewController *controller = [[SBSRootViewController alloc] init];
-    controller.title = NSLocalizedString(@"Root", nil);
+-(UIViewController *) createBulletinViewController {
+    SBSBulletinViewController *controller = [[SBSBulletinViewController alloc] init];
+    controller.title = NSLocalizedString(@"Bulletin", nil);
     
     UINavigationController * navController =  [self createNavControllerWithRootController:controller];
     navController.tabBarItem.title = controller.title;

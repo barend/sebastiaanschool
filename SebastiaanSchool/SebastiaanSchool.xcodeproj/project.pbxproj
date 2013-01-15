@@ -21,7 +21,6 @@
 		4A1966A116A086910011EFBF /* SBSNewsLetterTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A1966A016A086910011EFBF /* SBSNewsLetterTableViewController.m */; };
 		4A1966A816A08DAE0011EFBF /* SBSNewsLetterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A1966A716A08DAE0011EFBF /* SBSNewsLetterViewController.m */; };
 		4A3B996016A0830600241D4C /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A3B995F16A0830600241D4C /* MainWindow.xib */; };
-		4A3B996216A0834400241D4C /* SBSRootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A3B996116A0834400241D4C /* SBSRootViewController.xib */; };
 		4A4EA04B16A34CA400F12406 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4A4EA04A16A34CA400F12406 /* Settings.bundle */; };
 		4A4EA05916A35B1F00F12406 /* SBSStaffViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A4EA05716A35B1F00F12406 /* SBSStaffViewController.m */; };
 		4A4EA05A16A35B1F00F12406 /* SBSStaffViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A4EA05816A35B1F00F12406 /* SBSStaffViewController.xib */; };
@@ -39,7 +38,7 @@
 		4AC3F7F616A0AF2600452D33 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4AC3F7F816A0AF2600452D33 /* Localizable.strings */; };
 		4AC3F7FC16A0AFBB00452D33 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4AC3F7FE16A0AFBB00452D33 /* InfoPlist.strings */; };
 		4ADC932E16A0050600DAA972 /* SBSSebastiaanSchoolAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADC931E16A0050600DAA972 /* SBSSebastiaanSchoolAppDelegate.m */; };
-		4ADC932F16A0050600DAA972 /* SBSRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADC932016A0050600DAA972 /* SBSRootViewController.m */; };
+		4ADC932F16A0050600DAA972 /* SBSBulletinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADC932016A0050600DAA972 /* SBSBulletinViewController.m */; };
 		4ADC933016A0050600DAA972 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ADC932216A0050600DAA972 /* Default-568h@2x.png */; };
 		4ADC933116A0050600DAA972 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ADC932316A0050600DAA972 /* Default.png */; };
 		4ADC933216A0050600DAA972 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ADC932416A0050600DAA972 /* Default@2x.png */; };
@@ -74,7 +73,6 @@
 		4A1966A716A08DAE0011EFBF /* SBSNewsLetterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBSNewsLetterViewController.m; sourceTree = "<group>"; };
 		4A3B995B16A0781900241D4C /* SebastiaanSchool.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = SebastiaanSchool.entitlements; sourceTree = "<group>"; };
 		4A3B995F16A0830600241D4C /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
-		4A3B996116A0834400241D4C /* SBSRootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SBSRootViewController.xib; sourceTree = "<group>"; };
 		4A4EA04A16A34CA400F12406 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		4A4EA05616A35B1F00F12406 /* SBSStaffViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBSStaffViewController.h; sourceTree = "<group>"; };
 		4A4EA05716A35B1F00F12406 /* SBSStaffViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBSStaffViewController.m; sourceTree = "<group>"; };
@@ -97,8 +95,8 @@
 		4AC3F7FD16A0AFBB00452D33 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4AC3F7FF16A0AFBF00452D33 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4ADC931E16A0050600DAA972 /* SBSSebastiaanSchoolAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = SBSSebastiaanSchoolAppDelegate.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		4ADC931F16A0050600DAA972 /* SBSRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBSRootViewController.h; sourceTree = "<group>"; };
-		4ADC932016A0050600DAA972 /* SBSRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBSRootViewController.m; sourceTree = "<group>"; };
+		4ADC931F16A0050600DAA972 /* SBSBulletinViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBSBulletinViewController.h; sourceTree = "<group>"; };
+		4ADC932016A0050600DAA972 /* SBSBulletinViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBSBulletinViewController.m; sourceTree = "<group>"; };
 		4ADC932216A0050600DAA972 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		4ADC932316A0050600DAA972 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		4ADC932416A0050600DAA972 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
@@ -205,8 +203,8 @@
 			children = (
 				4ADC937B16A0283B00DAA972 /* SBSSebastiaanSchoolAppDelegate.h */,
 				4ADC931E16A0050600DAA972 /* SBSSebastiaanSchoolAppDelegate.m */,
-				4ADC931F16A0050600DAA972 /* SBSRootViewController.h */,
-				4ADC932016A0050600DAA972 /* SBSRootViewController.m */,
+				4ADC931F16A0050600DAA972 /* SBSBulletinViewController.h */,
+				4ADC932016A0050600DAA972 /* SBSBulletinViewController.m */,
 				4A19669F16A086910011EFBF /* SBSNewsLetterTableViewController.h */,
 				4A1966A016A086910011EFBF /* SBSNewsLetterTableViewController.m */,
 				4A1966A616A08DAE0011EFBF /* SBSNewsLetterViewController.h */,
@@ -227,7 +225,6 @@
 		4ADC932116A0050600DAA972 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				4A3B996116A0834400241D4C /* SBSRootViewController.xib */,
 				4A3B995F16A0830600241D4C /* MainWindow.xib */,
 				4A71D3CA16A15CDF00A11C80 /* Icon.png */,
 				4A71D3C816A15CDF00A11C80 /* Icon-72.png */,
@@ -313,7 +310,6 @@
 				4ADC933116A0050600DAA972 /* Default.png in Resources */,
 				4ADC933216A0050600DAA972 /* Default@2x.png in Resources */,
 				4A3B996016A0830600241D4C /* MainWindow.xib in Resources */,
-				4A3B996216A0834400241D4C /* SBSRootViewController.xib in Resources */,
 				4AC3F7F616A0AF2600452D33 /* Localizable.strings in Resources */,
 				4AC3F7FC16A0AFBB00452D33 /* InfoPlist.strings in Resources */,
 				4A71D3C416A15C6B00A11C80 /* Default-Landscape@2x~ipad.png in Resources */,
@@ -354,7 +350,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4ADC932E16A0050600DAA972 /* SBSSebastiaanSchoolAppDelegate.m in Sources */,
-				4ADC932F16A0050600DAA972 /* SBSRootViewController.m in Sources */,
+				4ADC932F16A0050600DAA972 /* SBSBulletinViewController.m in Sources */,
 				4ADC933B16A0063700DAA972 /* main.m in Sources */,
 				4ADC935716A00CBF00DAA972 /* GeneratedConstants.m in Sources */,
 				4A1966A116A086910011EFBF /* SBSNewsLetterTableViewController.m in Sources */,

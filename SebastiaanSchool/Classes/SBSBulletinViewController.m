@@ -1,20 +1,8 @@
-//
-//  SBSNewsLetterViewController.m
-//  SebastiaanSchool
-//
-//  Created by Jeroen Leenarts on 11-01-13.
-//
-//
+#import "SBSBulletinViewController.h"
+#import <Parse/Parse.h>
 
-#import "SBSNewsLetterTableViewController.h"
+@implementation SBSBulletinViewController
 
-#import "SBSNewsLetterViewController.h"
-
-@interface SBSNewsLetterTableViewController ()
-
-@end
-
-@implementation SBSNewsLetterTableViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -23,10 +11,10 @@
         // Custom the table
         
         // The className to query on
-        self.className = @"NewsLetter";
+        self.className = @"Bulletin";
         
         // The key of the PFObject to display in the label of the default cell style
-        self.textKey = @"name";
+        self.textKey = @"title";
         
         // Whether the built-in pull-to-refresh is enabled
         self.pullToRefreshEnabled = YES;
@@ -89,7 +77,7 @@
 // Override to customize the look of a cell representing an object. The default is to display
 // a UITableViewCellStyleDefault style cell with the label being the first key in the object.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object {
-    static NSString *CellIdentifier = @"newsLetterCell";
+    static NSString *CellIdentifier = @"bulletinCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
@@ -102,7 +90,7 @@
     }
     
     // Configure the cell
-    cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"News letter: %@", nil), [object objectForKey:@"name"]];
+    cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Bulletin: %@", nil), [object objectForKey:@"name"]];
     cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Published: %@", nil), [[SBSStyle longStyleDateFormatter] stringFromDate:[object objectForKey:@"publishedAt"]]];
     
     return cell;
@@ -158,9 +146,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    PFObject *newsLetter = [self objectAtIndexPath:indexPath];
-    SBSNewsLetterViewController *newsletterViewController = [[SBSNewsLetterViewController alloc]initWithNewsLetter:newsLetter];
-    [self.navigationController pushViewController:newsletterViewController animated:YES];
+//    PFObject *bulletin = [self objectAtIndexPath:indexPath];
+//    SBSNewsLetterViewController *newsletterViewController = [[SBSNewsLetterViewController alloc]initWithNewsLetter:newsLetter];
+//    [self.navigationController pushViewController:newsletterViewController animated:YES];
 }
 
 

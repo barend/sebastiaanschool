@@ -31,3 +31,29 @@ Parse.Cloud.afterSave("NewsLetter", function(request) {
 });
 
 
+Parse.Cloud.beforeSave("Bulletin", function(request, response) {
+  var publishedAt = request.object.get("publishedAt");
+  if (publishedAt == null ) {
+    // set publishedAt if it's not set.
+    request.object.set("publishedAt", new Date());
+  }
+  response.success();  
+});
+
+Parse.Cloud.afterSave("Bulletin", function(request) {
+	Parse.Push.send({
+	  channels: [ "" ],
+	  data: {
+	    alert: "Er is een nieuwe mededeling: " + request.object.get("title")
+	  }
+	}, {
+	  success: function() {
+		console.log("Push succeeded for bulletin " + request.object.get("title"));
+	  },
+	  error: function(error) {
+		console.error("Push failed for Bulletin " + request.object.get("title") + " with error code: " + error.code + "and message: " + error.message);
+	  }
+	});
+});
+
+

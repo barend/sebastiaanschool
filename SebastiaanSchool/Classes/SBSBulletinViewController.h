@@ -1,0 +1,3 @@
+@interface SBSBulletinViewController : PFQueryTableViewController
+
+@end

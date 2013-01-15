@@ -1,3 +1,0 @@
-@interface SBSRootViewController : UIViewController
-
-@end

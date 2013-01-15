@@ -1,4 +1,4 @@
-@class SBSRootViewController;
+@class SBSBulletinViewController;
 
 @interface SBSSebastiaanSchoolAppDelegate : NSObject <UIApplicationDelegate> {
 
