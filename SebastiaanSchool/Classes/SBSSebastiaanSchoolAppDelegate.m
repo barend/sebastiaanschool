@@ -29,10 +29,14 @@
     BOOL enableStaffLogin = [defaults boolForKey:@"enableStaffLogin"];
     
     // Override point for customization after application launch.
-    [self.rootViewController addChildViewController:[self createInfoViewController]];
+    if (!enableStaffLogin) {
+        [self.rootViewController addChildViewController:[self createInfoViewController]];
+    }
+
     [self.rootViewController addChildViewController:[self createNewsLetterController]];
     [self.rootViewController addChildViewController:[self createBulletinViewController]];
     [self.rootViewController addChildViewController:[self createContactViewController]];
+    [self.rootViewController addChildViewController:[self createAgendaViewController]];
     
     if (enableStaffLogin) {
         [self.rootViewController addChildViewController:[self createStaffViewController]];
@@ -132,6 +136,15 @@
 -(UIViewController *) createContactViewController {
     SBSContactTableViewController *controller = [[SBSContactTableViewController alloc] init];
     controller.title = NSLocalizedString(@"Contact", nil);
+    
+    UINavigationController * navController = [self createNavControllerWithRootController:controller];
+    navController.tabBarItem.title = controller.title;
+    return navController;
+}
+
+-(UIViewController *) createAgendaViewController {
+    SBSContactTableViewController *controller = [[SBSContactTableViewController alloc] init];
+    controller.title = NSLocalizedString(@"Agenda", nil);
     
     UINavigationController * navController = [self createNavControllerWithRootController:controller];
     navController.tabBarItem.title = controller.title;
