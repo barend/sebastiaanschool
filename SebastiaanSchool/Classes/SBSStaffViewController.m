@@ -14,11 +14,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewDidLoad];
-    if (![PFAnonymousUtils isLinkedWithUser:[PFUser currentUser]]) {
-        [welcomeLabel setText:[NSString stringWithFormat:NSLocalizedString(@"Welcome %@!", nil), [[PFUser currentUser] username]]];
-    } else {
-        [welcomeLabel setText:NSLocalizedString(@"Not logged in", nil)];
-    }
+    
+    [self updateButtonText];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -86,10 +83,10 @@
 
 -(void)updateButtonText {
     if (![PFAnonymousUtils isLinkedWithUser:[PFUser currentUser]]) {
-        [welcomeLabel setText:[NSString stringWithFormat:NSLocalizedString(@"Welcome %@!", nil), [[PFUser currentUser] username]]];
+        [self.welcomeLabel setText:[NSString stringWithFormat:NSLocalizedString(@"Welcome %@!", nil), [[PFUser currentUser] username]]];
         [self.loginButton setTitle:NSLocalizedString(@"Sign out", nil)forState:UIControlStateNormal];
     } else {
-        [welcomeLabel setText:@"Not logged in"];
+        [self.welcomeLabel setText:NSLocalizedString(@"Not logged in", nil)];
         [self.loginButton setTitle:NSLocalizedString(@"Sign in...", nil)forState:UIControlStateNormal];
     }
 }
