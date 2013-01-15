@@ -15,9 +15,9 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewDidLoad];
     if (![PFAnonymousUtils isLinkedWithUser:[PFUser currentUser]]) {
-        [welcomeLabel setText:[NSString stringWithFormat:@"Welcome %@!", [[PFUser currentUser] username]]];
+        [welcomeLabel setText:[NSString stringWithFormat:NSLocalizedString(@"Welcome %@!", nil), [[PFUser currentUser] username]]];
     } else {
-        [welcomeLabel setText:@"Not logged in"];
+        [welcomeLabel setText:NSLocalizedString(@"Not logged in", nil)];
     }
 }
 
@@ -37,7 +37,7 @@
         return YES; // Begin login process
     }
     
-    [[[UIAlertView alloc] initWithTitle:@"Missing Information" message:@"Make sure you fill out all of the information!" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil] show];
+    [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Missing Information", nil) message:NSLocalizedString(@"Make sure you fill out all of the information!", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil] show];
     return NO; // Interrupt login process
 }
 
@@ -86,7 +86,7 @@
 
 -(void)updateButtonText {
     if (![PFAnonymousUtils isLinkedWithUser:[PFUser currentUser]]) {
-        [welcomeLabel setText:[NSString stringWithFormat:@"Welcome %@!", [[PFUser currentUser] username]]];
+        [welcomeLabel setText:[NSString stringWithFormat:NSLocalizedString(@"Welcome %@!", nil), [[PFUser currentUser] username]]];
         [self.loginButton setTitle:NSLocalizedString(@"Sign out", nil)forState:UIControlStateNormal];
     } else {
         [welcomeLabel setText:@"Not logged in"];
