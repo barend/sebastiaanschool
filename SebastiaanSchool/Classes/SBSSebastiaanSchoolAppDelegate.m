@@ -23,7 +23,12 @@
     [defaultACL setPublicReadAccess:YES];
     
     [PFACL setDefaultACL:defaultACL withAccessForCurrentUser:YES];
-    
+
+#define TESTING 1
+#ifdef TESTING
+    //TODO fix this in the generated constants.
+    [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
+#endif
     [TestFlight takeOff:TEST_FLIGHT_TEAM_TOKEN];
     
     [self.rootViewController setViewControllers:[self getTabVCs] animated:NO];

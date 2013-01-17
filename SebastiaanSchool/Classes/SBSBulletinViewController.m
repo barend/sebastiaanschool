@@ -34,6 +34,7 @@
 {
     [super viewDidLoad];
     
+    [TestFlight passCheckpoint:[NSString stringWithFormat:@"Loaded VC %@", self.title]];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     

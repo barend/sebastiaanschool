@@ -49,7 +49,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    
+    [TestFlight passCheckpoint:[NSString stringWithFormat:@"Loaded VC %@", self.title]];
+
 //    UIButton *mailButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 //    mailButton.frame = CGRectMake(10, 10, 100, 40);
 //    [mailButton addTarget:self action:@selector(sendMail:) forControlEvents:UIControlEventTouchUpInside];

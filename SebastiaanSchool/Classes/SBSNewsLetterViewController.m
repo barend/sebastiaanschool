@@ -48,6 +48,7 @@
 {
     [super viewDidLoad];
     
+    [TestFlight passCheckpoint:[NSString stringWithFormat:@"Loaded VC %@", self.title]];
 
 	// Do any additional setup after loading the view.
     NSURL *url = [NSURL URLWithString:[self.newsLetter  objectForKey:@"url"]];

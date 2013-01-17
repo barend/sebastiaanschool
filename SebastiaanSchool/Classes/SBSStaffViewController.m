@@ -12,6 +12,13 @@
 
 @synthesize welcomeLabel;
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    [TestFlight passCheckpoint:[NSString stringWithFormat:@"Loaded VC %@", self.title]];
+	// Do any additional setup after loading the view.
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewDidLoad];
     
