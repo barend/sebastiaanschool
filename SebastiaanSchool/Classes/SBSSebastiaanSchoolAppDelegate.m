@@ -111,12 +111,7 @@
                     [self createStaffViewController]];
     });
     
-    //TODO make a nice property and utility out of this.
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults synchronize];
-    BOOL enableStaffLogin = [defaults boolForKey:@"enableStaffLogin"];
-        
-    if (enableStaffLogin) {
+    if ([NSUserDefaults enableStaffLogin]) {
         return [allTabs subarrayWithRange:NSMakeRange(1, allTabs.count -1)];
     } else {
         return [allTabs subarrayWithRange:NSMakeRange(0, allTabs.count -1)];
