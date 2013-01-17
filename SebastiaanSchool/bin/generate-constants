@@ -48,10 +48,15 @@ case "${PROFILE_TYPE}" in
 		DEBUG_LOGGING='YES'
 		DEBUG_PAYLOAD_ALLOWED='YES'
 		;;
+    *:AdHoc)
+        BUILD_LABEL='AD-HOC-DIST'
+        echo "${PROGNAME}: Detected AD-HOC release: ${BUILD_LABEL}" 1>&2
+        DEBUG_LOGGING='YES'
+        DEBUG_PAYLOAD_ALLOWED='YES'
+        ;;
 	*:AppStore)
-
-BUILD_LABEL='AppStore'
-        echo "${PROGNAME}: Detected external release: ${BUILD_LABEL}" 1>&2
+        BUILD_LABEL='AppStore'
+        echo "${PROGNAME}: Detected App store release: ${BUILD_LABEL}" 1>&2
 		DEBUG_LOGGING='NO'
 		DEBUG_PAYLOAD_ALLOWED='NO'
 		;;
