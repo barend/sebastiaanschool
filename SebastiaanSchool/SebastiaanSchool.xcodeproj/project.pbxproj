@@ -100,10 +100,10 @@
 		4A71D3C116A15C6B00A11C80 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
 		4A71D3C216A15C6B00A11C80 /* Default-Portrait@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait@2x~ipad.png"; sourceTree = "<group>"; };
 		4A71D3C316A15C6B00A11C80 /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait~ipad.png"; sourceTree = "<group>"; };
-		4A71D3C816A15CDF00A11C80 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
-		4A71D3C916A15CDF00A11C80 /* Icon-144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-144.png"; sourceTree = "<group>"; };
-		4A71D3CA16A15CDF00A11C80 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
-		4A71D3CB16A15CDF00A11C80 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		4A71D3C816A15CDF00A11C80 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72.png"; path = "Resources/Icon-72.png"; sourceTree = "<group>"; };
+		4A71D3C916A15CDF00A11C80 /* Icon-144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-144.png"; path = "Resources/Icon-144.png"; sourceTree = "<group>"; };
+		4A71D3CA16A15CDF00A11C80 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = Resources/Icon.png; sourceTree = "<group>"; };
+		4A71D3CB16A15CDF00A11C80 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "Resources/Icon@2x.png"; sourceTree = "<group>"; };
 		4A71D3D916A3123F00A11C80 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		4AB22B7016A73851001BA435 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
 		4AB22B7116A73851001BA435 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
@@ -187,6 +187,10 @@
 				4A71D3D916A3123F00A11C80 /* MessageUI.framework */,
 				4A3B995B16A0781900241D4C /* SebastiaanSchool.entitlements */,
 				4A15DA9616A0AE4200D8EB86 /* SebastiaanSchool-Info.plist */,
+				4A71D3CA16A15CDF00A11C80 /* Icon.png */,
+				4A71D3C816A15CDF00A11C80 /* Icon-72.png */,
+				4A71D3CB16A15CDF00A11C80 /* Icon@2x.png */,
+				4A71D3C916A15CDF00A11C80 /* Icon-144.png */,
 				4AC3F7FE16A0AFBB00452D33 /* InfoPlist.strings */,
 				4ADC934816A00B4300DAA972 /* bin */,
 				4ADC933A16A0063700DAA972 /* main.m */,
@@ -284,10 +288,6 @@
 				4AD180CE16A591A900B97F61 /* 287-at@2x.png */,
 				4A3B995F16A0830600241D4C /* MainWindow.xib */,
 				4AD1809A16A57FBE00B97F61 /* SBSStaffViewController.xib */,
-				4A71D3CA16A15CDF00A11C80 /* Icon.png */,
-				4A71D3C816A15CDF00A11C80 /* Icon-72.png */,
-				4A71D3CB16A15CDF00A11C80 /* Icon@2x.png */,
-				4A71D3C916A15CDF00A11C80 /* Icon-144.png */,
 				4ADC932216A0050600DAA972 /* Default-568h@2x.png */,
 				4ADC932316A0050600DAA972 /* Default.png */,
 				4ADC932416A0050600DAA972 /* Default@2x.png */,
