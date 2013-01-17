@@ -24,24 +24,9 @@
     
     [PFACL setDefaultACL:defaultACL withAccessForCurrentUser:YES];
     
-    //TODO make a nice property and utility out of this.
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    BOOL enableStaffLogin = [defaults boolForKey:@"enableStaffLogin"];
-    
-    // Override point for customization after application launch.
-    if (!enableStaffLogin) {
-        [self.rootViewController addChildViewController:[self createInfoViewController]];
-    }
-
-    [self.rootViewController addChildViewController:[self createNewsLetterController]];
-    [self.rootViewController addChildViewController:[self createBulletinViewController]];
-    [self.rootViewController addChildViewController:[self createContactViewController]];
-    [self.rootViewController addChildViewController:[self createAgendaViewController]];
     [TestFlight takeOff:TEST_FLIGHT_TEAM_TOKEN];
     
-    if (enableStaffLogin) {
-        [self.rootViewController addChildViewController:[self createStaffViewController]];
-    }
+    [self.rootViewController setViewControllers:[self getTabVCs] animated:NO];
     
     self.window.rootViewController = self.rootViewController;
     [self.window makeKeyAndVisible];
@@ -85,15 +70,20 @@
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults synchronize];
+
     /*
      Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
      */
+    
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     /*
      Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
      */
+    [self.rootViewController setViewControllers:[self getTabVCs] animated:YES];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
@@ -102,6 +92,30 @@
      Save data if appropriate.
      See also applicationDidEnterBackground:.
      */
+}
+
+- (NSArray *)getTabVCs{
+    static NSArray *allTabs;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        allTabs = @[[self createInfoViewController],
+                    [self createNewsLetterController],
+                    [self createBulletinViewController],
+                    [self createAgendaViewController],
+                    [self createContactViewController],
+                    [self createStaffViewController]];
+    });
+    
+    //TODO make a nice property and utility out of this.
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults synchronize];
+    BOOL enableStaffLogin = [defaults boolForKey:@"enableStaffLogin"];
+        
+    if (enableStaffLogin) {
+        return [allTabs subarrayWithRange:NSMakeRange(1, allTabs.count -1)];
+    } else {
+        return [allTabs subarrayWithRange:NSMakeRange(0, allTabs.count -1)];
+    }
 }
 
 #pragma mark - UIViewController creation
