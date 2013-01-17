@@ -37,6 +37,7 @@
     [self.rootViewController addChildViewController:[self createBulletinViewController]];
     [self.rootViewController addChildViewController:[self createContactViewController]];
     [self.rootViewController addChildViewController:[self createAgendaViewController]];
+    [TestFlight takeOff:TEST_FLIGHT_TEAM_TOKEN];
     
     if (enableStaffLogin) {
         [self.rootViewController addChildViewController:[self createStaffViewController]];
