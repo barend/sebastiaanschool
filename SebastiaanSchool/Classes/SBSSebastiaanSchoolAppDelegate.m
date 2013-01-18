@@ -3,6 +3,7 @@
 #import "SBSBulletinViewController.h"
 #import "SBSNewsLetterTableViewController.h"
 #import "SBSContactTableViewController.h"
+#import "SBSAgendaTableViewController.h"
 #import "SBSInfoViewController.h"
 #import "SBSStaffViewController.h"
 
@@ -162,7 +163,7 @@
 }
 
 -(UIViewController *) createAgendaViewController {
-    SBSContactTableViewController *controller = [[SBSContactTableViewController alloc] init];
+    SBSAgendaTableViewController *controller = [[SBSAgendaTableViewController alloc] init];
     controller.title = NSLocalizedString(@"Agenda", nil);
     
     UINavigationController * navController = [self createNavControllerWithRootController:controller];
