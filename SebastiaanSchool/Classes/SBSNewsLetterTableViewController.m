@@ -90,7 +90,7 @@
     }
     
     // Configure the cell
-    cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"News letter: %@", nil), [object objectForKey:@"name"]];
+    cell.textLabel.text = [[object objectForKey:@"name"] capitalizedString];
     cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Published: %@", nil), [[SBSStyle longStyleDateFormatter] stringFromDate:[object objectForKey:@"publishedAt"]]];
     
     return cell;
@@ -128,6 +128,7 @@
 {
     PFObject *newsLetter = [self objectAtIndexPath:indexPath];
     SBSNewsLetterViewController *newsletterViewController = [[SBSNewsLetterViewController alloc]initWithNewsLetter:newsLetter];
+    newsletterViewController.title = [[newsLetter objectForKey:@"name"] capitalizedString];
     [self.navigationController pushViewController:newsletterViewController animated:YES];
 }
 
