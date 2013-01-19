@@ -190,7 +190,6 @@
 		09ABC06213A1D52D009C3FCF = {
 			isa = PBXGroup;
 			children = (
-				4A71D3D916A3123F00A11C80 /* MessageUI.framework */,
 				4A3B995B16A0781900241D4C /* SebastiaanSchool.entitlements */,
 				4A15DA9616A0AE4200D8EB86 /* SebastiaanSchool-Info.plist */,
 				4A71D3CA16A15CDF00A11C80 /* Icon.png */,
@@ -221,6 +220,7 @@
 		09ABC07013A1D52D009C3FCF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4A71D3D916A3123F00A11C80 /* MessageUI.framework */,
 				4AB22B6F16A73851001BA435 /* TestFlightSDK1 */,
 				6372FF571613CC47002132AF /* AdSupport.framework */,
 				6372FF551613CC42002132AF /* Social.framework */,
