@@ -19,12 +19,6 @@
 	// Do any additional setup after loading the view.
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewDidLoad];
-    
-    [self updateButtonText];
-}
-
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
