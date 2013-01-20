@@ -17,11 +17,13 @@
                   clientKey:PARSE_CLIENT_KEY];
     
     [PFUser enableAutomaticUser];
-    
+        
     PFACL *defaultACL = [PFACL ACL];
 
     // If you would like all objects to be private by default, remove this line.
     [defaultACL setPublicReadAccess:YES];
+    [defaultACL setWriteAccess:YES forRoleWithName:@"staff"];
+    [defaultACL setReadAccess:YES forRoleWithName:@"staff"];
     
     [PFACL setDefaultACL:defaultACL withAccessForCurrentUser:YES];
 
