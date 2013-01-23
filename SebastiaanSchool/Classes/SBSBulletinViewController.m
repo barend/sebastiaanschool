@@ -38,8 +38,17 @@
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    if ([[SBSSecurity instance]isCurrentUserStaffUser]) {
+        if (self.navigationItem.rightBarButtonItem == nil) {
+            UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addBuletin)];
+            [self.navigationItem setRightBarButtonItem:addButton animated:animated];
+        }
+    } else {
+        [self.navigationItem setRightBarButtonItem:nil animated:animated];
+    }
 }
 
 #pragma mark - Parse
@@ -58,6 +67,17 @@
     [query orderByDescending:@"publishedAt"];
     
     return query;
+}
+
+- (void)addBuletin {
+    PFObject *newBulletin = [PFObject objectWithClassName:@"Bulletin"];
+    [newBulletin setObject:@"Test" forKey:@"title"];
+    [newBulletin saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            //Do a big reload since the framework VC doesn't support nice view insertions and removal.
+            [self loadObjects];
+        }
+    }];
 }
 
 
@@ -87,28 +107,32 @@
 
 #pragma mark - Table view data source
 
-/*
- // Override to support conditional editing of the table view.
- - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
- {
- // Return NO if you do not want the specified item to be editable.
- return YES;
- }
- */
 
-/*
- // Override to support editing the table view.
- - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
- {
- if (editingStyle == UITableViewCellEditingStyleDelete) {
- // Delete the row from the data source
- [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
- }
- else if (editingStyle == UITableViewCellEditingStyleInsert) {
- // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
- }
- }
- */
+// Override to support conditional editing of the table view.
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Return NO if you do not want the specified item to be editable.
+    return YES;
+}
+
+
+// Override to support editing the table view.
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        // Delete the row from the data source
+        PFObject *deletedBulletin = [self objectAtIndexPath:indexPath];
+        [deletedBulletin deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (succeeded) {
+                //Do a big reload since the framework VC doesn't support nice view insertions and removal.
+                [self loadObjects];
+            }
+        }];
+    }
+    else if (editingStyle == UITableViewCellEditingStyleInsert) {
+        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+    }
+}
 
 
 #pragma mark - Table view delegate

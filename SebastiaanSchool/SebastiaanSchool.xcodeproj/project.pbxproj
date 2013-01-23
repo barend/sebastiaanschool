@@ -39,6 +39,7 @@
 		4AB22B7416A73851001BA435 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AB22B7016A73851001BA435 /* libTestFlight.a */; };
 		4AB22B7516A73851001BA435 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 4AB22B7116A73851001BA435 /* README.md */; };
 		4AB22B7616A73851001BA435 /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 4AB22B7216A73851001BA435 /* release_notes.md */; };
+		4AB3D52B16AC88A5008086B5 /* SBSSecurity.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB3D52A16AC88A5008086B5 /* SBSSecurity.m */; };
 		4AC3F7F616A0AF2600452D33 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4AC3F7F816A0AF2600452D33 /* Localizable.strings */; };
 		4AC3F7FC16A0AFBB00452D33 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4AC3F7FE16A0AFBB00452D33 /* InfoPlist.strings */; };
 		4AD1809B16A57FBE00B97F61 /* SBSStaffViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AD1809A16A57FBE00B97F61 /* SBSStaffViewController.xib */; };
@@ -115,6 +116,8 @@
 		4AB22B7116A73851001BA435 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		4AB22B7216A73851001BA435 /* release_notes.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.md; sourceTree = "<group>"; };
 		4AB22B7316A73851001BA435 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
+		4AB3D52916AC88A5008086B5 /* SBSSecurity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBSSecurity.h; sourceTree = "<group>"; };
+		4AB3D52A16AC88A5008086B5 /* SBSSecurity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBSSecurity.m; sourceTree = "<group>"; };
 		4AC3F7F716A0AF2600452D33 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4AC3F7F916A0AF3800452D33 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4AC3F7FD16A0AFBB00452D33 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -277,6 +280,8 @@
 				4A71D3B516A155D100A11C80 /* SBSInfoViewController.m */,
 				4A4EA05616A35B1F00F12406 /* SBSStaffViewController.h */,
 				4A4EA05716A35B1F00F12406 /* SBSStaffViewController.m */,
+				4AB3D52916AC88A5008086B5 /* SBSSecurity.h */,
+				4AB3D52A16AC88A5008086B5 /* SBSSecurity.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -460,6 +465,7 @@
 				4A4EA05916A35B1F00F12406 /* SBSStaffViewController.m in Sources */,
 				4A3F5B5916A87BB9005F742E /* NSUserDefaults+SBS.m in Sources */,
 				4A12099116A9D69000A7259B /* SBSAgendaTableViewController.m in Sources */,
+				4AB3D52B16AC88A5008086B5 /* SBSSecurity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
