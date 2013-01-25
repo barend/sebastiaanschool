@@ -1,3 +1,5 @@
-@interface SBSBulletinViewController : PFQueryTableViewController
+#import "SBSAddBulletinViewController.h"
+
+@interface SBSBulletinViewController : PFQueryTableViewController <SBSAddBulletinDelegate>
 
 @end

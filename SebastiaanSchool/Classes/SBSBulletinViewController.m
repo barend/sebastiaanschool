@@ -1,5 +1,7 @@
-#import "SBSBulletinViewController.h"
 #import <Parse/Parse.h>
+
+#import "SBSBulletinViewController.h"
+#import "SBSAddBulletinViewController.h"
 
 @implementation SBSBulletinViewController
 
@@ -80,14 +82,21 @@
 }
 
 - (void)addBuletin {
-    PFObject *newBulletin = [PFObject objectWithClassName:@"Bulletin"];
-    [newBulletin setObject:@"Test" forKey:@"title"];
+    SBSAddBulletinViewController *addBuletinVC = [[SBSAddBulletinViewController alloc]init];
+    [self.navigationController pushViewController:addBuletinVC animated:YES];
+}
+
+-(void)createdBulletin:(PFObject *)newBulletin {
     [newBulletin saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
             //Do a big reload since the framework VC doesn't support nice view insertions and removal.
             [self loadObjects];
+        } else {
+            NSLog(@"Error while adding bulletin: %@", error);
         }
     }];
+    
+    [self.navigationController popToViewController:self animated:YES];
 }
 
 
@@ -116,7 +125,6 @@
 
 
 #pragma mark - Table view data source
-
 
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
