@@ -3,11 +3,17 @@
 
 @implementation SBSBulletinViewController
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
+}
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userRoleChanged:) name:SBSUserRoleDidChangeNotification object:nil];
+        
         // Custom the table
         
         // The className to query on
@@ -41,7 +47,11 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated {
-    if ([[SBSSecurity instance]isCurrentUserStaffUser]) {
+    [self updateBarButtonItemAnimated:animated];
+}
+
+-(void)updateBarButtonItemAnimated:(BOOL)animated {
+    if ([[SBSSecurity instance] currentUserStaffUser]) {
         if (self.navigationItem.rightBarButtonItem == nil) {
             UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addBuletin)];
             [self.navigationItem setRightBarButtonItem:addButton animated:animated];
@@ -142,6 +152,12 @@
 //    PFObject *bulletin = [self objectAtIndexPath:indexPath];
 //    SBSNewsLetterViewController *newsletterViewController = [[SBSNewsLetterViewController alloc]initWithNewsLetter:newsLetter];
 //    [self.navigationController pushViewController:newsletterViewController animated:YES];
+}
+
+#pragma mark - Listen for security role changes
+
+-(void)userRoleChanged:(NSNotification *)notification {
+    [self updateBarButtonItemAnimated:YES];
 }
 
 

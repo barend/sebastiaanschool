@@ -8,8 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString * const SBSUserRoleDidChangeNotification;
+
+
 @interface SBSSecurity : NSObject
-@property (nonatomic, readonly) BOOL isCurrentUserStaffUser;
+@property (nonatomic, readonly) BOOL currentUserStaffUser;
 
 +(SBSSecurity *)instance;
+
+-(void)reset;
+
 @end
