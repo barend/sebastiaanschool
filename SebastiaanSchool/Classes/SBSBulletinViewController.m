@@ -83,6 +83,7 @@
 
 - (void)addBuletin {
     SBSAddBulletinViewController *addBuletinVC = [[SBSAddBulletinViewController alloc]init];
+    addBuletinVC.delegate = self;
     [self.navigationController pushViewController:addBuletinVC animated:YES];
 }
 

@@ -43,10 +43,13 @@
 
 -(void)doneButtonPressed:(id) sender {
     PFObject *newBulletin = [PFObject objectWithClassName:@"Bulletin"];
-    [newBulletin setObject:self.titleField.text forKey:@"title"];
-    [newBulletin setObject:self.bodyField.text forKey:@"body"];
-
-    [self.delegate createdBulletin:newBulletin];
+    if (self.titleField.text.length !=0) {
+        [newBulletin setObject:self.titleField.text forKey:@"title"];
+        if (self.bodyField.text.length !=0) {
+            [newBulletin setObject:self.bodyField.text forKey:@"body"];
+        }
+        [self.delegate createdBulletin:newBulletin];
+    }
 }
 
 
