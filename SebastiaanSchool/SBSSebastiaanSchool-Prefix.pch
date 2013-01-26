@@ -22,7 +22,8 @@
 
     #import "GeneratedConstants.h"
 
-    #import  "SBSStyle.h"
+    #import "SBSStyle.h"
+    #import "SBSSecurity.h"
 
     #import "NSUserDefaults+SBS.h"
 #endif

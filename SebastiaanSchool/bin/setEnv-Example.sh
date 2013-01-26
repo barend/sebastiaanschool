@@ -11,3 +11,6 @@ export PARSE_APPLICATION_ID="Dummy"
 export PARSE_CLIENT_KEY="Dummy"
 export PARSE_REST_API_KEY="Dummy"
 
+export PARSE_MASTER_KEY="Dummy"
+
+export TEST_FLIGHT_TEAM_TOKEN="Dummy"

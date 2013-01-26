@@ -19,16 +19,10 @@
 	// Do any additional setup after loading the view.
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewDidLoad];
-    
-    [self updateButtonText];
-}
-
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    [self updateButtonText];
+    [self updateState];
 }
 
 
@@ -49,28 +43,27 @@
 - (void)logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user {
     [self.navigationController popToRootViewControllerAnimated:YES];
     
-    [self updateButtonText];
+    [self updateState];
 }
 
 // Sent to the delegate when the log in attempt fails.
 - (void)logInViewController:(PFLogInViewController *)logInController didFailToLogInWithError:(NSError *)error {
     NSLog(@"Failed to log in...");
     
-    [self updateButtonText];
+    [self updateState];
 }
 
 // Sent to the delegate when the log in screen is dismissed.
 - (void)logInViewControllerDidCancelLogIn:(PFLogInViewController *)logInController {
     [self.navigationController popViewControllerAnimated:YES];
     
-    [self updateButtonText];
+    [self updateState];
 }
 
 
 #pragma mark - Logout button handler
 
-- (IBAction)logOutButtonTapAction:(id)sender {
-    
+- (IBAction)logOutButtonTapAction:(id)sender {    
     if ([PFAnonymousUtils isLinkedWithUser:[PFUser currentUser]]) { // No user logged in
         // Create the log in view controller
         PFLogInViewController *logInViewController = [[PFLogInViewController alloc] init];
@@ -81,14 +74,15 @@
         // Present the log in view controller
         [self.navigationController pushViewController:logInViewController animated:YES];
     } else {
-
         [PFUser logOut];
     }
     
-    [self updateButtonText];
+    [self updateState];
 }
 
--(void)updateButtonText {
+-(void)updateState {
+    [[SBSSecurity instance]reset];
+
     if (![PFAnonymousUtils isLinkedWithUser:[PFUser currentUser]]) {
         [self.welcomeLabel setText:[NSString stringWithFormat:NSLocalizedString(@"Welcome %@!", nil), [[PFUser currentUser] username]]];
         [self.loginButton setTitle:NSLocalizedString(@"Sign out", nil)forState:UIControlStateNormal];

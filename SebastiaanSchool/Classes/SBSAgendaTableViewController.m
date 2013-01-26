@@ -43,28 +43,10 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     [TestFlight passCheckpoint:[NSString stringWithFormat:@"Loaded VC %@", self.title]];
-    
-    //    UIButton *mailButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    //    mailButton.frame = CGRectMake(10, 10, 100, 40);
-    //    [mailButton addTarget:self action:@selector(sendMail:) forControlEvents:UIControlEventTouchUpInside];
-    //    [self.view addSubview:mailButton];
 }
 
 
 #pragma mark - Parse
-
-- (void)objectsDidLoad:(NSError *)error {
-    [super objectsDidLoad:error];
-    
-    // This method is called every time objects are loaded from Parse via the PFQuery
-}
-
-- (void)objectsWillLoad {
-    [super objectsWillLoad];
-    
-    // This method is called before a PFQuery is fired to get more objects
-}
-
 
 // Override to customize what kind of query to perform on the class. The default is to query for
 // all objects ordered by createdAt descending.

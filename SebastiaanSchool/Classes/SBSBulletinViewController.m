@@ -1,13 +1,21 @@
-#import "SBSBulletinViewController.h"
 #import <Parse/Parse.h>
+
+#import "SBSBulletinViewController.h"
+#import "SBSAddBulletinViewController.h"
 
 @implementation SBSBulletinViewController
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
+}
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userRoleChanged:) name:SBSUserRoleDidChangeNotification object:nil];
+        
         // Custom the table
         
         // The className to query on
@@ -38,24 +46,24 @@
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    [self updateBarButtonItemAnimated:animated];
+}
+
+-(void)updateBarButtonItemAnimated:(BOOL)animated {
+    if ([[SBSSecurity instance] currentUserStaffUser]) {
+        if (self.navigationItem.rightBarButtonItem == nil) {
+            UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addBuletin)];
+            [self.navigationItem setRightBarButtonItem:addButton animated:animated];
+        }
+    } else {
+        [self.navigationItem setRightBarButtonItem:nil animated:animated];
+    }
 }
 
 #pragma mark - Parse
-
-- (void)objectsDidLoad:(NSError *)error {
-    [super objectsDidLoad:error];
-    
-    // This method is called every time objects are loaded from Parse via the PFQuery
-}
-
-- (void)objectsWillLoad {
-    [super objectsWillLoad];
-    
-    // This method is called before a PFQuery is fired to get more objects
-}
-
 
 // Override to customize what kind of query to perform on the class. The default is to query for
 // all objects ordered by createdAt descending.
@@ -71,6 +79,24 @@
     [query orderByDescending:@"publishedAt"];
     
     return query;
+}
+
+- (void)addBuletin {
+    SBSAddBulletinViewController *addBuletinVC = [[SBSAddBulletinViewController alloc]init];
+    [self.navigationController pushViewController:addBuletinVC animated:YES];
+}
+
+-(void)createdBulletin:(PFObject *)newBulletin {
+    [newBulletin saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            //Do a big reload since the framework VC doesn't support nice view insertions and removal.
+            [self loadObjects];
+        } else {
+            NSLog(@"Error while adding bulletin: %@", error);
+        }
+    }];
+    
+    [self.navigationController popToViewController:self animated:YES];
 }
 
 
@@ -98,49 +124,33 @@
 }
 
 
-/*
- // Override to customize the look of the cell that allows the user to load the next page of objects.
- // The default implementation is a UITableViewCellStyleDefault cell with simple labels.
- - (UITableViewCell *)tableView:(UITableView *)tableView cellForNextPageAtIndexPath:(NSIndexPath *)indexPath {
- static NSString *CellIdentifier = @"NextPage";
- 
- UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
- 
- if (cell == nil) {
- cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
- }
- 
- cell.selectionStyle = UITableViewCellSelectionStyleNone;
- cell.textLabel.text = @"Load more...";
- 
- return cell;
- }
- */
-
 #pragma mark - Table view data source
 
-/*
- // Override to support conditional editing of the table view.
- - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
- {
- // Return NO if you do not want the specified item to be editable.
- return YES;
- }
- */
+// Override to support conditional editing of the table view.
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Return NO if you do not want the specified item to be editable.
+    return YES;
+}
 
-/*
- // Override to support editing the table view.
- - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
- {
- if (editingStyle == UITableViewCellEditingStyleDelete) {
- // Delete the row from the data source
- [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
- }
- else if (editingStyle == UITableViewCellEditingStyleInsert) {
- // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
- }
- }
- */
+
+// Override to support editing the table view.
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        // Delete the row from the data source
+        PFObject *deletedBulletin = [self objectAtIndexPath:indexPath];
+        [deletedBulletin deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (succeeded) {
+                //Do a big reload since the framework VC doesn't support nice view insertions and removal.
+                [self loadObjects];
+            }
+        }];
+    }
+    else if (editingStyle == UITableViewCellEditingStyleInsert) {
+        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+    }
+}
 
 
 #pragma mark - Table view delegate
@@ -150,6 +160,12 @@
 //    PFObject *bulletin = [self objectAtIndexPath:indexPath];
 //    SBSNewsLetterViewController *newsletterViewController = [[SBSNewsLetterViewController alloc]initWithNewsLetter:newsLetter];
 //    [self.navigationController pushViewController:newsletterViewController animated:YES];
+}
+
+#pragma mark - Listen for security role changes
+
+-(void)userRoleChanged:(NSNotification *)notification {
+    [self updateBarButtonItemAnimated:YES];
 }
 
 
