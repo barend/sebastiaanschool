@@ -47,6 +47,7 @@ case "${PROFILE_TYPE}" in
         echo "${PROGNAME}: Detected ${BUILD_LABEL} build." 1>&2
 		DEBUG_LOGGING='YES'
 		DEBUG_PAYLOAD_ALLOWED='YES'
+        DEV_SANDBOX='YES'
 		;;
     *:AdHoc)
         BUILD_LABEL='AD-HOC-DIST'
@@ -92,19 +93,28 @@ cat << EOF
 const BOOL DEBUG_LOGGING = ${DEBUG_LOGGING};
 const BOOL DEBUG_PAYLOAD_ALLOWED = ${DEBUG_PAYLOAD_ALLOWED};
 EOF
+if [ "$DEV_SANDBOX" = 'YES' ];
+then
+
+echo "NSString * const PARSE_APPLICATION_ID = @\"${DEV_PARSE_APPLICATION_ID}\";"
+echo "NSString * const PARSE_CLIENT_KEY = @\"${DEV_PARSE_CLIENT_KEY}\";"
+
+else
 
 echo "NSString * const PARSE_APPLICATION_ID = @\"${PARSE_APPLICATION_ID}\";"
 echo "NSString * const PARSE_CLIENT_KEY = @\"${PARSE_CLIENT_KEY}\";"
 
+fi
+
 echo "NSString * const TEST_FLIGHT_TEAM_TOKEN = @\"${TEST_FLIGHT_TEAM_TOKEN}\";"
 
-if [ "${BUILD_LABEL}" = 'DEVELOPER' ]
+if [ "${BUILD_LABEL}" = 'DEVELOPER' ];
 then
 cat << EOF
 EOF
 fi
 
-if [ "${DEBUG_LOGGING}" = 'YES' ]
+if [ "${DEBUG_LOGGING}" = 'YES' ];
 then
 cat << EOF
 

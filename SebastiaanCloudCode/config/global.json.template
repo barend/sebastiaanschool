@@ -1,0 +1,14 @@
+{
+    "applications": {
+        "Seb@stiaan School": {
+            "applicationId": "PARSE_APPLICATION_ID", 
+            "masterKey": "PARSE_MASTER_KEY"
+        }, 
+        "_default": {
+            "link": "Seb@stiaan School"
+        }
+    }, 
+    "global": {
+        "parseVersion": "1.1.15"
+    }
+}
