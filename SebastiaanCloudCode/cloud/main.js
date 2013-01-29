@@ -44,7 +44,7 @@ Parse.Cloud.afterSave("Bulletin", function(request) {
 	Parse.Push.send({
 	  channels: [ "" ],
 	  data: {
-	    alert: "Er is een nieuwe mededeling: " + request.object.get("title")
+	    alert: request.object.get("title")
 	  }
 	}, {
 	  success: function() {
