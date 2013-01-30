@@ -46,10 +46,11 @@
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)newDeviceToken {
     [PFPush storeDeviceToken:newDeviceToken];
-    [PFPush subscribeToChannelInBackground:@"" target:self selector:@selector(subscribeFinished:error:)];
+    [[PFInstallation currentInstallation] addUniqueObject:@"" forKey:@"channels"];
 #ifdef DEBUG
-    [PFPush subscribeToChannelInBackground:@"debug" target:self selector:@selector(subscribeFinished:error:)];
+    [[PFInstallation currentInstallation] addUniqueObject:@"debug" forKey:@"channels"];
 #endif
+    [[PFInstallation currentInstallation] saveEventually];
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
