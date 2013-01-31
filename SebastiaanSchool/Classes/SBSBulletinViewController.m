@@ -91,7 +91,7 @@
             //Do a big reload since the framework VC doesn't support nice view insertions and removal.
             [self loadObjects];
         } else {
-            NSLog(@"Error while adding bulletin: %@", error);
+            ULog(@"Error while adding bulletin: %@", error);
         }
     }];
     
@@ -143,6 +143,8 @@
             if (succeeded) {
                 //Do a big reload since the framework VC doesn't support nice view insertions and removal.
                 [self loadObjects];
+            } else {
+                ULog(@"Failed to delete buletin");
             }
         }];
     }
@@ -159,6 +161,7 @@
 //    PFObject *bulletin = [self objectAtIndexPath:indexPath];
 //    SBSNewsLetterViewController *newsletterViewController = [[SBSNewsLetterViewController alloc]initWithNewsLetter:newsLetter];
 //    [self.navigationController pushViewController:newsletterViewController animated:YES];
+    ULog(@"Still needs implementation.");
 }
 
 #pragma mark - Listen for security role changes

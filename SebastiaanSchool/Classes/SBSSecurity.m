@@ -71,7 +71,7 @@ NSString * const SBSUserRoleDidChangeNotification = @"SBSUserRoleDidChangeNotifi
     
     
     if ([userTypeKeypath isEqual:keyPath]) {
-        NSLog(@"Role of user changed");
+        DLog(@"Role of user changed");
         [[NSNotificationCenter defaultCenter] postNotificationName:SBSUserRoleDidChangeNotification object:nil];
     }
 }
