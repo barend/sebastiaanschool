@@ -116,6 +116,18 @@ fi
 
 if [ "${DEBUG_LOGGING}" = 'YES' ];
 then
+
+echo "NSString * const DEVICE_IDENTIFIER_SELECTOR = @\"uniqueIdentifier\";"
+
+else
+
+echo "NSString * const DEVICE_IDENTIFIER_SELECTOR = @"";"
+
+fi
+
+
+if [ "${DEBUG_LOGGING}" = 'YES' ];
+then
 cat << EOF
 
 static NSString * const BUILD_LABEL = @"${BUILD_LABEL}";
