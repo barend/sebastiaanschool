@@ -6,8 +6,6 @@
 //
 //
 
-#import <UIKit/UIKit.h>
-
 @protocol SBSAddBulletinDelegate <NSObject>
 
 -(void)createdBulletin:(PFObject *)newBulletin;

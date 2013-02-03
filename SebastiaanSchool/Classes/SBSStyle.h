@@ -6,8 +6,6 @@
 //
 //
 
-#import <Foundation/Foundation.h>
-
 @interface SBSStyle : NSObject
 
 + (UIColor *)sebastiaanBlueColor;
