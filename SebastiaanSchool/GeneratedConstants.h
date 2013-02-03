@@ -14,4 +14,4 @@ extern NSString * const PARSE_CLIENT_KEY;
 
 extern NSString * const TEST_FLIGHT_TEAM_TOKEN;
 
-extern NSString * const DEVICE_IDENTIFIER_SELECTOR;
+void bootstrapTestFlight(void);

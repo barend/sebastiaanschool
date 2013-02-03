@@ -130,6 +130,36 @@ if [ "${DEBUG_LOGGING}" = 'YES' ];
 then
 cat << EOF
 
+void bootstrapTestFlight(void) {
+    @autoreleasepool {
+        [TestFlight takeOff:TEST_FLIGHT_TEAM_TOKEN];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+        [TestFlight setDeviceIdentifier:[UIDevice currentDevice].uniqueIdentifier];
+#pragma clang diagnostic pop
+    }
+}
+EOF
+
+else
+cat << EOF
+
+void bootstrapTestFlight(void) {
+    @autoreleasepool {
+        [TestFlight takeOff:TEST_FLIGHT_TEAM_TOKEN];
+    }
+}
+EOF
+
+echo "NSString * const DEVICE_IDENTIFIER_SELECTOR = @"";"
+
+fi
+
+
+if [ "${DEBUG_LOGGING}" = 'YES' ];
+then
+cat << EOF
+
 static NSString * const BUILD_LABEL = @"${BUILD_LABEL}";
 
 // This code is only present when logging is enabled.

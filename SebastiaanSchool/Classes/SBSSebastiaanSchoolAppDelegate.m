@@ -12,6 +12,8 @@
 #pragma mark - UIApplicationDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    bootstrapTestFlight();
+    
     [Parse setApplicationId:PARSE_APPLICATION_ID
                   clientKey:PARSE_CLIENT_KEY];
     
@@ -26,13 +28,6 @@
     
     [PFACL setDefaultACL:defaultACL withAccessForCurrentUser:YES];
 
-    //TODO fix this in the generated constants.
-    if (DEVICE_IDENTIFIER_SELECTOR.length > 0) {
-        NSLog(@"Detected conditionaly compiled selector for device token");
-        NSString * di = [[UIDevice currentDevice] performSelector:NSSelectorFromString(DEVICE_IDENTIFIER_SELECTOR)];
-        [TestFlight setDeviceIdentifier:di];
-    }
-    [TestFlight takeOff:TEST_FLIGHT_TEAM_TOKEN];
     
     [self.rootViewController setViewControllers:[self getTabVCs] animated:NO];
     
