@@ -10,6 +10,7 @@
 
 #ifdef __OBJC__
 
+    // Forward NSLog to TestFlight
     #define NSLog TFLog
 
     // DLog will output like NSLog only when the DEBUG variable is set
@@ -39,7 +40,6 @@
     #import <Parse/Parse.h>
 
     #import "TestFlight.h"
-
     #import "GeneratedConstants.h"
 
     #import "SBSStyle.h"
