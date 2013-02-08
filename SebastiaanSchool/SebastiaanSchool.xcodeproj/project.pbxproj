@@ -25,6 +25,10 @@
 		4A3B996016A0830600241D4C /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A3B995F16A0830600241D4C /* MainWindow.xib */; };
 		4A3F5B5916A87BB9005F742E /* NSUserDefaults+SBS.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A3F5B5816A87BB9005F742E /* NSUserDefaults+SBS.m */; };
 		4A3F6A3616C58FB700FC066D /* SBSInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A3F6A3516C58FB700FC066D /* SBSInfoViewController.xib */; };
+		4A3F6A3916C5995600FC066D /* 75-phone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A3F6A3716C5995600FC066D /* 75-phone.png */; };
+		4A3F6A3A16C5995600FC066D /* 75-phone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A3F6A3816C5995600FC066D /* 75-phone@2x.png */; };
+		4A3F6A3D16C599F300FC066D /* 112-group.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A3F6A3B16C599F300FC066D /* 112-group.png */; };
+		4A3F6A3E16C599F300FC066D /* 112-group@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A3F6A3C16C599F300FC066D /* 112-group@2x.png */; };
 		4A4EA04B16A34CA400F12406 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4A4EA04A16A34CA400F12406 /* Settings.bundle */; };
 		4A4EA05916A35B1F00F12406 /* SBSStaffViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A4EA05716A35B1F00F12406 /* SBSStaffViewController.m */; };
 		4A71D3AD16A152A800A11C80 /* SBSContactTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A71D3AC16A152A800A11C80 /* SBSContactTableViewController.m */; };
@@ -101,6 +105,10 @@
 		4A3F5B5716A87BB9005F742E /* NSUserDefaults+SBS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaults+SBS.h"; sourceTree = "<group>"; };
 		4A3F5B5816A87BB9005F742E /* NSUserDefaults+SBS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSUserDefaults+SBS.m"; sourceTree = "<group>"; };
 		4A3F6A3516C58FB700FC066D /* SBSInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SBSInfoViewController.xib; sourceTree = "<group>"; };
+		4A3F6A3716C5995600FC066D /* 75-phone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "75-phone.png"; sourceTree = "<group>"; };
+		4A3F6A3816C5995600FC066D /* 75-phone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "75-phone@2x.png"; sourceTree = "<group>"; };
+		4A3F6A3B16C599F300FC066D /* 112-group.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "112-group.png"; sourceTree = "<group>"; };
+		4A3F6A3C16C599F300FC066D /* 112-group@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "112-group@2x.png"; sourceTree = "<group>"; };
 		4A4EA04A16A34CA400F12406 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		4A4EA05616A35B1F00F12406 /* SBSStaffViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBSStaffViewController.h; sourceTree = "<group>"; };
 		4A4EA05716A35B1F00F12406 /* SBSStaffViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBSStaffViewController.m; sourceTree = "<group>"; };
@@ -296,6 +304,10 @@
 		4ADC932116A0050600DAA972 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4A3F6A3716C5995600FC066D /* 75-phone.png */,
+				4A3F6A3816C5995600FC066D /* 75-phone@2x.png */,
+				4A3F6A3B16C599F300FC066D /* 112-group.png */,
+				4A3F6A3C16C599F300FC066D /* 112-group@2x.png */,
 				4AD180D516A5922800B97F61 /* 123-id-card.png */,
 				4AD180D616A5922800B97F61 /* 123-id-card@2x.png */,
 				4AD180D116A5920000B97F61 /* 162-receipt.png */,
@@ -421,6 +433,10 @@
 				4AB22B7616A73851001BA435 /* release_notes.md in Resources */,
 				4AF4A0B316A86DA600493C20 /* provisiontype in Resources */,
 				4A3F6A3616C58FB700FC066D /* SBSInfoViewController.xib in Resources */,
+				4A3F6A3916C5995600FC066D /* 75-phone.png in Resources */,
+				4A3F6A3A16C5995600FC066D /* 75-phone@2x.png in Resources */,
+				4A3F6A3D16C599F300FC066D /* 112-group.png in Resources */,
+				4A3F6A3E16C599F300FC066D /* 112-group@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

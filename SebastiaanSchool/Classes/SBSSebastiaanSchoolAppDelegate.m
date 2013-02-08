@@ -76,8 +76,6 @@
         allTabs = @[[self createInfoViewController],
                     [self createNewsLetterController],
                     [self createBulletinViewController],
-                    [self createAgendaViewController],
-                    [self createContactViewController],
                     [self createStaffViewController]];
     });
     
@@ -121,36 +119,15 @@
     return navController;
 }
 
--(UIViewController *) createContactViewController {
-    SBSContactTableViewController *controller = [[SBSContactTableViewController alloc] init];
-    controller.title = NSLocalizedString(@"Contact", nil);
-    
-    UINavigationController * navController = [self createNavControllerWithRootController:controller];
-    navController.tabBarItem.title = controller.title;
-    navController.tabBarItem.image = [UIImage imageNamed:@"123-id-card"];
-    return navController;
-}
-
--(UIViewController *) createAgendaViewController {
-    SBSAgendaTableViewController *controller = [[SBSAgendaTableViewController alloc] init];
-    controller.title = NSLocalizedString(@"Agenda", nil);
-    
-    UINavigationController * navController = [self createNavControllerWithRootController:controller];
-    navController.tabBarItem.title = controller.title;
-    navController.tabBarItem.image = [UIImage imageNamed:@"259-list"];
-    return navController;
-}
-
 -(UIViewController *) createStaffViewController {
     SBSStaffViewController *controller = [[SBSStaffViewController alloc] init];
     controller.title = NSLocalizedString(@"Staff", nil);
     
-    UINavigationController * navController =  [self createNavControllerWithRootController:controller];
+    UINavigationController * navController = [self createNavControllerWithRootController:controller];
     navController.tabBarItem.title = controller.title;
     navController.tabBarItem.image = [UIImage imageNamed:@"237-key"];
     return navController;
 }
-
 
 -(UINavigationController *) createNavControllerWithRootController:(UIViewController *)rootController {
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:rootController];
