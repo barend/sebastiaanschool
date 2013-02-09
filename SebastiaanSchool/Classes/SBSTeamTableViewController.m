@@ -146,7 +146,7 @@
         PFObject *contactItem = [self objectAtIndexPath:indexPath];
         NSString *contactItemName = [contactItem objectForKey:@"displayName"];
         
-        UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:[NSString stringWithFormat: NSLocalizedString(@"Weet u zeker dat u \"%@\" wilt verwijderen?", nil), contactItemName] delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) destructiveButtonTitle:NSLocalizedString(@"Delete", nil) otherButtonTitles:nil];
+        UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:[NSString stringWithFormat: NSLocalizedString(@"Are you sure you want to delete \"%@\"?", nil), contactItemName] delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) destructiveButtonTitle:NSLocalizedString(@"Delete", nil) otherButtonTitles:nil];
         self.currentlyEditedIndexPath = indexPath;
         
         [actionSheet showInView:[UIApplication sharedApplication].delegate.window.rootViewController.view];
