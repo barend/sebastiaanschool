@@ -35,6 +35,20 @@
     [self applyTitle:NSLocalizedString(@"About", nil) andWithImageNamed:@"123-id-card" toButton:self.aboutButton];
     [self applyTitle:NSLocalizedString(@"Agenda", nil) andWithImageNamed:@"259-list" toButton:self.agendaButton];
     [self applyTitle:NSLocalizedString(@"Staff", nil) andWithImageNamed:@"112-group" toButton:self.teamButton];
+    
+    UITapGestureRecognizer * tapRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(doTapOnIcon:)];
+    tapRecognizer.numberOfTapsRequired = 3;
+    self.iconImageView.userInteractionEnabled = YES;
+    [self.iconImageView addGestureRecognizer:tapRecognizer];
+}
+
+-(void)doTapOnIcon:(id)sender {
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
+    animation.toValue = [NSNumber numberWithFloat:((360*M_PI)/180)];
+    animation.autoreverses = NO;
+    animation.repeatCount = 3;
+//    animation.duration = 0.4f;
+    [self.iconImageView.layer addAnimation:animation forKey:@"360"];
 }
 
 - (void)applyTitle:(NSString *)title andWithImageNamed:(NSString *)imageName toButton:(UIButton*)button {
