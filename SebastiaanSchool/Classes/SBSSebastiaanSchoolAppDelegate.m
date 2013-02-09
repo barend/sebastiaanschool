@@ -80,7 +80,7 @@
     });
     
     if ([NSUserDefaults enableStaffLogin]) {
-        return [allTabs subarrayWithRange:NSMakeRange(1, allTabs.count -1)];
+        return allTabs;
     } else {
         return [allTabs subarrayWithRange:NSMakeRange(0, allTabs.count -1)];
     }
