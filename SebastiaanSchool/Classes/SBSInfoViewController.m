@@ -39,9 +39,12 @@
 
 - (void)applyTitle:(NSString *)title andWithImageNamed:(NSString *)imageName toButton:(UIButton*)button {
     UIImage *image = [UIImage imageNamed:imageName];
+    UIImage *whiteImage = [UIImage imageNamed:[NSString stringWithFormat:@"%@-white", imageName]];
     
     [button setImage:image forState:UIControlStateNormal];
+    [button setImage:whiteImage forState:UIControlStateHighlighted];
     [button setTitle:title forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     
     button.tintColor = [SBSStyle sebastiaanBlueColor];
     
