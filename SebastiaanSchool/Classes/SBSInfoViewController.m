@@ -30,7 +30,7 @@
 {
     [super viewDidLoad];
     [TestFlight passCheckpoint:[NSString stringWithFormat:@"Loaded VC %@", self.title]];
-    
+    self.view.backgroundColor = [SBSStyle sebastiaanBlueColor];
     [self applyTitle:NSLocalizedString(@"Call", nil) andWithImageNamed:@"75-phone" toButton:self.callButton];
     [self applyTitle:NSLocalizedString(@"About", nil) andWithImageNamed:@"123-id-card" toButton:self.aboutButton];
     [self applyTitle:NSLocalizedString(@"Agenda", nil) andWithImageNamed:@"259-list" toButton:self.agendaButton];
