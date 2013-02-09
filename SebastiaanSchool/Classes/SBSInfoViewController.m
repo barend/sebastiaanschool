@@ -9,7 +9,7 @@
 #import "SBSInfoViewController.h"
 
 #import "SBSAgendaTableViewController.h"
-#import "SBSContactTableViewController.h"
+#import "SBSTeamTableViewController.h"
 
 @interface SBSInfoViewController ()
 
@@ -35,10 +35,6 @@
     [self applyTitle:NSLocalizedString(@"About", nil) andWithImageNamed:@"123-id-card" toButton:self.aboutButton];
     [self applyTitle:NSLocalizedString(@"Agenda", nil) andWithImageNamed:@"259-list" toButton:self.infoButton];
     [self applyTitle:NSLocalizedString(@"Staff", nil) andWithImageNamed:@"112-group" toButton:self.teamButton];
-}
-
-- (void)gotoContact:(id)sender {
-    
 }
 
 - (void)applyTitle:(NSString *)title andWithImageNamed:(NSString *)imageName toButton:(UIButton*)button {
@@ -73,8 +69,8 @@
         
         [self.navigationController pushViewController:agendaController animated:YES];
     } else if(sender == self.teamButton) {
-        SBSContactTableViewController *contactController = [[SBSContactTableViewController alloc] init];
-        contactController.title = NSLocalizedString(@"Contact", nil);
+        SBSTeamTableViewController *contactController = [[SBSTeamTableViewController alloc] init];
+        contactController.title = NSLocalizedString(@"Team", nil);
 
         [self.navigationController pushViewController:contactController animated:YES];
     } else {

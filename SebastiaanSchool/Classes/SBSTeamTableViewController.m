@@ -6,13 +6,13 @@
 //
 //
 
-#import "SBSContactTableViewController.h"
+#import "SBSTeamTableViewController.h"
 
-@interface SBSContactTableViewController ()
+@interface SBSTeamTableViewController ()
 
 @end
 
-@implementation SBSContactTableViewController
+@implementation SBSTeamTableViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {

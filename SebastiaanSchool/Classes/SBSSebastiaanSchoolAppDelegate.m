@@ -1,7 +1,7 @@
 #import "SBSSebastiaanSchoolAppDelegate.h"
 #import "SBSBulletinViewController.h"
 #import "SBSNewsLetterTableViewController.h"
-#import "SBSContactTableViewController.h"
+#import "SBSTeamTableViewController.h"
 #import "SBSAgendaTableViewController.h"
 #import "SBSInfoViewController.h"
 #import "SBSStaffViewController.h"
