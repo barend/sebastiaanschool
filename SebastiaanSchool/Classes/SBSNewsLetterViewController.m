@@ -58,22 +58,22 @@
 
 #pragma mark - UIWebView delegate implementation
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-    NSLog(@"Error web");
+    ALog(@"Error web");
     [self.activityIndicator stopAnimating];
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    NSLog(@"Request: %@", request);
+    DLog(@"Request: %@", request);
     return YES;
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
-    NSLog(@"Finish web");
+    ALog(@"Finish web");
     [self.activityIndicator stopAnimating];
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView {
-    NSLog(@"Start web");
+    ALog(@"Start web");
     [self.activityIndicator startAnimating];
 }
 

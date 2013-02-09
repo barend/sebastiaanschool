@@ -6,9 +6,8 @@
 //
 //
 
-#import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
 
-@interface SBSContactTableViewController : PFQueryTableViewController <MFMailComposeViewControllerDelegate>
+@interface SBSTeamTableViewController : PFQueryTableViewController <MFMailComposeViewControllerDelegate>
 
 @end

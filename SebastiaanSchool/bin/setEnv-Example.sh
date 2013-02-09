@@ -7,10 +7,22 @@
 #
 #  Created by Jeroen Leenarts on 11-01-13.
 #
-export PARSE_APPLICATION_ID="Dummy"
-export PARSE_CLIENT_KEY="Dummy"
-export PARSE_REST_API_KEY="Dummy"
 
-export PARSE_MASTER_KEY="Dummy"
+export TEST_FLIGHT_TEAM_TOKEN="dummy"
 
-export TEST_FLIGHT_TEAM_TOKEN="Dummy"
+#Developement keys
+
+export DEV_PARSE_APPLICATION_ID="dummy"
+export DEV_PARSE_CLIENT_KEY="dummy"
+export DEV_PARSE_REST_API_KEY="dummy"
+
+export DEV_PARSE_MASTER_KEY="dummy"
+
+#Production keys
+
+export PARSE_APPLICATION_ID="dummy"
+export PARSE_CLIENT_KEY="dummy"
+export PARSE_REST_API_KEY="dummy"
+
+export PARSE_MASTER_KEY="dummy"
+

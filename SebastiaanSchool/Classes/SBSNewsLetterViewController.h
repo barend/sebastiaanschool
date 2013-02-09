@@ -6,8 +6,6 @@
 //
 //
 
-#import <UIKit/UIKit.h>
-
 @interface SBSNewsLetterViewController : UIViewController <UIWebViewDelegate>
 
 - (id)initWithNewsLetter:(PFObject *)newsLetter;

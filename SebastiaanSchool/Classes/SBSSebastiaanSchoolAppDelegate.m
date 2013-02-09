@@ -1,8 +1,7 @@
-#import <Parse/Parse.h>
 #import "SBSSebastiaanSchoolAppDelegate.h"
 #import "SBSBulletinViewController.h"
 #import "SBSNewsLetterTableViewController.h"
-#import "SBSContactTableViewController.h"
+#import "SBSTeamTableViewController.h"
 #import "SBSAgendaTableViewController.h"
 #import "SBSInfoViewController.h"
 #import "SBSStaffViewController.h"
@@ -12,6 +11,8 @@
 #pragma mark - UIApplicationDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    bootstrapTestFlight();
+    
     [Parse setApplicationId:PARSE_APPLICATION_ID
                   clientKey:PARSE_CLIENT_KEY];
     
@@ -26,12 +27,6 @@
     
     [PFACL setDefaultACL:defaultACL withAccessForCurrentUser:YES];
 
-#define TESTING 1
-#ifdef TESTING
-    //TODO fix this in the generated constants.
-    [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
-#endif
-    [TestFlight takeOff:TEST_FLIGHT_TEAM_TOKEN];
     
     [self.rootViewController setViewControllers:[self getTabVCs] animated:NO];
     
@@ -81,13 +76,11 @@
         allTabs = @[[self createInfoViewController],
                     [self createNewsLetterController],
                     [self createBulletinViewController],
-                    [self createAgendaViewController],
-                    [self createContactViewController],
                     [self createStaffViewController]];
     });
     
     if ([NSUserDefaults enableStaffLogin]) {
-        return [allTabs subarrayWithRange:NSMakeRange(1, allTabs.count -1)];
+        return allTabs;
     } else {
         return [allTabs subarrayWithRange:NSMakeRange(0, allTabs.count -1)];
     }
@@ -126,36 +119,15 @@
     return navController;
 }
 
--(UIViewController *) createContactViewController {
-    SBSContactTableViewController *controller = [[SBSContactTableViewController alloc] init];
-    controller.title = NSLocalizedString(@"Contact", nil);
-    
-    UINavigationController * navController = [self createNavControllerWithRootController:controller];
-    navController.tabBarItem.title = controller.title;
-    navController.tabBarItem.image = [UIImage imageNamed:@"123-id-card"];
-    return navController;
-}
-
--(UIViewController *) createAgendaViewController {
-    SBSAgendaTableViewController *controller = [[SBSAgendaTableViewController alloc] init];
-    controller.title = NSLocalizedString(@"Agenda", nil);
-    
-    UINavigationController * navController = [self createNavControllerWithRootController:controller];
-    navController.tabBarItem.title = controller.title;
-    navController.tabBarItem.image = [UIImage imageNamed:@"259-list"];
-    return navController;
-}
-
 -(UIViewController *) createStaffViewController {
     SBSStaffViewController *controller = [[SBSStaffViewController alloc] init];
     controller.title = NSLocalizedString(@"Staff", nil);
     
-    UINavigationController * navController =  [self createNavControllerWithRootController:controller];
+    UINavigationController * navController = [self createNavControllerWithRootController:controller];
     navController.tabBarItem.title = controller.title;
     navController.tabBarItem.image = [UIImage imageNamed:@"237-key"];
     return navController;
 }
-
 
 -(UINavigationController *) createNavControllerWithRootController:(UIViewController *)rootController {
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:rootController];

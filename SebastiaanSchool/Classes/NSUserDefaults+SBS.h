@@ -6,8 +6,6 @@
 //
 //
 
-#import <Foundation/Foundation.h>
-
 @interface NSUserDefaults (SBS)
 +(BOOL) enableStaffLogin;
 

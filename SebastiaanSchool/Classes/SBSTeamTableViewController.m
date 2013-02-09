@@ -6,13 +6,13 @@
 //
 //
 
-#import "SBSContactTableViewController.h"
+#import "SBSTeamTableViewController.h"
 
-@interface SBSContactTableViewController ()
+@interface SBSTeamTableViewController ()
 
 @end
 
-@implementation SBSContactTableViewController
+@implementation SBSTeamTableViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -161,16 +161,16 @@
     switch (result)
     {
         case MFMailComposeResultCancelled:
-            NSLog(@"Mail cancelled");
+            DLog(@"Mail cancelled");
             break;
         case MFMailComposeResultSaved:
-            NSLog(@"Mail saved");
+            DLog(@"Mail saved");
             break;
         case MFMailComposeResultSent:
-            NSLog(@"Mail sent");
+            DLog(@"Mail sent");
             break;
         case MFMailComposeResultFailed:
-            NSLog(@"Mail sent failure: %@", [error localizedDescription]);
+            ALog(@"Mail sent failure: %@", [error localizedDescription]);
             break;
         default:
             break;
