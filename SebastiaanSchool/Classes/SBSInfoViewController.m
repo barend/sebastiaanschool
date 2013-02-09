@@ -33,7 +33,7 @@
     
     [self applyTitle:NSLocalizedString(@"Call", nil) andWithImageNamed:@"75-phone" toButton:self.callButton];
     [self applyTitle:NSLocalizedString(@"About", nil) andWithImageNamed:@"123-id-card" toButton:self.aboutButton];
-    [self applyTitle:NSLocalizedString(@"Agenda", nil) andWithImageNamed:@"259-list" toButton:self.infoButton];
+    [self applyTitle:NSLocalizedString(@"Agenda", nil) andWithImageNamed:@"259-list" toButton:self.agendaButton];
     [self applyTitle:NSLocalizedString(@"Staff", nil) andWithImageNamed:@"112-group" toButton:self.teamButton];
 }
 
@@ -66,7 +66,9 @@
             [alert show];
         }
     } else if(sender == self.aboutButton) {
-    } else if(sender == self.infoButton) {
+        ULog(@"Not implemented yet.");
+    } else if(sender == self.agendaButton) {
+        [TestFlight passCheckpoint:@"Agenda button tapped on phone."];
         SBSAgendaTableViewController *agendaController = [[SBSAgendaTableViewController alloc] init];
         agendaController.title = NSLocalizedString(@"Agenda", nil);
         

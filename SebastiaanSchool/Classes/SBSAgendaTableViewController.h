@@ -6,6 +6,6 @@
 //
 //
 
-@interface SBSAgendaTableViewController : PFQueryTableViewController
+@interface SBSAgendaTableViewController : PFQueryTableViewController <UIActionSheetDelegate>
 
 @end
