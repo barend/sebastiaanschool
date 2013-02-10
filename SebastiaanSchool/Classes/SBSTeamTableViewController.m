@@ -7,17 +7,25 @@
 //
 
 #import "SBSTeamTableViewController.h"
+#import "SBSAddTeamMemberViewController.h"
 
 @interface SBSTeamTableViewController ()
-
+@property (nonatomic, strong) NSIndexPath *currentlyEditedIndexPath;
 @end
 
 @implementation SBSTeamTableViewController
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
+}
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userRoleChanged:) name:SBSUserRoleDidChangeNotification object:nil];
+
         // Custom the table
         
         // The className to query on
@@ -45,6 +53,21 @@
     [TestFlight passCheckpoint:[NSString stringWithFormat:@"Loaded VC %@", self.title]];
 }
 
+-(void)viewWillAppear:(BOOL)animated {
+    [self updateBarButtonItemAnimated:animated];
+}
+
+-(void)updateBarButtonItemAnimated:(BOOL)animated {
+    if ([[SBSSecurity instance] currentUserStaffUser]) {
+        if (self.navigationItem.rightBarButtonItem == nil) {
+            UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addTeamMember)];
+            [self.navigationItem setRightBarButtonItem:addButton animated:animated];
+        }
+    } else {
+        [self.navigationItem setRightBarButtonItem:nil animated:animated];
+    }
+}
+
 
 #pragma mark - Parse
 
@@ -64,6 +87,24 @@
     return query;
 }
 
+- (void)addTeamMember {
+    SBSAddTeamMemberViewController *addTeamMemberVC = [[SBSAddTeamMemberViewController alloc]init];
+    addTeamMemberVC.delegate = self;
+    [self.navigationController pushViewController:addTeamMemberVC animated:YES];
+}
+
+-(void)createdTeamMember:(PFObject *)newTeamMember {
+    [newTeamMember saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            //Do a big reload since the framework VC doesn't support nice view insertions and removal.
+            [self loadObjects];
+        } else {
+            ULog(@"Error while adding bulletin: %@", error);
+        }
+    }];
+    
+    [self.navigationController popToViewController:self animated:YES];
+}
 
 
 // Override to customize the look of a cell representing an object. The default is to display
@@ -91,19 +132,45 @@
 
 #pragma mark - Table view data source
 
-/*
- // Override to support editing the table view.
- - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
- {
- if (editingStyle == UITableViewCellEditingStyleDelete) {
- // Delete the row from the data source
- [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
- }
- else if (editingStyle == UITableViewCellEditingStyleInsert) {
- // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
- }
- }
- */
+// Override to support conditional editing of the table view.
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Return NO if you do not want the specified item to be editable.
+    return [SBSSecurity instance].currentUserStaffUser;
+}
+
+// Override to support editing the table view.
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        PFObject *contactItem = [self objectAtIndexPath:indexPath];
+        NSString *contactItemName = [contactItem objectForKey:@"displayName"];
+        
+        UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:[NSString stringWithFormat: NSLocalizedString(@"Are you sure you want to delete \"%@\"?", nil), contactItemName] delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) destructiveButtonTitle:NSLocalizedString(@"Delete", nil) otherButtonTitles:nil];
+        self.currentlyEditedIndexPath = indexPath;
+        
+        [actionSheet showInView:[UIApplication sharedApplication].delegate.window.rootViewController.view];
+    }
+}
+
+#pragma mark - Action sheet delegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == actionSheet.cancelButtonIndex || self.currentlyEditedIndexPath == nil) {
+        return;
+    }
+    
+    // Delete the row from the data source
+    PFObject *deletedTeamMember = [self objectAtIndexPath:self.currentlyEditedIndexPath];
+    [deletedTeamMember deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            //Do a big reload since the framework VC doesn't support nice view insertions and removal.
+            [self loadObjects];
+        } else {
+            ULog(@"Failed to delete buletin");
+        }
+    }];
+
+}
 
 
 #pragma mark - Table view delegate
@@ -178,6 +245,12 @@
     
     // Close the Mail Interface
     [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
+#pragma mark - Listen for security role changes
+
+-(void)userRoleChanged:(NSNotification *)notification {
+    [self updateBarButtonItemAnimated:YES];
 }
 
 @end
