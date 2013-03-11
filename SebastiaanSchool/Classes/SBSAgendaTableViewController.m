@@ -80,10 +80,8 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
         
-        UIView * const newSelectedBackgroundView = [[UIView alloc] initWithFrame:cell.bounds];
-        newSelectedBackgroundView.backgroundColor = [SBSStyle sebastiaanBlueColor];
-        newSelectedBackgroundView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-        cell.selectedBackgroundView = newSelectedBackgroundView;
+        cell.selectedBackgroundView = [SBSStyle selectedBackgroundView];
+        cell.selectedBackgroundView.frame = cell.bounds;
     }
     
     // Configure the cell

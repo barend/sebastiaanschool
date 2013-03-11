@@ -9,7 +9,7 @@
 @interface SBSStyle : NSObject
 
 + (UIColor *)sebastiaanBlueColor;
-
 + (NSDateFormatter *)longStyleDateFormatter;
++ (UIView *)selectedBackgroundView;
 
 @end

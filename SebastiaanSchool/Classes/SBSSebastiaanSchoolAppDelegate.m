@@ -27,7 +27,11 @@
     
     [PFACL setDefaultACL:defaultACL withAccessForCurrentUser:YES];
 
-    
+
+    // Apply UIAppearance
+    [[UIButton appearance] setTintColor:[SBSStyle sebastiaanBlueColor]];
+    [[UINavigationBar appearance] setTintColor:[SBSStyle sebastiaanBlueColor]];
+
     [self.rootViewController setViewControllers:[self getTabVCs] animated:NO];
     
     self.window.rootViewController = self.rootViewController;
@@ -131,7 +135,6 @@
 
 -(UINavigationController *) createNavControllerWithRootController:(UIViewController *)rootController {
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:rootController];
-    navController.navigationBar.tintColor = [SBSStyle sebastiaanBlueColor];
 
     return navController;
 }
