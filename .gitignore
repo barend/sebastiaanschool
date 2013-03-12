@@ -24,3 +24,8 @@ derived-sources/
 
 # ignore App Code project
 .idea/
+SebastiaanSchool/Pods
+global.json
+Podfile.lock
+setEnv.sh
+derived-sources
