@@ -11,6 +11,8 @@
 @interface SBSAddTeamMemberViewController ()
 @property (nonatomic, strong) UITextField *displayNameField;
 @property (nonatomic, strong) UITextField *descriptionField;
+@property (nonatomic, strong) UITextField *emailField;
+
 @end
 
 @implementation SBSAddTeamMemberViewController
@@ -36,9 +38,14 @@
     [self.view addSubview:self.displayNameField];
     
     self.descriptionField = [[UITextField alloc]initWithFrame:CGRectMake(10, 52, bounds.size.width - 20, 26)];
-#warning add placeholder? http://stackoverflow.com/questions/1328638/placeholder-in-uitextview
+    self.displayNameField.placeholder = NSLocalizedString(@"Description", nil);
     self.descriptionField.borderStyle = UITextBorderStyleRoundedRect;
     [self.view addSubview:self.descriptionField];
+
+    self.emailField = [[UITextField alloc]initWithFrame:CGRectMake(10, 52, bounds.size.width - 20, 26)];
+    self.displayNameField.placeholder = NSLocalizedString(@"Email", nil);
+    self.emailField.borderStyle = UITextBorderStyleRoundedRect;
+    [self.view addSubview:self.emailField];
 }
 
 -(void)doneButtonPressed:(id) sender {
@@ -46,7 +53,7 @@
     if (self.displayNameField.text.length !=0 && self.descriptionField.text.length !=0) {
         [newTeamMember setObject:self.displayNameField.text forKey:@"displayName"];
         [newTeamMember setObject:self.descriptionField.text forKey:@"description"];
-        
+        [newTeamMember setObject:self.emailField.text forKey:@"email"];
         [self.delegate createdTeamMember:newTeamMember];
     }
 }
