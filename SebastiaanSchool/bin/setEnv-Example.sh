@@ -8,7 +8,7 @@
 #  Created by Jeroen Leenarts on 11-01-13.
 #
 
-export TEST_FLIGHT_TEAM_TOKEN="dummy"
+export TEST_FLIGHT_APP_TOKEN="dummy"
 
 #Developement keys
 

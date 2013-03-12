@@ -106,7 +106,7 @@ echo "NSString * const PARSE_CLIENT_KEY = @\"${PARSE_CLIENT_KEY}\";"
 
 fi
 
-echo "NSString * const TEST_FLIGHT_TEAM_TOKEN = @\"${TEST_FLIGHT_TEAM_TOKEN}\";"
+echo "NSString * const TEST_FLIGHT_APP_TOKEN = @\"${TEST_FLIGHT_APP_TOKEN}\";"
 
 if [ "${BUILD_LABEL}" = 'DEVELOPER' ];
 then
@@ -132,7 +132,7 @@ cat << EOF
 
 void bootstrapTestFlight(void) {
     @autoreleasepool {
-        [TestFlight takeOff:TEST_FLIGHT_TEAM_TOKEN];
+        [TestFlight takeOff:TEST_FLIGHT_APP_TOKEN];
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
         [TestFlight setDeviceIdentifier:[UIDevice currentDevice].uniqueIdentifier];
@@ -146,7 +146,7 @@ cat << EOF
 
 void bootstrapTestFlight(void) {
     @autoreleasepool {
-        [TestFlight takeOff:TEST_FLIGHT_TEAM_TOKEN];
+        [TestFlight takeOff:TEST_FLIGHT_APP_TOKEN];
     }
 }
 EOF
