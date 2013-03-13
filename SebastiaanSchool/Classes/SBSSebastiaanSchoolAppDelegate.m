@@ -105,7 +105,7 @@
 
 -(UIViewController *) createNewsLetterController {
     SBSNewsLetterTableViewController *controller = [[SBSNewsLetterTableViewController alloc] initWithStyle:UITableViewStylePlain];
-    controller.title = NSLocalizedString(@"News letter", nil);
+    controller.title = NSLocalizedString(@"Newsletter", nil);
     
     UINavigationController * navController =  [self createNavControllerWithRootController:controller];
     navController.tabBarItem.title = controller.title;
