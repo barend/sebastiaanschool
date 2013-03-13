@@ -1,4 +1,4 @@
-#!/in/bash
+#!/bin/bash
 
 source ../config/setCloudEnv.sh
 
