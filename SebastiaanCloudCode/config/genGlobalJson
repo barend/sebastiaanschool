@@ -1,16 +1,4 @@
-source ../../SebastiaanSchool/bin/setEnv.sh
 
-if [ "$1" = 'PROD' ];
-then
-	PARSE_APPLICATION_ID=${PARSE_APPLICATION_ID}
-	PARSE_MASTER_KEY=${PARSE_MASTER_KEY}
-elif [ "$1" = 'DEV' ];
-then
-	PARSE_APPLICATION_ID=${DEV_PARSE_APPLICATION_ID}
-	PARSE_MASTER_KEY=${DEV_PARSE_MASTER_KEY}
-else
-	echo "Unknown option."
-	exit 1
-fi
+source setCloudEnv.sh
 
 sed -e "s/PARSE_APPLICATION_ID/${PARSE_APPLICATION_ID}/g" -e "s/PARSE_MASTER_KEY/${PARSE_MASTER_KEY}/g" global.json.template >global.json

@@ -1,4 +1,4 @@
-source ../../SebastiaanSchool/bin/setEnv.sh
+source ../config/setCloudEnv.sh
 
 curl -X POST \
   -H "X-Parse-Application-Id: ${PARSE_APPLICATION_ID}" \

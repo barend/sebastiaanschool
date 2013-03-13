@@ -1,6 +1,6 @@
 #!/in/bash
 
-source ../../SebastiaanSchool/bin/setEnv.sh
+source ../config/setCloudEnv.sh
 
 USER_NAME="$1"
 PASSWORD="$2"
