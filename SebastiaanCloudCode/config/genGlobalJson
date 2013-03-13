@@ -1,4 +1,3 @@
-set -x
 source ../../SebastiaanSchool/bin/setEnv.sh
 
 if [ "$1" = 'PROD' ];
