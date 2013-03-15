@@ -9,6 +9,8 @@
 
 #import "SBSNewsLetterViewController.h"
 
+#import "TFHpple.h"
+
 @interface SBSNewsLetterTableViewController ()
 
 @end
@@ -76,6 +78,84 @@
 }
 
 - (void)refreshNewsletters {
+    [TestFlight passCheckpoint:@"Refreshing newsletters"];
+
+    [TestFlight passCheckpoint:@"Refreshing newsletters"];
+    
+    NSData * data = [NSData dataWithContentsOfURL:[NSURL URLWithString:@"http://www.sebastiaanschool.nl"]];
+    TFHpple *doc = [[TFHpple alloc]initWithHTMLData:data];
+
+#warning Make these settings available on the server
+	NSArray *hrefElements = [doc searchWithXPathQuery:@"//li[@id='cat_1098']/ul/li/a/@href"];
+    NSArray *spanElements = [doc searchWithXPathQuery:@"//li[@id='cat_1098']/ul/li/a/span"];
+    NSString * baseUrlString = @"http://www.sebastiaanschool.nl";
+
+    if (hrefElements.count != spanElements.count) {
+		NSLog(@"Refreshing newsletters failed: non matching href and span counts.");
+        return;
+    }
+    
+    NSMutableArray *newsLetterUrls = [NSMutableArray array];
+    [hrefElements enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        TFHppleElement * element = obj;
+        NSString * url = [baseUrlString stringByAppendingPathComponent:element.firstChild.content];
+        url = [url stringByReplacingOccurrencesOfString:@"http:/" withString:@"http://"];
+        [newsLetterUrls addObject:url];
+    }];
+    
+    NSMutableArray *newsLetterNames = [NSMutableArray array];
+    [spanElements enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        TFHppleElement * element = obj;
+        [newsLetterNames addObject:element.firstChild.content];
+    }];
+
+	PFQuery * query = [self queryForTable];
+	[query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+	  if (!error) {
+          // The find succeeded.
+          NSLog(@"Successfully retrieved %d newsletters.", objects.count);
+          
+          for (PFObject * obj in objects) {
+              if([newsLetterNames containsObject:[obj objectForKey:@"name"]] && [newsLetterUrls containsObject:[obj objectForKey:@"url"]]) {
+                  //This one is not updated
+                  NSUInteger index = [newsLetterNames indexOfObject:[obj objectForKey:@"name"]];
+                  [newsLetterNames removeObjectAtIndex:index];
+                  [newsLetterUrls removeObjectAtIndex:index];
+              } else if ([newsLetterNames containsObject:[obj objectForKey:@"name"]]) {
+                  NSUInteger index = [newsLetterNames indexOfObject:[obj objectForKey:@"name"]];
+                  NSString *newUrl = [newsLetterUrls objectAtIndex:index];
+                  
+                  [newsLetterNames removeObjectAtIndex:index];
+                  [newsLetterUrls removeObjectAtIndex:index];
+                  
+                  [obj setObject:newUrl forKey:@"url"];
+                  [obj saveInBackground];
+              } else if([newsLetterUrls containsObject:[obj objectForKey:@"url"]]) {
+                  NSUInteger index = [newsLetterNames indexOfObject:[obj objectForKey:@"url"]];
+                  NSString *newName = [newsLetterNames objectAtIndex:index];
+
+                  [newsLetterNames removeObjectAtIndex:index];
+                  [newsLetterUrls removeObjectAtIndex:index];
+                  
+                  [obj setObject:newName forKey:@"name"];
+                  [obj saveInBackground];
+              } else {
+                  [obj deleteInBackground];
+              }
+          }
+          
+          for (NSUInteger index = 0; index < newsLetterNames.count; index++) {
+              PFObject *obj = [PFObject objectWithClassName:self.className];
+              [obj setObject:[newsLetterNames objectAtIndex:index] forKey:@"name"];
+              [obj setObject:[newsLetterUrls objectAtIndex:index] forKey:@"url"];
+
+              [obj saveInBackground];
+          }
+    } else {
+	    // Log details of the failure
+	    NSLog(@"Error: %@ %@", error, [error userInfo]);
+	  }
+	}];
 }
 
 #pragma mark - Parse
