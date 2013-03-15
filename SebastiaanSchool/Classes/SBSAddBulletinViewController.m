@@ -36,9 +36,8 @@
     [self.view addSubview:self.titleField];
     
     self.bodyField = [[UITextField alloc]initWithFrame:CGRectMake(10, 52, bounds.size.width - 20, 26)];
-#warning add placeholder? http://stackoverflow.com/questions/1328638/placeholder-in-uitextview
     self.bodyField.borderStyle = UITextBorderStyleRoundedRect;
-    [self.view addSubview:self.bodyField];
+//    [self.view addSubview:self.bodyField];
 }
 
 -(void)doneButtonPressed:(id) sender {

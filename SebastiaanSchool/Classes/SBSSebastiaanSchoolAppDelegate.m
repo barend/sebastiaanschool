@@ -27,7 +27,11 @@
     
     [PFACL setDefaultACL:defaultACL withAccessForCurrentUser:YES];
 
-    
+
+    // Apply UIAppearance
+    [[UIButton appearance] setTintColor:[SBSStyle sebastiaanBlueColor]];
+    [[UINavigationBar appearance] setTintColor:[SBSStyle sebastiaanBlueColor]];
+
     [self.rootViewController setViewControllers:[self getTabVCs] animated:NO];
     
     self.window.rootViewController = self.rootViewController;
@@ -101,7 +105,7 @@
 
 -(UIViewController *) createNewsLetterController {
     SBSNewsLetterTableViewController *controller = [[SBSNewsLetterTableViewController alloc] initWithStyle:UITableViewStylePlain];
-    controller.title = NSLocalizedString(@"News letter", nil);
+    controller.title = NSLocalizedString(@"Newsletter", nil);
     
     UINavigationController * navController =  [self createNavControllerWithRootController:controller];
     navController.tabBarItem.title = controller.title;
@@ -131,7 +135,6 @@
 
 -(UINavigationController *) createNavControllerWithRootController:(UIViewController *)rootController {
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:rootController];
-    navController.navigationBar.tintColor = [SBSStyle sebastiaanBlueColor];
 
     return navController;
 }

@@ -31,5 +31,11 @@ static NSDateFormatter * longStyleDateFormatter;
     return longStyleDateFormatter;
 }
 
++ (UIView *)selectedBackgroundView {
+    UIView * const newSelectedBackgroundView = [[UIView alloc] initWithFrame:CGRectZero];
+    newSelectedBackgroundView.backgroundColor = [SBSStyle sebastiaanBlueColor];
+    newSelectedBackgroundView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    return newSelectedBackgroundView;
+}
 
 @end

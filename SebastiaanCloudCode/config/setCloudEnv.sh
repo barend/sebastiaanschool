@@ -1,0 +1,18 @@
+#!/bin/bash
+
+source ../../SebastiaanSchool/bin/setEnv.sh
+
+if [ "$1" = 'PROD' ];
+then
+	PARSE_APPLICATION_ID=${PARSE_APPLICATION_ID}
+	PARSE_MASTER_KEY=${PARSE_MASTER_KEY}
+	PARSE_REST_API_KEY=${PARSE_REST_API_KEY}
+elif [ "$1" = 'DEV' ];
+then
+	PARSE_APPLICATION_ID=${DEV_PARSE_APPLICATION_ID}
+	PARSE_MASTER_KEY=${DEV_PARSE_MASTER_KEY}
+	PARSE_REST_API_KEY=${DEV_PARSE_REST_API_KEY}
+else
+	echo "Unknown option."
+	exit 1
+fi

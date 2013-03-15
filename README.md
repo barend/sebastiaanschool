@@ -8,3 +8,5 @@ When looking into running this code yourself, you will need a Parse.com account.
 After setting your credentials in the said setEnv.sh file. Run all curl scripts in the cloudcode project.
 
 The cloudcode project contains a few hooks right now dealing with notifications. But those are not needed right now.
+
+Building the app requires CocoaPods.
