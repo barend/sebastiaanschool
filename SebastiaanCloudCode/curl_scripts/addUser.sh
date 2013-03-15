@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ../config/setCloudEnv.sh
+source ../config/setCloudEnv.sh $3
 
 USER_NAME="$1"
 PASSWORD="$2"
