@@ -4,7 +4,6 @@
 //
 //  Created by Jeroen Leenarts on 11-01-13.
 //
-//
 
 #import "SBSNewsLetterTableViewController.h"
 
@@ -16,10 +15,17 @@
 
 @implementation SBSNewsLetterTableViewController
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
+}
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userRoleChanged:) name:SBSUserRoleDidChangeNotification object:nil];
+        
         // Custom the table
         
         // The className to query on
@@ -52,6 +58,24 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    [self updateBarButtonItemAnimated:animated];
+}
+
+-(void)updateBarButtonItemAnimated:(BOOL)animated {
+    if ([[SBSSecurity instance] currentUserStaffUser]) {
+        if (self.navigationItem.rightBarButtonItem == nil) {
+            UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshNewsletters)];
+            [self.navigationItem setRightBarButtonItem:addButton animated:animated];
+        }
+    } else {
+        [self.navigationItem setRightBarButtonItem:nil animated:animated];
+    }
+}
+
+- (void)refreshNewsletters {
 }
 
 #pragma mark - Parse
@@ -128,6 +152,12 @@
     SBSNewsLetterViewController *newsletterViewController = [[SBSNewsLetterViewController alloc]initWithNewsLetter:newsLetter];
     newsletterViewController.title = [[newsLetter objectForKey:@"name"] capitalizedString];
     [self.navigationController pushViewController:newsletterViewController animated:YES];
+}
+
+#pragma mark - Listen for security role changes
+
+-(void)userRoleChanged:(NSNotification *)notification {
+    [self updateBarButtonItemAnimated:YES];
 }
 
 
