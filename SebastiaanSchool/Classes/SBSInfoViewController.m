@@ -41,6 +41,31 @@
     tapRecognizer.numberOfTapsRequired = 3;
     self.iconImageView.userInteractionEnabled = YES;
     [self.iconImageView addGestureRecognizer:tapRecognizer];
+
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [self updateLayout];
+}
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation duration:(NSTimeInterval)duration {
+    [self updateLayout];
+}
+
+- (void) updateLayout {
+    const CGFloat halfViewWidth = self.view.bounds.size.width / 2.0f;
+    
+    CGRect twitterFrame = self.twitterButton.frame;
+    twitterFrame.size.width = halfViewWidth - 20.0f - 5.0f;
+    twitterFrame.origin.x = 20.0f;
+    self.twitterButton.frame = twitterFrame;
+    
+    CGRect yurlFrame = self.yurlButton.frame;
+    yurlFrame.size.width = halfViewWidth - 20.0f - 5.0f;
+    yurlFrame.origin.x = halfViewWidth + 5.0f;
+    self.yurlButton.frame = yurlFrame;
+    
+    self.iconImageView.center = CGPointMake(halfViewWidth, twitterFrame.origin.y / 2.0f);
 }
 
 -(void)doTapOnIcon:(id)sender {
