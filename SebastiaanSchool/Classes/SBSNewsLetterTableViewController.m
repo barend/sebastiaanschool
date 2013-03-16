@@ -80,12 +80,9 @@
 - (void)refreshNewsletters {
     [TestFlight passCheckpoint:@"Refreshing newsletters"];
 
-    [TestFlight passCheckpoint:@"Refreshing newsletters"];
-    
     NSData * data = [NSData dataWithContentsOfURL:[NSURL URLWithString:@"http://www.sebastiaanschool.nl"]];
     TFHpple *doc = [[TFHpple alloc]initWithHTMLData:data];
 
-#warning Make these settings available on the server
 	NSArray *hrefElements = [doc searchWithXPathQuery:@"//li[@id='cat_1098']/ul/li/a/@href"];
     NSArray *spanElements = [doc searchWithXPathQuery:@"//li[@id='cat_1098']/ul/li/a/span"];
     NSString * baseUrlString = @"http://www.sebastiaanschool.nl";
