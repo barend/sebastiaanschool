@@ -1,5 +1,6 @@
 #import "SBSBulletinViewController.h"
 #import "SBSEditBulletinViewController.h"
+#import "SBSBulletinCell.h"
 
 #import "UIView+JLFrameAdditions.h"
 
@@ -134,9 +135,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object {
     static NSString *CellIdentifier = @"bulletinCell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    SBSBulletinCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        cell = [[SBSBulletinCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
         
         cell.selectedBackgroundView = [SBSStyle selectedBackgroundView];
         cell.selectedBackgroundView.frame = cell.bounds;
