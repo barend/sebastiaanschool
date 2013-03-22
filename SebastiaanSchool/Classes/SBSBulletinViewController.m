@@ -1,5 +1,7 @@
 #import "SBSBulletinViewController.h"
-#import "SBSAddBulletinViewController.h"
+#import "SBSEditBulletinViewController.h"
+
+#import "UIView+JLFrameAdditions.h"
 
 @implementation SBSBulletinViewController
 
@@ -53,7 +55,7 @@
 -(void)updateBarButtonItemAnimated:(BOOL)animated {
     if ([[SBSSecurity instance] currentUserStaffUser]) {
         if (self.navigationItem.rightBarButtonItem == nil) {
-            UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addBuletin)];
+            UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addBulletinButtonPressed:)];
             [self.navigationItem setRightBarButtonItem:addButton animated:animated];
         }
     } else {
@@ -79,13 +81,15 @@
     return query;
 }
 
-- (void)addBuletin {
-    SBSAddBulletinViewController *addBuletinVC = [[SBSAddBulletinViewController alloc]init];
-    addBuletinVC.delegate = self;
-    [self.navigationController pushViewController:addBuletinVC animated:YES];
+- (void)addBulletinButtonPressed:(id)sender {
+    SBSEditBulletinViewController *editBuletinVC = [[SBSEditBulletinViewController alloc]init];
+    editBuletinVC.delegate = self;
+    [self.navigationController pushViewController:editBuletinVC animated:YES];
 }
 
--(void)createdBulletin:(PFObject *)newBulletin {
+#pragma mark - SBSAddBulletinViewController delegates
+
+-(void)createBulletin:(PFObject *)newBulletin {
     [newBulletin saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
             //Do a big reload since the framework VC doesn't support nice view insertions and removal.
@@ -98,6 +102,31 @@
     [self.navigationController popToViewController:self animated:YES];
 }
 
+-(void)updateBulletin:(PFObject *)updatedBulletin {
+    [updatedBulletin saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            //Do a big reload since the framework VC doesn't support nice view insertions and removal.
+            [self loadObjects];
+        } else {
+            ULog(@"Error while updating bulletin: %@", error);
+        }
+    }];
+    
+    [self.navigationController popToViewController:self animated:YES];
+}
+
+-(void)deleteBulletin:(PFObject *)deletedBulletin {
+//    [newBulletin saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+//        if (succeeded) {
+//            //Do a big reload since the framework VC doesn't support nice view insertions and removal.
+//            [self loadObjects];
+//        } else {
+//            ULog(@"Error while deleting bulletin: %@", error);
+//        }
+//    }];
+    
+    [self.navigationController popToViewController:self animated:YES];
+}
 
 
 // Override to customize the look of a cell representing an object. The default is to display
@@ -116,6 +145,7 @@
     // Configure the cell
     cell.textLabel.text = [object objectForKey:@"title"];
     cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Published: %@", nil), [[SBSStyle longStyleDateFormatter] stringFromDate:[object objectForKey:@"publishedAt"]]];
+    cell.bodyLabel.text = [object objectForKey:@"body"];
     
     return cell;
 }
@@ -156,10 +186,15 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    PFObject *bulletin = [self objectAtIndexPath:indexPath];
-//    SBSNewsLetterViewController *newsletterViewController = [[SBSNewsLetterViewController alloc]initWithNewsLetter:newsLetter];
-//    [self.navigationController pushViewController:newsletterViewController animated:YES];
-    ULog(@"Still needs implementation.");
+    SBSEditBulletinViewController *bulletinVC = [[SBSEditBulletinViewController alloc]init];
+//    bulletinVC.delegate = self;
+    [self.navigationController pushViewController:bulletinVC animated:YES];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    PFObject * object = [self objectAtIndexPath:indexPath];
+    return [SBSBulletinCell heightForWidth:self.view._width withItem:object];
 }
 
 #pragma mark - Listen for security role changes
