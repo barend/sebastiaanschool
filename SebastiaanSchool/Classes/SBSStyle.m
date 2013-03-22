@@ -11,6 +11,9 @@
 static UIColor * sebastiaanBlueColor;
 static NSDateFormatter * longStyleDateFormatter;
 
+static UIFont * titleFont;
+static UIFont * subtitleFont;
+static UIFont * bodyFont;
 
 @implementation SBSStyle
 
@@ -20,6 +23,10 @@ static NSDateFormatter * longStyleDateFormatter;
         
         longStyleDateFormatter = [[NSDateFormatter alloc] init];
         [longStyleDateFormatter setDateStyle:NSDateFormatterLongStyle];
+        
+        titleFont = [UIFont boldSystemFontOfSize:[UIFont labelFontSize] +1.0f];
+        subtitleFont = [UIFont systemFontOfSize:[UIFont systemFontSize]];
+        bodyFont = [UIFont systemFontOfSize:[UIFont systemFontSize] +2.0f];
     }
 }
 
@@ -37,5 +44,18 @@ static NSDateFormatter * longStyleDateFormatter;
     newSelectedBackgroundView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     return newSelectedBackgroundView;
 }
+
++ (UIFont *)titleFont {
+    return titleFont;
+}
+
++ (UIFont *)subtitleFont {
+    return subtitleFont;
+}
+
++ (UIFont *)bodyFont {
+    return bodyFont;
+}
+
 
 @end

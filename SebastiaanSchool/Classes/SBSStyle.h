@@ -12,4 +12,8 @@
 + (NSDateFormatter *)longStyleDateFormatter;
 + (UIView *)selectedBackgroundView;
 
++ (UIFont *)titleFont;
++ (UIFont *)subtitleFont;
++ (UIFont *)bodyFont;
+
 @end
