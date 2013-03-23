@@ -21,6 +21,12 @@
 		4A0124B116FCA71D00F744D6 /* UIView+JLFrameAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A0124B016FCA71D00F744D6 /* UIView+JLFrameAdditions.m */; };
 		4A0124B916FCFDA700F744D6 /* SBSEditBulletinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A0124B716FCFDA600F744D6 /* SBSEditBulletinViewController.m */; };
 		4A0124BC16FCFE0100F744D6 /* SBSEditBulletinViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A0124BB16FCFE0100F744D6 /* SBSEditBulletinViewController.xib */; };
+		4A0124BF16FD8E2900F744D6 /* redButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A0124BD16FD8E2900F744D6 /* redButton@2x.png */; };
+		4A0124C016FD8E2900F744D6 /* redButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A0124BE16FD8E2900F744D6 /* redButton.png */; };
+		4A0124C516FD8FB600F744D6 /* greenButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A0124C116FD8FB600F744D6 /* greenButton@2x.png */; };
+		4A0124C616FD8FB600F744D6 /* greenButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A0124C216FD8FB600F744D6 /* greenButton.png */; };
+		4A0124C716FD8FB600F744D6 /* greyButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A0124C316FD8FB600F744D6 /* greyButton@2x.png */; };
+		4A0124C816FD8FB600F744D6 /* greyButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A0124C416FD8FB600F744D6 /* greyButton.png */; };
 		4A12099116A9D69000A7259B /* SBSAgendaTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A12099016A9D69000A7259B /* SBSAgendaTableViewController.m */; };
 		4A18DD4C16F5054A00D5115A /* yurl-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A18DD4A16F5054A00D5115A /* yurl-logo.png */; };
 		4A18DD4D16F5054A00D5115A /* yurl-logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A18DD4B16F5054A00D5115A /* yurl-logo@2x.png */; };
@@ -125,6 +131,12 @@
 		4A0124B616FCFDA600F744D6 /* SBSEditBulletinViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBSEditBulletinViewController.h; sourceTree = "<group>"; };
 		4A0124B716FCFDA600F744D6 /* SBSEditBulletinViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBSEditBulletinViewController.m; sourceTree = "<group>"; };
 		4A0124BB16FCFE0100F744D6 /* SBSEditBulletinViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SBSEditBulletinViewController.xib; sourceTree = "<group>"; };
+		4A0124BD16FD8E2900F744D6 /* redButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "redButton@2x.png"; sourceTree = "<group>"; };
+		4A0124BE16FD8E2900F744D6 /* redButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redButton.png; sourceTree = "<group>"; };
+		4A0124C116FD8FB600F744D6 /* greenButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "greenButton@2x.png"; sourceTree = "<group>"; };
+		4A0124C216FD8FB600F744D6 /* greenButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greenButton.png; sourceTree = "<group>"; };
+		4A0124C316FD8FB600F744D6 /* greyButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "greyButton@2x.png"; sourceTree = "<group>"; };
+		4A0124C416FD8FB600F744D6 /* greyButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greyButton.png; sourceTree = "<group>"; };
 		4A12098F16A9D69000A7259B /* SBSAgendaTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBSAgendaTableViewController.h; sourceTree = "<group>"; };
 		4A12099016A9D69000A7259B /* SBSAgendaTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBSAgendaTableViewController.m; sourceTree = "<group>"; };
 		4A15DA9616A0AE4200D8EB86 /* SebastiaanSchool-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SebastiaanSchool-Info.plist"; sourceTree = "<group>"; };
@@ -418,6 +430,12 @@
 				4A71D3C116A15C6B00A11C80 /* Default-Landscape~ipad.png */,
 				4A71D3C216A15C6B00A11C80 /* Default-Portrait@2x~ipad.png */,
 				4A71D3C316A15C6B00A11C80 /* Default-Portrait~ipad.png */,
+				4A0124BD16FD8E2900F744D6 /* redButton@2x.png */,
+				4A0124BE16FD8E2900F744D6 /* redButton.png */,
+				4A0124C116FD8FB600F744D6 /* greenButton@2x.png */,
+				4A0124C216FD8FB600F744D6 /* greenButton.png */,
+				4A0124C316FD8FB600F744D6 /* greyButton@2x.png */,
+				4A0124C416FD8FB600F744D6 /* greyButton.png */,
 				4AC3F7F816A0AF2600452D33 /* Localizable.strings */,
 				4A4EA04A16A34CA400F12406 /* Settings.bundle */,
 			);
@@ -549,6 +567,12 @@
 				4A18DD5016F50D2600D5115A /* yurl-logo-white.png in Resources */,
 				4A18DD5116F50D2600D5115A /* yurl-logo-white@2x.png in Resources */,
 				4A0124BC16FCFE0100F744D6 /* SBSEditBulletinViewController.xib in Resources */,
+				4A0124BF16FD8E2900F744D6 /* redButton@2x.png in Resources */,
+				4A0124C016FD8E2900F744D6 /* redButton.png in Resources */,
+				4A0124C516FD8FB600F744D6 /* greenButton@2x.png in Resources */,
+				4A0124C616FD8FB600F744D6 /* greenButton.png in Resources */,
+				4A0124C716FD8FB600F744D6 /* greyButton@2x.png in Resources */,
+				4A0124C816FD8FB600F744D6 /* greyButton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
