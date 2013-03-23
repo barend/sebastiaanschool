@@ -8,11 +8,18 @@
 
 #import "SBSEditBulletinViewController.h"
 
-//@interface SBSEditBulletinViewController ()
-//@property (nonatomic, strong) UITextField *titleField;
-//@property (nonatomic, strong) UITextField *bodyField;
-//
-//@end
+#import "UIView+JLFrameAdditions.h"
+
+@interface SBSEditBulletinViewController ()
+
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UITextView *titleTextView;
+@property (weak, nonatomic) IBOutlet UILabel *bodyLabel;
+@property (weak, nonatomic) IBOutlet UITextView *bodyTextView;
+@property (weak, nonatomic) IBOutlet UIButton *deleteButton;
+- (IBAction)deleteButtonPressed:(id)sender;
+
+@end
 
 @implementation SBSEditBulletinViewController
 
@@ -27,30 +34,90 @@
 
 - (void)viewDidLoad{
     [super viewDidLoad];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButtonPressed:)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(doneButtonPressed:)];
     
-    //    CGRect bounds = self.view.bounds;
+    self.titleLabel.text = NSLocalizedString(@"Message", nil);
     
-    //    self.titleField = [[UITextField alloc]initWithFrame:CGRectMake(10, 10, bounds.size.width - 20, 26)];
-    //    self.titleField.placeholder = NSLocalizedString(@"Title", nil);
-    //    self.titleField.borderStyle = UITextBorderStyleRoundedRect;
-    //    [self.view addSubview:self.titleField];
-    //
-    //    self.bodyField = [[UITextField alloc]initWithFrame:CGRectMake(10, 52, bounds.size.width - 20, 26)];
-    //    self.bodyField.borderStyle = UITextBorderStyleRoundedRect;
-    //    [self.view addSubview:self.bodyField];
+    self.titleTextView.layer.borderWidth = 1.0f;
+    self.titleTextView.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    self.titleTextView.font = [SBSStyle titleFont];
+    
+
+    self.bodyLabel.text = NSLocalizedString(@"Message content", nil);
+
+    self.bodyTextView.layer.borderWidth = 1.0f;
+    self.bodyTextView.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    self.bodyTextView.font = [SBSStyle bodyFont];
+
+    [self updateLayout];
+    
+    self.titleTextView.text = [self.bulletin objectForKey:@"title"];
+    self.bodyTextView.text = [self.bulletin objectForKey:@"body"];
+
+    [self.deleteButton setBackgroundImage:[[UIImage imageNamed:@"redButton"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 16, 0, 16)] forState:UIControlStateNormal];
+    [self.deleteButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.deleteButton setTitleShadowColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+    [self.deleteButton setTitleColor:[UIColor darkGrayColor] forState:UIControlStateHighlighted];
+    self.deleteButton.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    [self.deleteButton setTitle:NSLocalizedString(@"Delete", nil) forState:UIControlStateNormal];
+
+}
+
+- (void)setBulletin:(PFObject *)bulletin {
+    _bulletin = bulletin;
+    
+    [self updateLayout];
+}
+
+- (void) updateLayout {
+    if (self.bulletin == nil) {
+        self.deleteButton.hidden = YES;
+        self.bodyTextView._height = self.view._height - self.bodyTextView._y -20;
+    } else {
+        self.deleteButton.hidden = NO;
+        self.bodyTextView._height = self.view._height - self.bodyTextView._y - self.deleteButton._height -30;
+    }
 }
 
 -(void)doneButtonPressed:(id) sender {
-//    PFObject *newBulletin = [PFObject objectWithClassName:@"Bulletin"];
-//    if (self.titleField.text.length !=0) {
-//        [newBulletin setObject:self.titleField.text forKey:@"title"];
-//        if (self.bodyField.text.length !=0) {
-//            [newBulletin setObject:self.bodyField.text forKey:@"body"];
-//        }
-//        [self.delegate createBulletin:newBulletin];
-//    }
+    PFObject *bulletin = self.bulletin;
+    if (self.bulletin == nil) {
+        bulletin = [PFObject objectWithClassName:@"Bulletin"];
+    }
+    
+    if (self.titleTextView.text.length !=0) {
+        [bulletin setObject:self.titleTextView.text forKey:@"title"];
+        if (self.bodyTextView.text.length !=0) {
+            [bulletin setObject:self.bodyTextView.text forKey:@"body"];
+        }
+        if (self.bulletin == nil) {
+            [self.delegate createBulletin:bulletin];
+        } else {
+            [self.delegate updateBulletin:bulletin];
+        }
+    }
 }
 
-@end
+- (void)viewDidUnload {
+    [self setTitleTextView:nil];
+    [self setBodyTextView:nil];
+    [self setTitleLabel:nil];
+    [self setBodyLabel:nil];
+    [self setDeleteButton:nil];
+    [super viewDidUnload];
+}
+- (IBAction)deleteButtonPressed:(id)sender {
+    UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:NSLocalizedString(@"Delete Bulletin?", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) destructiveButtonTitle:NSLocalizedString(@"Delete", nil) otherButtonTitles: nil];
+    
+    [actionSheet showInView:[UIApplication sharedApplication].delegate.window.rootViewController.view];
+}
 
+#pragma mark - Action sheet delegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex != actionSheet.destructiveButtonIndex) {
+        return;
+    }
+
+    [self.delegate deleteBulletin:self.bulletin];
+}
+@end

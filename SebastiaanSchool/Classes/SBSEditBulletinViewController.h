@@ -12,12 +12,13 @@
 
 -(void)createBulletin:(PFObject *)newBulletin;
 -(void)updateBulletin:(PFObject *)updatedBulletin;
--(void)deleteBulletin:(PFObject *)updatedBulletin;
+-(void)deleteBulletin:(PFObject *)deletedBulletin;
 
 @end
 
-@interface SBSEditBulletinViewController : UIViewController
+@interface SBSEditBulletinViewController : UIViewController <UIActionSheetDelegate>
 
 @property (nonatomic, weak) id<SBSEditBulletinDelegate> delegate;
+@property (nonatomic, strong)PFObject * bulletin;
 
 @end

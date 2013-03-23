@@ -26,7 +26,7 @@
         self.textKey = @"title";
         
         // Whether the built-in pull-to-refresh is enabled
-        self.pullToRefreshEnabled = YES;
+        self.pullToRefreshEnabled = NO;
         
         // Whether the built-in pagination is enabled
         self.paginationEnabled = NO;
@@ -50,6 +50,7 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:YES];
     [self updateBarButtonItemAnimated:animated];
 }
 
@@ -117,14 +118,14 @@
 }
 
 -(void)deleteBulletin:(PFObject *)deletedBulletin {
-//    [newBulletin saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-//        if (succeeded) {
-//            //Do a big reload since the framework VC doesn't support nice view insertions and removal.
-//            [self loadObjects];
-//        } else {
-//            ULog(@"Error while deleting bulletin: %@", error);
-//        }
-//    }];
+    [deletedBulletin deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            //Do a big reload since the framework VC doesn't support nice view insertions and removal.
+            [self loadObjects];
+        } else {
+            ULog(@"Error while deleting bulletin: %@", error);
+        }
+    }];
     
     [self.navigationController popToViewController:self animated:YES];
 }
@@ -154,41 +155,21 @@
 
 #pragma mark - Table view data source
 
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return [SBSSecurity instance].currentUserStaffUser;
-}
-
-
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        PFObject *deletedBulletin = [self objectAtIndexPath:indexPath];
-        [deletedBulletin deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-            if (succeeded) {
-                //Do a big reload since the framework VC doesn't support nice view insertions and removal.
-                [self loadObjects];
-            } else {
-                ULog(@"Failed to delete buletin");
-            }
-        }];
-    }
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }
-}
-
-
 #pragma mark - Table view delegate
+
+- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ([SBSSecurity instance].currentUserStaffUser) {
+        return indexPath;
+    } else {
+        return nil;
+    }
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     SBSEditBulletinViewController *bulletinVC = [[SBSEditBulletinViewController alloc]init];
-//    bulletinVC.delegate = self;
+    bulletinVC.delegate = self;
+    bulletinVC.bulletin = [self objectAtIndexPath:indexPath];
     [self.navigationController pushViewController:bulletinVC animated:YES];
 }
 
