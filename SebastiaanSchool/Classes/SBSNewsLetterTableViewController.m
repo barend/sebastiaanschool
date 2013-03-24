@@ -6,8 +6,9 @@
 //
 
 #import "SBSNewsLetterTableViewController.h"
-
 #import "SBSNewsLetterViewController.h"
+
+#import "SBSNewsLetter.h"
 
 #import "TFHpple.h"
 
@@ -31,7 +32,7 @@
         // Custom the table
         
         // The className to query on
-        self.parseClassName = @"NewsLetter";
+        self.parseClassName = [SBSNewsLetter parseClassName];
         
         // The key of the PFObject to display in the label of the default cell style
         self.textKey = @"name";
@@ -112,29 +113,29 @@
           // The find succeeded.
           NSLog(@"Successfully retrieved %d newsletters.", objects.count);
           
-          for (PFObject * obj in objects) {
-              if([newsLetterNames containsObject:[obj objectForKey:@"name"]] && [newsLetterUrls containsObject:[obj objectForKey:@"url"]]) {
+          for (SBSNewsLetter * obj in objects) {
+              if([newsLetterNames containsObject:obj.name] && [newsLetterUrls containsObject:obj.url]) {
                   //This one is not updated
-                  NSUInteger index = [newsLetterNames indexOfObject:[obj objectForKey:@"name"]];
+                  NSUInteger index = [newsLetterNames indexOfObject:obj.name];
                   [newsLetterNames removeObjectAtIndex:index];
                   [newsLetterUrls removeObjectAtIndex:index];
-              } else if ([newsLetterNames containsObject:[obj objectForKey:@"name"]]) {
-                  NSUInteger index = [newsLetterNames indexOfObject:[obj objectForKey:@"name"]];
+              } else if ([newsLetterNames containsObject:obj.name]) {
+                  NSUInteger index = [newsLetterNames indexOfObject:obj.name];
                   NSString *newUrl = [newsLetterUrls objectAtIndex:index];
                   
                   [newsLetterNames removeObjectAtIndex:index];
                   [newsLetterUrls removeObjectAtIndex:index];
                   
-                  [obj setObject:newUrl forKey:@"url"];
+                  obj.url = newUrl;
                   [obj saveInBackground];
-              } else if([newsLetterUrls containsObject:[obj objectForKey:@"url"]]) {
-                  NSUInteger index = [newsLetterNames indexOfObject:[obj objectForKey:@"url"]];
+              } else if([newsLetterUrls containsObject:obj.url]) {
+                  NSUInteger index = [newsLetterNames indexOfObject:obj.url];
                   NSString *newName = [newsLetterNames objectAtIndex:index];
 
                   [newsLetterNames removeObjectAtIndex:index];
                   [newsLetterUrls removeObjectAtIndex:index];
                   
-                  [obj setObject:newName forKey:@"name"];
+                  obj.name = newName;
                   [obj saveInBackground];
               } else {
                   [obj deleteInBackground];
@@ -142,9 +143,9 @@
           }
           
           for (NSUInteger index = 0; index < newsLetterNames.count; index++) {
-              PFObject *obj = [PFObject objectWithClassName:self.parseClassName];
-              [obj setObject:[newsLetterNames objectAtIndex:index] forKey:@"name"];
-              [obj setObject:[newsLetterUrls objectAtIndex:index] forKey:@"url"];
+              SBSNewsLetter *obj = [[SBSNewsLetter alloc]init];
+              obj.name = [newsLetterNames objectAtIndex:index];
+              obj.url = [newsLetterUrls objectAtIndex:index];
 
               [obj saveInBackground];
           }
@@ -160,7 +161,7 @@
 // Override to customize what kind of query to perform on the class. The default is to query for
 // all objects ordered by createdAt descending.
 - (PFQuery *)queryForTable {
-    PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
+    PFQuery *query = [SBSNewsLetter query];
     
     // If no objects are loaded in memory, we look to the cache first to fill the table
     // and then subsequently do a query against the network.
@@ -173,11 +174,10 @@
     return query;
 }
 
-
-
 // Override to customize the look of a cell representing an object. The default is to display
 // a UITableViewCellStyleDefault style cell with the label being the first key in the object.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object {
+    SBSNewsLetter *newsletter = (SBSNewsLetter *)object;
     static NSString *CellIdentifier = @"newsLetterCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -189,45 +189,19 @@
     }
     
     // Configure the cell
-    cell.textLabel.text = [[object objectForKey:@"name"] capitalizedString];
-    cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Published: %@", nil), [[SBSStyle longStyleDateFormatter] stringFromDate:[object objectForKey:@"publishedAt"]]];
+    cell.textLabel.text = [newsletter.name capitalizedString];
+    cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Published: %@", nil), [[SBSStyle longStyleDateFormatter] stringFromDate:newsletter.publishedAt]];
     
     return cell;
 }
-
-#pragma mark - Table view data source
-
-/*
- // Override to support conditional editing of the table view.
- - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
- {
- // Return NO if you do not want the specified item to be editable.
- return YES;
- }
- */
-
-/*
- // Override to support editing the table view.
- - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
- {
- if (editingStyle == UITableViewCellEditingStyleDelete) {
- // Delete the row from the data source
- [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
- }
- else if (editingStyle == UITableViewCellEditingStyleInsert) {
- // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
- }
- }
- */
-
 
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    PFObject *newsLetter = [self objectAtIndexPath:indexPath];
+    SBSNewsLetter *newsLetter = (SBSNewsLetter *)[self objectAtIndexPath:indexPath];
     SBSNewsLetterViewController *newsletterViewController = [[SBSNewsLetterViewController alloc]initWithNewsLetter:newsLetter];
-    newsletterViewController.title = [[newsLetter objectForKey:@"name"] capitalizedString];
+    newsletterViewController.title = [newsLetter.name capitalizedString];
     [self.navigationController pushViewController:newsletterViewController animated:YES];
 }
 
