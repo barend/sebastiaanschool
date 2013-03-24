@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ../config/setCloudEnv.sh
+source ../config/setCloudEnv.sh $1
 
 curl -X POST \
   -H "X-Parse-Application-Id: ${PARSE_APPLICATION_ID}" \

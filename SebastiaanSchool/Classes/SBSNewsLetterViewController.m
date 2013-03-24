@@ -10,7 +10,7 @@
 
 @interface SBSNewsLetterViewController ()
 
-@property (nonatomic, strong) PFObject * newsLetter;
+@property (nonatomic, strong) SBSNewsLetter * newsLetter;
 @property (nonatomic, strong) UIWebView * webView;
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
 
@@ -18,7 +18,7 @@
 
 @implementation SBSNewsLetterViewController
 
-- (id)initWithNewsLetter:(PFObject *)newsLetter {
+- (id)initWithNewsLetter:(SBSNewsLetter *)newsLetter {
     self = [super init];
     if (self) {
         _newsLetter = newsLetter;
@@ -51,7 +51,7 @@
     [TestFlight passCheckpoint:[NSString stringWithFormat:@"Loaded VC %@", self.title]];
 
 	// Do any additional setup after loading the view.
-    NSURL *url = [NSURL URLWithString:[self.newsLetter  objectForKey:@"url"]];
+    NSURL *url = [NSURL URLWithString:self.newsLetter.url];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [self.webView loadRequest:request];
 }

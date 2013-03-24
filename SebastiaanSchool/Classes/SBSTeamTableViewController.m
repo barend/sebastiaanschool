@@ -9,6 +9,8 @@
 #import "SBSTeamTableViewController.h"
 #import "SBSAddTeamMemberViewController.h"
 
+#import "SBSContactItem.h"
+
 @interface SBSTeamTableViewController ()
 @property (nonatomic, strong) NSIndexPath *currentlyEditedIndexPath;
 @end
@@ -29,7 +31,7 @@
         // Custom the table
         
         // The className to query on
-        self.className = @"ContactItem";
+        self.parseClassName = [SBSContactItem parseClassName];
         
         // The key of the PFObject to display in the label of the default cell style
         self.textKey = @"displayName";
@@ -74,7 +76,7 @@
 // Override to customize what kind of query to perform on the class. The default is to query for
 // all objects ordered by createdAt descending.
 - (PFQuery *)queryForTable {
-    PFQuery *query = [PFQuery queryWithClassName:self.className];
+    PFQuery *query = [SBSContactItem query];
     
     // If no objects are loaded in memory, we look to the cache first to fill the table
     // and then subsequently do a query against the network.
@@ -93,7 +95,7 @@
     [self.navigationController pushViewController:addTeamMemberVC animated:YES];
 }
 
--(void)createdTeamMember:(PFObject *)newTeamMember {
+-(void)createdTeamMember:(SBSContactItem *)newTeamMember {
     [newTeamMember saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
             //Do a big reload since the framework VC doesn't support nice view insertions and removal.
@@ -110,6 +112,8 @@
 // Override to customize the look of a cell representing an object. The default is to display
 // a UITableViewCellStyleDefault style cell with the label being the first key in the object.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object {
+    
+    SBSContactItem *contactItem = (SBSContactItem *)object;
     static NSString *CellIdentifier = @"contactCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -121,8 +125,9 @@
     }
     
     // Configure the cell
-    cell.textLabel.text = [object objectForKey:@"displayName"];
-    cell.detailTextLabel.text = [object objectForKey:@"description"];
+    cell.textLabel.text = contactItem.displayName;
+#warning description is not a smart property name.
+    cell.detailTextLabel.text = [contactItem objectForKey:@"description"];
     
     return cell;
 }
@@ -141,8 +146,8 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        PFObject *contactItem = [self objectAtIndexPath:indexPath];
-        NSString *contactItemName = [contactItem objectForKey:@"displayName"];
+        SBSContactItem *contactItem = (SBSContactItem *)[self objectAtIndexPath:indexPath];
+        NSString *contactItemName = contactItem.displayName;
         
         UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:[NSString stringWithFormat: NSLocalizedString(@"Are you sure you want to delete \"%@\"?", nil), contactItemName] delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) destructiveButtonTitle:NSLocalizedString(@"Delete", nil) otherButtonTitles:nil];
         self.currentlyEditedIndexPath = indexPath;
@@ -177,10 +182,10 @@
 {
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 
-    PFObject *selectedContactItem = [self objectAtIndexPath:indexPath];
+    SBSContactItem *selectedContactItem = (SBSContactItem *)[self objectAtIndexPath:indexPath];
     
-    NSString *displayName = [selectedContactItem objectForKey:@"displayName"];
-    NSString *emailRecipient = [selectedContactItem objectForKey:@"email"];
+    NSString *displayName = selectedContactItem.displayName;
+    NSString *emailRecipient = selectedContactItem.email;
 
     if ([emailRecipient length] ==0) {
         NSString *title = NSLocalizedString(@"Unknown email addres", nil);

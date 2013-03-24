@@ -32,9 +32,8 @@
     [TestFlight passCheckpoint:[NSString stringWithFormat:@"Loaded VC %@", self.title]];
     self.view.backgroundColor = [SBSStyle sebastiaanBlueColor];
     [self applyTitle:NSLocalizedString(@"Call", nil) andWithImageNamed:@"75-phone" toButton:self.callButton];
-    [self applyTitle:NSLocalizedString(@"About", nil) andWithImageNamed:@"123-id-card" toButton:self.aboutButton];
-#warning hidden about button.
-    self.aboutButton.hidden = YES;
+    [self applyTitle:NSLocalizedString(@"@KBSebastiaan", nil) andWithImageNamed:@"twitter-bird" toButton:self.twitterButton];
+    [self applyTitle:NSLocalizedString(@"Yurl site", nil) andWithImageNamed:@"yurl-logo" toButton:self.yurlButton];
     [self applyTitle:NSLocalizedString(@"Agenda", nil) andWithImageNamed:@"259-list" toButton:self.agendaButton];
     [self applyTitle:NSLocalizedString(@"Team", nil) andWithImageNamed:@"112-group" toButton:self.teamButton];
     
@@ -42,6 +41,31 @@
     tapRecognizer.numberOfTapsRequired = 3;
     self.iconImageView.userInteractionEnabled = YES;
     [self.iconImageView addGestureRecognizer:tapRecognizer];
+
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [self updateLayout];
+}
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation duration:(NSTimeInterval)duration {
+    [self updateLayout];
+}
+
+- (void) updateLayout {
+    const CGFloat halfViewWidth = self.view.bounds.size.width / 2.0f;
+    
+    CGRect twitterFrame = self.twitterButton.frame;
+    twitterFrame.size.width = halfViewWidth - 20.0f - 5.0f;
+    twitterFrame.origin.x = 20.0f;
+    self.twitterButton.frame = twitterFrame;
+    
+    CGRect yurlFrame = self.yurlButton.frame;
+    yurlFrame.size.width = halfViewWidth - 20.0f - 5.0f;
+    yurlFrame.origin.x = halfViewWidth + 5.0f;
+    self.yurlButton.frame = yurlFrame;
+    
+    self.iconImageView.center = CGPointMake(halfViewWidth, twitterFrame.origin.y / 2.0f);
 }
 
 -(void)doTapOnIcon:(id)sender {
@@ -49,7 +73,6 @@
     animation.toValue = [NSNumber numberWithFloat:((360*M_PI)/180)];
     animation.autoreverses = NO;
     animation.repeatCount = 3;
-//    animation.duration = 0.4f;
     [self.iconImageView.layer addAnimation:animation forKey:@"360"];
 }
 
@@ -81,8 +104,13 @@
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:NSLocalizedString(@"Your device does not support phone calls. Please call 055 53 35 355 with your phone.", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil];
             [alert show];
         }
-    } else if(sender == self.aboutButton) {
-        ULog(@"Not implemented yet.");
+    } else if(sender == self.twitterButton) {
+        NSURL *twitterAppUrl = [NSURL URLWithString:@"twitter://user?id=424159127"];
+        if([[UIApplication sharedApplication] canOpenURL:twitterAppUrl]) {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"twitter://user?id=424159127"]];
+        } else {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://twitter.com/KBSebastiaan"]];
+        }
     } else if(sender == self.agendaButton) {
         [TestFlight passCheckpoint:@"Agenda button tapped on phone."];
         SBSAgendaTableViewController *agendaController = [[SBSAgendaTableViewController alloc] init];
@@ -94,11 +122,11 @@
         contactController.title = NSLocalizedString(@"Team", nil);
 
         [self.navigationController pushViewController:contactController animated:YES];
+    } else if (sender == self.yurlButton) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://sebastiaan.yurls.net"]];
     } else {
         NSAssert(NO, @"Unknown button tapped.");
     }
 }
-
-
 
 @end

@@ -28,7 +28,7 @@
 
 - (void)loadView{
     [super loadView];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonItemStyleDone target:self action:@selector(doneButtonPressed:)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButtonPressed:)];
         
     CGRect bounds = self.view.bounds;
     
@@ -49,27 +49,13 @@
 }
 
 -(void)doneButtonPressed:(id) sender {
-    PFObject *newTeamMember = [PFObject objectWithClassName:@"ContactItem"];
+    SBSContactItem *newTeamMember = [[SBSContactItem alloc]init];
     if (self.displayNameField.text.length !=0 && self.descriptionField.text.length !=0) {
-        [newTeamMember setObject:self.displayNameField.text forKey:@"displayName"];
-        [newTeamMember setObject:self.descriptionField.text forKey:@"description"];
-        [newTeamMember setObject:self.emailField.text forKey:@"email"];
+        newTeamMember.displayName = self.displayNameField.text;
+        newTeamMember.description = self.descriptionField.text;
+        newTeamMember.email = self.emailField.text;
         [self.delegate createdTeamMember:newTeamMember];
     }
-}
-
-
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

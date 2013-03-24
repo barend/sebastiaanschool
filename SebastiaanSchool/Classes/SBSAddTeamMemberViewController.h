@@ -6,9 +6,11 @@
 //
 //
 
+#import "SBSContactItem.h"
+
 @protocol SBSAddTeamMemberDelegate <NSObject>
 
--(void)createdTeamMember:(PFObject *)newTeamMember;
+-(void)createdTeamMember:(SBSContactItem *)newTeamMember;
 
 @end
 

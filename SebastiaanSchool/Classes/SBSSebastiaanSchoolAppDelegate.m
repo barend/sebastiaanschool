@@ -6,12 +6,22 @@
 #import "SBSInfoViewController.h"
 #import "SBSStaffViewController.h"
 
+#import "SBSAgendaItem.h"
+#import "SBSBulletin.h"
+#import "SBSContactItem.h"
+#import "SBSNewsLetter.h"
+
 @implementation SBSSebastiaanSchoolAppDelegate
 
 #pragma mark - UIApplicationDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     bootstrapTestFlight();
+    
+    [SBSAgendaItem  registerSubclass];
+    [SBSBulletin    registerSubclass];
+    [SBSContactItem registerSubclass];
+    [SBSNewsLetter  registerSubclass];
     
     [Parse setApplicationId:PARSE_APPLICATION_ID
                   clientKey:PARSE_CLIENT_KEY];
