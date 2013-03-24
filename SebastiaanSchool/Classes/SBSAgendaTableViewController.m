@@ -11,6 +11,8 @@
 #import "SBSAgendaTableViewController.h"
 #import "SBSSebastiaanSchoolAppDelegate.h"
 
+#import "SBSAgendaItem.h"
+
 @interface SBSAgendaTableViewController ()
 @property (nonatomic, strong)EKEventStore *eventStore;
 
@@ -25,7 +27,7 @@
         // Custom the table
         
         // The className to query on
-        self.parseClassName = @"AgendaItem";
+        self.parseClassName = [SBSAgendaItem parseClassName];
         
         // The key of the PFObject to display in the label of the default cell style
         self.textKey = @"name";
@@ -56,7 +58,7 @@
 // Override to customize what kind of query to perform on the class. The default is to query for
 // all objects ordered by createdAt descending.
 - (PFQuery *)queryForTable {
-    PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
+    PFQuery *query = [SBSAgendaItem query];
     
     // If no objects are loaded in memory, we look to the cache first to fill the table
     // and then subsequently do a query against the network.
@@ -69,11 +71,11 @@
     return query;
 }
 
-
-
 // Override to customize the look of a cell representing an object. The default is to display
 // a UITableViewCellStyleDefault style cell with the label being the first key in the object.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object {
+    
+    SBSAgendaItem * agendaItem = (SBSAgendaItem *)object;
     static NSString *CellIdentifier = @"agendaCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -85,9 +87,9 @@
     }
     
     // Configure the cell
-    cell.textLabel.text = [object objectForKey:@"name"];
-    NSDate *startDate = [object objectForKey:@"start"];
-    NSDate *endDate = [object objectForKey:@"end"];
+    cell.textLabel.text = agendaItem.name;
+    NSDate *startDate = agendaItem.start;
+    NSDate *endDate = agendaItem.end;
     
     if (startDate != nil && endDate != nil && [startDate compare:endDate] == NSOrderedAscending) {
         cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ - %@",
@@ -104,27 +106,12 @@
 
 #pragma mark - Table view data source
 
-/*
- // Override to support editing the table view.
- - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
- {
- if (editingStyle == UITableViewCellEditingStyleDelete) {
- // Delete the row from the data source
- [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
- }
- else if (editingStyle == UITableViewCellEditingStyleInsert) {
- // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
- }
- }
- */
-
-
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    PFObject *agendaItem = [self objectAtIndexPath:indexPath];
-    NSString *agendaItemName = [agendaItem objectForKey:@"name"];
+    SBSAgendaItem *agendaItem = (SBSAgendaItem *)[self objectAtIndexPath:indexPath];
+    NSString *agendaItemName = agendaItem.name;
     
     UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:[NSString stringWithFormat: NSLocalizedString(@"Add \"%@\" to your default calendar?", nil), agendaItemName] delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Add to calendar", nil), nil];
     
@@ -141,10 +128,10 @@
         return;
     }
     
-    PFObject *agendaItem = [self objectAtIndexPath:self.tableView.indexPathForSelectedRow];
-    NSString *agendaItemName = [agendaItem objectForKey:@"name"];
-    NSDate *agendaItemStartDate = [agendaItem objectForKey:@"start"];
-    NSDate *agendaItemEndDate = [agendaItem objectForKey:@"end"];
+    SBSAgendaItem *agendaItem = (SBSAgendaItem *)[self objectAtIndexPath:self.tableView.indexPathForSelectedRow];
+    NSString *agendaItemName = agendaItem.name;
+    NSDate *agendaItemStartDate = agendaItem.start;
+    NSDate *agendaItemEndDate = agendaItem.end;
     
     EKEvent *event=[EKEvent eventWithEventStore:self.eventStore];
     event.allDay = YES;
