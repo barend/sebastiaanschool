@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SBSBulletin.h"
 
 @interface SBSBulletinCell : UITableViewCell
 
 @property (nonatomic, readonly) UILabel *bodyLabel;
 
-+ (CGFloat)heightForWidth:(CGFloat)width withItem:(PFObject *)object;
++ (CGFloat)heightForWidth:(CGFloat)width withItem:(SBSBulletin *)object;
 
 @end

@@ -12,7 +12,7 @@
 
 @implementation SBSBulletinCell
 
-+ (CGFloat)heightForWidth:(CGFloat)width withItem:(PFObject *)object
++ (CGFloat)heightForWidth:(CGFloat)width withItem:(SBSBulletin *)object
 {
     if (object == nil) {
         return 0.0f;
@@ -20,9 +20,9 @@
     const CGFloat margin = 10.0f;
     CGFloat availableWidth = width - margin *2;
     
-    NSString *title = [object objectForKey:@"title"];
-    NSString *publishedAt = [[SBSStyle longStyleDateFormatter] stringFromDate:[object objectForKey:@"publishedAt"]];
-    NSString *body = [object objectForKey:@"body"];
+    NSString *title = object.title;
+    NSString *publishedAt = [[SBSStyle longStyleDateFormatter] stringFromDate:object.publishedAt];
+    NSString *body = object.body;
     
     CGFloat height = margin;
     

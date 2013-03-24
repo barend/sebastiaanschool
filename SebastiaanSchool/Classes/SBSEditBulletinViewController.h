@@ -8,17 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
+#import "SBSBulletin.h"
+
 @protocol SBSEditBulletinDelegate <NSObject>
 
--(void)createBulletin:(PFObject *)newBulletin;
--(void)updateBulletin:(PFObject *)updatedBulletin;
--(void)deleteBulletin:(PFObject *)deletedBulletin;
+-(void)createBulletin:(SBSBulletin *)newBulletin;
+-(void)updateBulletin:(SBSBulletin *)updatedBulletin;
+-(void)deleteBulletin:(SBSBulletin *)deletedBulletin;
 
 @end
 
 @interface SBSEditBulletinViewController : UIViewController <UIActionSheetDelegate>
 
 @property (nonatomic, weak) id<SBSEditBulletinDelegate> delegate;
-@property (nonatomic, strong)PFObject * bulletin;
+@property (nonatomic, strong)SBSBulletin * bulletin;
 
 @end

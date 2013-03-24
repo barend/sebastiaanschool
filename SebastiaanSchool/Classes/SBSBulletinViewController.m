@@ -2,6 +2,8 @@
 #import "SBSEditBulletinViewController.h"
 #import "SBSBulletinCell.h"
 
+#import "SBSBulletin.h"
+
 #import "UIView+JLFrameAdditions.h"
 
 @implementation SBSBulletinViewController
@@ -20,7 +22,7 @@
         // Custom the table
         
         // The className to query on
-        self.parseClassName = @"Bulletin";
+        self.parseClassName = [SBSBulletin parseClassName];
         
         // The key of the PFObject to display in the label of the default cell style
         self.textKey = @"title";
@@ -70,7 +72,7 @@
 // Override to customize what kind of query to perform on the class. The default is to query for
 // all objects ordered by createdAt descending.
 - (PFQuery *)queryForTable {
-    PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
+    PFQuery *query = [SBSBulletin query];
     
     // If no objects are loaded in memory, we look to the cache first to fill the table
     // and then subsequently do a query against the network.
@@ -134,6 +136,8 @@
 // Override to customize the look of a cell representing an object. The default is to display
 // a UITableViewCellStyleDefault style cell with the label being the first key in the object.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object {
+    
+    SBSBulletin *bulletin = (SBSBulletin *)object;
     static NSString *CellIdentifier = @"bulletinCell";
     
     SBSBulletinCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -145,9 +149,9 @@
     }
     
     // Configure the cell
-    cell.textLabel.text = [object objectForKey:@"title"];
-    cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Published: %@", nil), [[SBSStyle longStyleDateFormatter] stringFromDate:[object objectForKey:@"publishedAt"]]];
-    cell.bodyLabel.text = [object objectForKey:@"body"];
+    cell.textLabel.text = bulletin.title;
+    cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Published: %@", nil), [[SBSStyle longStyleDateFormatter] stringFromDate:bulletin.publishedAt]];
+    cell.bodyLabel.text = bulletin.body;
     
     return cell;
 }
@@ -169,13 +173,13 @@
 {
     SBSEditBulletinViewController *bulletinVC = [[SBSEditBulletinViewController alloc]init];
     bulletinVC.delegate = self;
-    bulletinVC.bulletin = [self objectAtIndexPath:indexPath];
+    bulletinVC.bulletin = (SBSBulletin *)[self objectAtIndexPath:indexPath];
     [self.navigationController pushViewController:bulletinVC animated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    PFObject * object = [self objectAtIndexPath:indexPath];
+    SBSBulletin * object = (SBSBulletin *)[self objectAtIndexPath:indexPath];
     return [SBSBulletinCell heightForWidth:self.view._width withItem:object];
 }
 

@@ -51,8 +51,8 @@
 
     [self updateLayout];
     
-    self.titleTextView.text = [self.bulletin objectForKey:@"title"];
-    self.bodyTextView.text = [self.bulletin objectForKey:@"body"];
+    self.titleTextView.text = self.bulletin.title;
+    self.bodyTextView.text = self.bulletin.body;
 
     [self.deleteButton setBackgroundImage:[[UIImage imageNamed:@"redButton"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 16, 0, 16)] forState:UIControlStateNormal];
     [self.deleteButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -63,7 +63,7 @@
 
 }
 
-- (void)setBulletin:(PFObject *)bulletin {
+- (void)setBulletin:(SBSBulletin *)bulletin {
     _bulletin = bulletin;
     
     [self updateLayout];
@@ -80,15 +80,15 @@
 }
 
 -(void)doneButtonPressed:(id) sender {
-    PFObject *bulletin = self.bulletin;
+    SBSBulletin *bulletin = self.bulletin;
     if (self.bulletin == nil) {
-        bulletin = [PFObject objectWithClassName:@"Bulletin"];
+        bulletin = [[SBSBulletin alloc]init];
     }
     
     if (self.titleTextView.text.length !=0) {
-        [bulletin setObject:self.titleTextView.text forKey:@"title"];
+        bulletin.title = self.titleTextView.text;
         if (self.bodyTextView.text.length !=0) {
-            [bulletin setObject:self.bodyTextView.text forKey:@"body"];
+            bulletin.body = self.bodyTextView.text;
         }
         if (self.bulletin == nil) {
             [self.delegate createBulletin:bulletin];
