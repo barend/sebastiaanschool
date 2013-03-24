@@ -20,7 +20,7 @@
         // Custom the table
         
         // The className to query on
-        self.className = @"Bulletin";
+        self.parseClassName = @"Bulletin";
         
         // The key of the PFObject to display in the label of the default cell style
         self.textKey = @"title";
@@ -70,7 +70,7 @@
 // Override to customize what kind of query to perform on the class. The default is to query for
 // all objects ordered by createdAt descending.
 - (PFQuery *)queryForTable {
-    PFQuery *query = [PFQuery queryWithClassName:self.className];
+    PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
     
     // If no objects are loaded in memory, we look to the cache first to fill the table
     // and then subsequently do a query against the network.

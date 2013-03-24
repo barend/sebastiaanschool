@@ -31,7 +31,7 @@
         // Custom the table
         
         // The className to query on
-        self.className = @"NewsLetter";
+        self.parseClassName = @"NewsLetter";
         
         // The key of the PFObject to display in the label of the default cell style
         self.textKey = @"name";
@@ -142,7 +142,7 @@
           }
           
           for (NSUInteger index = 0; index < newsLetterNames.count; index++) {
-              PFObject *obj = [PFObject objectWithClassName:self.className];
+              PFObject *obj = [PFObject objectWithClassName:self.parseClassName];
               [obj setObject:[newsLetterNames objectAtIndex:index] forKey:@"name"];
               [obj setObject:[newsLetterUrls objectAtIndex:index] forKey:@"url"];
 
@@ -160,7 +160,7 @@
 // Override to customize what kind of query to perform on the class. The default is to query for
 // all objects ordered by createdAt descending.
 - (PFQuery *)queryForTable {
-    PFQuery *query = [PFQuery queryWithClassName:self.className];
+    PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
     
     // If no objects are loaded in memory, we look to the cache first to fill the table
     // and then subsequently do a query against the network.
