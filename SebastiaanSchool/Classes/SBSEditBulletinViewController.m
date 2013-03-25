@@ -10,7 +10,7 @@
 
 #import "UIView+JLFrameAdditions.h"
 
-@interface SBSEditBulletinViewController ()
+@interface SBSEditBulletinViewController ()<UITextViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UITextView *titleTextView;
@@ -61,6 +61,9 @@
     self.deleteButton.layer.borderColor = [UIColor lightGrayColor].CGColor;
     [self.deleteButton setTitle:NSLocalizedString(@"Delete", nil) forState:UIControlStateNormal];
 
+    //Assign delegates.
+    self.titleTextView.delegate = self;
+    self.bodyTextView.delegate = self;
 }
 
 - (void)setBulletin:(SBSBulletin *)bulletin {
@@ -120,6 +123,22 @@
     UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:NSLocalizedString(@"Delete Bulletin?", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) destructiveButtonTitle:NSLocalizedString(@"Delete", nil) otherButtonTitles: nil];
     
     [actionSheet showInView:[UIApplication sharedApplication].delegate.window.rootViewController.view];
+}
+
+#pragma mark - Text view delegate
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    if (textView == self.titleTextView) {
+        const CGFloat availableWidth = [SBSStyle phoneWidth] - [SBSStyle standardMargin] *2;
+        
+        NSString *newText = [textView.text stringByReplacingCharactersInRange:range withString:text];
+
+        CGSize size = [newText sizeWithFont:[SBSStyle titleFont]];
+        BOOL result = availableWidth >= size.width;
+        return result;
+    }
+    
+    return YES;
 }
 
 #pragma mark - Action sheet delegate
