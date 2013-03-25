@@ -34,7 +34,7 @@
 
 - (void)viewDidLoad{
     [super viewDidLoad];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(doneButtonPressed:)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveButtonPressed:)];
     
     self.titleLabel.text = NSLocalizedString(@"Message", nil);
     
@@ -80,6 +80,16 @@
 }
 
 -(void)doneButtonPressed:(id) sender {
+    if(self.titleTextView.isFirstResponder) {
+        [self.titleTextView resignFirstResponder];
+    }
+    if(self.bodyTextView.isFirstResponder) {
+        [self.bodyTextView resignFirstResponder];
+    }
+}
+
+
+-(void)saveButtonPressed:(id) sender {
     SBSBulletin *bulletin = self.bulletin;
     if (self.bulletin == nil) {
         bulletin = [[SBSBulletin alloc]init];
