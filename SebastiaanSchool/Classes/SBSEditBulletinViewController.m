@@ -64,6 +64,16 @@
     //Assign delegates.
     self.titleTextView.delegate = self;
     self.bodyTextView.delegate = self;
+
+    UIToolbar * accessoryView = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, [SBSStyle phoneWidth], 50.0f)];
+    accessoryView.barStyle = UIBarStyleBlack;
+    accessoryView.translucent = YES;
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButtonPressed:)];
+    
+    accessoryView.items = @[[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], doneButton];
+    
+    self.titleTextView.inputAccessoryView = accessoryView;
+    self.bodyTextView.inputAccessoryView = accessoryView;
 }
 
 - (void)setBulletin:(SBSBulletin *)bulletin {
