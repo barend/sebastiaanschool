@@ -17,14 +17,13 @@
     if (object == nil) {
         return 0.0f;
     }
-    const CGFloat margin = 10.0f;
-    CGFloat availableWidth = width - margin *2;
+    CGFloat availableWidth = width - [SBSStyle standardMargin] *2;
     
     NSString *title = object.title;
     NSString *publishedAt = [[SBSStyle longStyleDateFormatter] stringFromDate:object.publishedAt];
     NSString *body = object.body;
     
-    CGFloat height = margin;
+    CGFloat height = [SBSStyle standardMargin];
     
     height += [title sizeWithFont:[SBSStyle titleFont] constrainedToSize:CGSizeMake(availableWidth, CGFLOAT_MAX)].height;
     height += [publishedAt sizeWithFont:[SBSStyle subtitleFont] constrainedToSize:CGSizeMake(availableWidth, CGFLOAT_MAX)].height;
@@ -32,7 +31,7 @@
         height += [body sizeWithFont:[SBSStyle bodyFont] constrainedToSize:CGSizeMake(availableWidth, CGFLOAT_MAX)].height;
     }
     
-    height += margin;
+    height += [SBSStyle standardMargin];
     
     return height;
 }
@@ -57,7 +56,7 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    self.textLabel._y = 10.0f;
+    self.textLabel._y = [SBSStyle standardMargin];
     self.detailTextLabel._y = self.textLabel._bottom;
     
     if (self.bodyLabel.text == nil) {
@@ -65,9 +64,9 @@
     } else {
         self.bodyLabel.frame = self.bounds;
         self.bodyLabel._y = self.detailTextLabel._bottom;
-        self.bodyLabel._left = 10.0f;
-        self.bodyLabel._width = self.bodyLabel._width -10;
-        self.bodyLabel._height = self.bounds.size.height - self.bodyLabel._y - 10;
+        self.bodyLabel._left = [SBSStyle standardMargin];
+        self.bodyLabel._width = self.bodyLabel._width - [SBSStyle standardMargin];
+        self.bodyLabel._height = self.bounds.size.height - self.bodyLabel._y - [SBSStyle standardMargin];
     }
 }
 

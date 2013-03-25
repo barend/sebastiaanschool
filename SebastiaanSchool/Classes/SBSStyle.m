@@ -57,5 +57,12 @@ static UIFont * bodyFont;
     return bodyFont;
 }
 
++ (CGFloat)phoneWidth {
+    return 320.0f;
+}
+
++ (CGFloat)standardMargin {
+    return 10.0f;
+}
 
 @end

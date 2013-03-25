@@ -16,4 +16,7 @@
 + (UIFont *)subtitleFont;
 + (UIFont *)bodyFont;
 
++ (CGFloat)phoneWidth;
++ (CGFloat)standardMargin;
+
 @end
