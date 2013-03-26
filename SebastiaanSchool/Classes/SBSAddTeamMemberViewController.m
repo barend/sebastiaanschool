@@ -10,7 +10,7 @@
 
 @interface SBSAddTeamMemberViewController ()
 @property (nonatomic, strong) UITextField *displayNameField;
-@property (nonatomic, strong) UITextField *descriptionField;
+@property (nonatomic, strong) UITextField *detailTextField;
 @property (nonatomic, strong) UITextField *emailField;
 
 @end
@@ -37,10 +37,10 @@
     self.displayNameField.borderStyle = UITextBorderStyleRoundedRect;
     [self.view addSubview:self.displayNameField];
     
-    self.descriptionField = [[UITextField alloc]initWithFrame:CGRectMake(10, 52, bounds.size.width - 20, 26)];
+    self.detailTextField = [[UITextField alloc]initWithFrame:CGRectMake(10, 52, bounds.size.width - 20, 26)];
     self.displayNameField.placeholder = NSLocalizedString(@"Description", nil);
-    self.descriptionField.borderStyle = UITextBorderStyleRoundedRect;
-    [self.view addSubview:self.descriptionField];
+    self.detailTextField.borderStyle = UITextBorderStyleRoundedRect;
+    [self.view addSubview:self.detailTextField];
 
     self.emailField = [[UITextField alloc]initWithFrame:CGRectMake(10, 52, bounds.size.width - 20, 26)];
     self.displayNameField.placeholder = NSLocalizedString(@"Email", nil);
@@ -50,9 +50,9 @@
 
 -(void)doneButtonPressed:(id) sender {
     SBSContactItem *newTeamMember = [[SBSContactItem alloc]init];
-    if (self.displayNameField.text.length !=0 && self.descriptionField.text.length !=0) {
+    if (self.displayNameField.text.length !=0 && self.detailTextField.text.length !=0) {
         newTeamMember.displayName = self.displayNameField.text;
-        newTeamMember.description = self.descriptionField.text;
+        newTeamMember.detailText = self.detailTextField.text;
         newTeamMember.email = self.emailField.text;
         [self.delegate createdTeamMember:newTeamMember];
     }

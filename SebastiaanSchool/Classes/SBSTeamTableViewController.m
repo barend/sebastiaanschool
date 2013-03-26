@@ -126,8 +126,7 @@
     
     // Configure the cell
     cell.textLabel.text = contactItem.displayName;
-#warning description is not a smart property name.
-    cell.detailTextLabel.text = [contactItem objectForKey:@"description"];
+    cell.detailTextLabel.text = contactItem.detailText;
     
     return cell;
 }

@@ -11,7 +11,7 @@
 @interface SBSContactItem : PFObject<PFSubclassing>
 
 @property (retain) NSString *displayName;
-@property (retain) NSString *description;
+@property (retain) NSString *detailText;
 @property (retain) NSString *email;
 @property (retain) NSNumber *order;
 

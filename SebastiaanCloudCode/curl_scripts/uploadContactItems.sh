@@ -12,7 +12,7 @@ curl -X POST \
             "method": "POST",
             "path": "/1/classes/ContactItem",
             "body": {
-				"description":"Meerschoolse directeur",
+				"detailText":"Meerschoolse directeur",
 				"displayName":"Marthijn Manders",
 				"email":"directie@sebastiaanschool.nl",
                 "order":0
@@ -22,7 +22,7 @@ curl -X POST \
             "method": "POST",
             "path": "/1/classes/ContactItem",
             "body": {
-				"description":"Dagelijkse leiding",
+				"detailText":"Dagelijkse leiding",
 				"displayName":"Marlous van Loosbroek",
 				"email":"marlous@sebastiaanschool.nl",
                 "order":1
@@ -32,7 +32,7 @@ curl -X POST \
             "method": "POST",
             "path": "/1/classes/ContactItem",
             "body": {
-				"description":"Marlous van Loosbroek",
+				"detailText":"Marlous van Loosbroek",
 				"displayName":"Interne begeleiding",
 				"email":"marlous@sebastiaanschool.nl",
                 "order":2
@@ -42,7 +42,7 @@ curl -X POST \
             "method": "POST",
             "path": "/1/classes/ContactItem",
             "body": {
-				"description":"Rob Bongers",
+				"detailText":"Rob Bongers",
 				"displayName":"ICT",
 				"email":"r.bongers@sebastiaanschool.nl",
                 "order":3
@@ -52,7 +52,7 @@ curl -X POST \
             "method": "POST",
             "path": "/1/classes/ContactItem",
             "body": {
-				"description":"Karin Proper",
+				"detailText":"Karin Proper",
 				"displayName":"Techniek",
 				"email":"k.proper@sebastiaanschool.nl",
                 "order":4
@@ -62,7 +62,7 @@ curl -X POST \
             "method": "POST",
             "path": "/1/classes/ContactItem",
             "body": {
-				"description":"Groep 1 - 2a",
+				"detailText":"Groep 1 - 2a",
 				"displayName":"Mariska Busch",
 				"email":"m.busch@sebastiaanschool.nl",
                 "order":5
@@ -72,7 +72,7 @@ curl -X POST \
             "method": "POST",
             "path": "/1/classes/ContactItem",
             "body": {
-				"description":"Groep 1 - 2a",
+				"detailText":"Groep 1 - 2a",
 				"displayName":"Natascha Kers",
 				"email":"n.kers@sebastiaanschool.nl",
                 "order":6
@@ -82,7 +82,7 @@ curl -X POST \
             "method": "POST",
             "path": "/1/classes/ContactItem",
             "body": {
-				"description":"Groep 1- 2b",
+				"detailText":"Groep 1- 2b",
 				"displayName":"Mirjam Gaarman",
 				"email":"m.gaarman@sebastiaanschool.nl",
                 "order":7
@@ -92,7 +92,7 @@ curl -X POST \
             "method": "POST",
             "path": "/1/classes/ContactItem",
             "body": {
-				"description":"Groep 3 - 4",
+				"detailText":"Groep 3 - 4",
 				"displayName":"Karin Proper",
 				"email":"k.proper@sebastiaanschool.nl",
                 "order":8
@@ -102,7 +102,7 @@ curl -X POST \
             "method": "POST",
             "path": "/1/classes/ContactItem",
             "body": {
-				"description":"Groep 3 - 4",
+				"detailText":"Groep 3 - 4",
 				"displayName":"Eline Kamphuis",
 				"email":"",
                 "order":9
@@ -112,7 +112,7 @@ curl -X POST \
             "method": "POST",
             "path": "/1/classes/ContactItem",
             "body": {
-				"description":"Groep 5 - 6",
+				"detailText":"Groep 5 - 6",
 				"displayName":"Rian de Laat",
 				"email":"r.delaat@sebastiaanschool.nl",
                 "order":10
@@ -122,7 +122,7 @@ curl -X POST \
             "method": "POST",
             "path": "/1/classes/ContactItem",
             "body": {
-				"description":"Groep 5 - 6",
+				"detailText":"Groep 5 - 6",
 				"displayName":"Anouk Molendijk",
 				"email":"a.molendijk@sebastiaanschool.nl",
                 "order":11
@@ -132,7 +132,7 @@ curl -X POST \
             "method": "POST",
             "path": "/1/classes/ContactItem",
             "body": {
-                "description":"Groep 7 - 8",
+                "detailText":"Groep 7 - 8",
                 "displayName":"Rob Bongers",
                 "email":"r.bongers@sebastiaanschool.nl",
                 "order":12
