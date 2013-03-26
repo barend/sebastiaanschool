@@ -20,13 +20,13 @@
     CGFloat availableWidth = width - [SBSStyle standardMargin] *2;
     
     NSString *title = object.title;
-    NSString *publishedAt = [[SBSStyle longStyleDateFormatter] stringFromDate:object.publishedAt];
+    NSString *createdAt = [[SBSStyle longStyleDateFormatter] stringFromDate:object.createdAt];
     NSString *body = object.body;
     
     CGFloat height = [SBSStyle standardMargin];
     
     height += [title sizeWithFont:[SBSStyle titleFont] constrainedToSize:CGSizeMake(availableWidth, CGFLOAT_MAX)].height;
-    height += [publishedAt sizeWithFont:[SBSStyle subtitleFont] constrainedToSize:CGSizeMake(availableWidth, CGFLOAT_MAX)].height;
+    height += [createdAt sizeWithFont:[SBSStyle subtitleFont] constrainedToSize:CGSizeMake(availableWidth, CGFLOAT_MAX)].height;
     if (body != nil) {
         height += [body sizeWithFont:[SBSStyle bodyFont] constrainedToSize:CGSizeMake(availableWidth, CGFLOAT_MAX)].height;
     }

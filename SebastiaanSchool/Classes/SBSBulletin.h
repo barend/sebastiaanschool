@@ -12,6 +12,5 @@
 
 @property (retain) NSString *title;
 @property (retain) NSString *body;
-@property (retain) NSDate *publishedAt;
 
 @end

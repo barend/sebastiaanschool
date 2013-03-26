@@ -11,7 +11,7 @@
 
 @implementation SBSBulletin
 
-@dynamic title, body, publishedAt;
+@dynamic title, body;
 
 + (NSString *)parseClassName {
     return @"Bulletin";
