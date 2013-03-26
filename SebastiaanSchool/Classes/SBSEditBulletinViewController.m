@@ -74,7 +74,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     self.titleTextView.delegate = self;
     self.bodyTextView.delegate = self;
 
-    UIToolbar * accessoryView = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, [SBSStyle phoneWidth], 50.0f)];
+    UIToolbar * accessoryView = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, [SBSStyle phoneWidth], 44.0)];
     accessoryView.barStyle = UIBarStyleBlack;
     accessoryView.translucent = YES;
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButtonPressed:)];
