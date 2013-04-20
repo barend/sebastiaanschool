@@ -94,11 +94,11 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 - (void) updateLayout {
     if (self.bulletin == nil) {
         self.deleteButton.hidden = YES;
-        self.bodyTextView._height = self.view._height - self.bodyTextView._y -20;
     } else {
         self.deleteButton.hidden = NO;
         self.bodyTextView._height = self.view._height - self.bodyTextView._y - self.deleteButton._height -30;
     }
+    self.bodyTextView._height = self.view._height - self.bodyTextView._y - self.deleteButton._height -30;
 }
 
 -(void)doneButtonPressed:(id) sender {
