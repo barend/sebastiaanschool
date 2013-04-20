@@ -7,7 +7,7 @@
 //
 
 #import "SBSTeamTableViewController.h"
-#import "SBSAddTeamMemberViewController.h"
+#import "SBSEditTeamMemberViewController.h"
 
 #import "SBSContactItem.h"
 
@@ -90,18 +90,46 @@
 }
 
 - (void)addTeamMember {
-    SBSAddTeamMemberViewController *addTeamMemberVC = [[SBSAddTeamMemberViewController alloc]init];
+    SBSEditTeamMemberViewController *addTeamMemberVC = [[SBSEditTeamMemberViewController alloc]init];
     addTeamMemberVC.delegate = self;
     [self.navigationController pushViewController:addTeamMemberVC animated:YES];
 }
 
--(void)createdTeamMember:(SBSContactItem *)newTeamMember {
+#pragma mark - SBSAddTeamMemberDelegate implementation
+
+-(void)createTeamMember:(SBSContactItem *)newTeamMember {
     [newTeamMember saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
             //Do a big reload since the framework VC doesn't support nice view insertions and removal.
             [self loadObjects];
         } else {
             ULog(@"Error while adding bulletin: %@", error);
+        }
+    }];
+    
+    [self.navigationController popToViewController:self animated:YES];
+}
+
+-(void)updateTeamMember:(SBSContactItem *)updatedTeamMember {
+    [updatedTeamMember saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            //Do a big reload since the framework VC doesn't support nice view insertions and removal.
+            [self loadObjects];
+        } else {
+            ULog(@"Error while updating team member: %@", error);
+        }
+    }];
+    
+    [self.navigationController popToViewController:self animated:YES];
+}
+
+-(void)deleteTeamMember:(SBSContactItem *)deletedTeamMember {
+    [deletedTeamMember deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            //Do a big reload since the framework VC doesn't support nice view insertions and removal.
+            [self loadObjects];
+        } else {
+            ULog(@"Error while deleting team member: %@", error);
         }
     }];
     
