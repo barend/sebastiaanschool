@@ -70,10 +70,6 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     self.deleteButton.layer.borderColor = [UIColor lightGrayColor].CGColor;
     [self.deleteButton setTitle:NSLocalizedString(@"Delete", nil) forState:UIControlStateNormal];
 
-    //Assign delegates.
-    self.titleTextView.delegate = self;
-    self.bodyTextView.delegate = self;
-
     UIToolbar * accessoryView = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, [SBSStyle phoneWidth], 44.0)];
     accessoryView.barStyle = UIBarStyleBlack;
     accessoryView.translucent = YES;
