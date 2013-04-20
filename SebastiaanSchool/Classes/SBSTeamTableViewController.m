@@ -73,8 +73,6 @@
 
 #pragma mark - Parse
 
-// Override to customize what kind of query to perform on the class. The default is to query for
-// all objects ordered by createdAt descending.
 - (PFQuery *)queryForTable {
     PFQuery *query = [SBSContactItem query];
     
@@ -208,6 +206,16 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if ([[SBSSecurity instance] currentUserStaffUser]) {
+        SBSEditTeamMemberViewController *teamMemberVC = [[SBSEditTeamMemberViewController alloc]init];
+        teamMemberVC.delegate = self;
+        teamMemberVC.contact = (SBSContactItem *)[self objectAtIndexPath:indexPath];
+        [self.navigationController pushViewController:teamMemberVC animated:YES];
+        
+        return;
+    }
+
 
     SBSContactItem *selectedContactItem = (SBSContactItem *)[self objectAtIndexPath:indexPath];
     

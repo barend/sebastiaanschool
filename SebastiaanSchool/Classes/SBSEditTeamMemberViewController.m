@@ -69,9 +69,9 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     
     [self updateLayout];
     
-//    self.displayNameTextView.text = self.bulletin.title;
-//    self.detailTextView.text = self.bulletin.body;
-//    self.emailTextView.text = self.bulletin.body;
+    self.displayNameTextView.text = self.contact.displayName;
+    self.detailTextView.text = self.contact.detailText;
+    self.emailTextView.text = self.contact.email;
     
     [self.deleteButton setBackgroundImage:[[UIImage imageNamed:@"redButton"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 16, 0, 16)] forState:UIControlStateNormal];
     [self.deleteButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -79,11 +79,6 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     [self.deleteButton setTitleColor:[UIColor darkGrayColor] forState:UIControlStateHighlighted];
     self.deleteButton.layer.borderColor = [UIColor lightGrayColor].CGColor;
     [self.deleteButton setTitle:NSLocalizedString(@"Delete", nil) forState:UIControlStateNormal];
-    
-    //Assign delegates.
-    self.displayNameTextView.delegate = self;
-    self.detailTextView.delegate = self;
-    self.emailTextView.delegate = self;
     
     UIToolbar * accessoryView = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, [SBSStyle phoneWidth], 44.0)];
     accessoryView.barStyle = UIBarStyleBlack;
@@ -109,21 +104,11 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
         self.deleteButton.hidden = YES;
     } else {
         self.deleteButton.hidden = NO;
-#warning Implement.
-//        self.bodyTextView._height = self.view._height - self.bodyTextView._y - self.deleteButton._height -30;
     }
-#warning Implement.
-//    self.bodyTextView._height = self.view._height - self.bodyTextView._y - self.deleteButton._height -30;
 }
 
 -(void)doneButtonPressed:(id) sender {
-#warning Implement.
-//    if(self.titleTextView.isFirstResponder) {
-//        [self.titleTextView resignFirstResponder];
-//    }
-//    if(self.bodyTextView.isFirstResponder) {
-//        [self.bodyTextView resignFirstResponder];
-//    }
+    [self.view endEditing:NO];
 }
 
 
@@ -132,28 +117,17 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     if (self.contact == nil) {
         contact = [[SBSContactItem alloc]init];
     }
-#warning Implement.
-//    if (self.titleTextView.text.length !=0) {
-//        bulletin.title = self.titleTextView.text;
-//        if (self.bodyTextView.text.length !=0) {
-//            bulletin.body = self.bodyTextView.text;
-//        }
-//        if (self.contact == nil) {
-//            [self.delegate createdTeamMember:contact];
-//        } else {
-//            [self.delegate updatedTeamMember:contact];
-//        }
-//    }
-    //-(void)doneButtonPressed:(id) sender {
-    //    SBSContactItem *newTeamMember = [[SBSContactItem alloc]init];
-    //    if (self.displayNameField.text.length !=0 && self.detailTextField.text.length !=0) {
-    //        newTeamMember.displayName = self.displayNameField.text;
-    //        newTeamMember.detailText = self.detailTextField.text;
-    //        newTeamMember.email = self.emailField.text;
-    //        [self.delegate createdTeamMember:newTeamMember];
-    //    }
-    //}
-
+    if (self.displayNameTextView.text.length != 0 && self.detailTextView.text.length) {
+        contact.displayName = self.displayNameTextView.text;
+        contact.detailText = self.detailTextView.text;
+        contact.email = self.emailTextView.text;
+        
+        if (self.contact == nil) {
+            [self.delegate createTeamMember:contact];
+        } else {
+            [self.delegate updateTeamMember:contact];
+        }
+    }
 }
 
 - (void)viewDidUnload {
@@ -237,8 +211,8 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     [UIView commitAnimations];
 }
 
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-#warning Implement
+//- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+//#warning Implement
 //    if (textView == self.titleTextView) {
 //        const CGFloat availableWidth = [SBSStyle phoneWidth] - [SBSStyle standardMargin] *2;
 //        
@@ -249,8 +223,8 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 //        return result;
 //    }
 //    
-    return YES;
-}
+//    return YES;
+//}
 
 #pragma mark - Action sheet delegate
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
