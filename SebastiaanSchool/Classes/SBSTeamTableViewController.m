@@ -12,7 +12,6 @@
 #import "SBSContactItem.h"
 
 @interface SBSTeamTableViewController ()
-@property (nonatomic, strong) NSIndexPath *currentlyEditedIndexPath;
 @property (nonatomic, strong) NSMutableArray *editedObjects;
 @end
 
@@ -227,7 +226,6 @@
         NSString *contactItemName = contactItem.displayName;
         
         UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:[NSString stringWithFormat: NSLocalizedString(@"Are you sure you want to delete \"%@\"?", nil), contactItemName] delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) destructiveButtonTitle:NSLocalizedString(@"Delete", nil) otherButtonTitles:nil];
-        self.currentlyEditedIndexPath = indexPath;
         
         [actionSheet showInView:[UIApplication sharedApplication].delegate.window.rootViewController.view];
     }
@@ -235,12 +233,12 @@
 
 #pragma mark - Action sheet delegate
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == actionSheet.cancelButtonIndex || self.currentlyEditedIndexPath == nil) {
+    if (buttonIndex == actionSheet.cancelButtonIndex) {
         return;
     }
     
     // Delete the row from the data source
-    PFObject *deletedTeamMember = [self objectAtIndexPath:self.currentlyEditedIndexPath];
+    PFObject *deletedTeamMember = [self objectAtIndexPath:self.tableView.indexPathForSelectedRow];
     [deletedTeamMember deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
             //Do a big reload since the framework VC doesn't support nice view insertions and removal.
