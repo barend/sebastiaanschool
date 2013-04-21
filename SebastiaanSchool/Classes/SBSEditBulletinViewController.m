@@ -37,12 +37,10 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveButtonPressed:)];
     
     self.titleLabel.text = NSLocalizedString(@"Message", nil);
+    self.bodyLabel.text = NSLocalizedString(@"Message content", nil);
     
     [SBSStyle applyStyleToTextView:self.titleTextView];
     self.titleTextView.font = [SBSStyle titleFont];
-
-    self.bodyLabel.text = NSLocalizedString(@"Message content", nil);
-    
     [SBSStyle applyStyleToTextView:self.bodyTextView];
 
     [self updateLayout];

@@ -99,6 +99,8 @@
 		4AC3F7FC16A0AFBB00452D33 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4AC3F7FE16A0AFBB00452D33 /* InfoPlist.strings */; };
 		4AD1809B16A57FBE00B97F61 /* SBSStaffViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AD1809A16A57FBE00B97F61 /* SBSStaffViewController.xib */; };
 		4AD416391723DEB400DA4777 /* SBSBaseEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD416381723DEB400DA4777 /* SBSBaseEditViewController.m */; };
+		4AD4163D1723E87800DA4777 /* SBSEditAgendaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD4163B1723E87800DA4777 /* SBSEditAgendaViewController.m */; };
+		4AD416401723E8A600DA4777 /* SBSEditAgendaViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AD4163F1723E8A600DA4777 /* SBSEditAgendaViewController.xib */; };
 		4ADC932E16A0050600DAA972 /* SBSSebastiaanSchoolAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADC931E16A0050600DAA972 /* SBSSebastiaanSchoolAppDelegate.m */; };
 		4ADC932F16A0050600DAA972 /* SBSBulletinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADC932016A0050600DAA972 /* SBSBulletinViewController.m */; };
 		4ADC933016A0050600DAA972 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ADC932216A0050600DAA972 /* Default-568h@2x.png */; };
@@ -233,6 +235,9 @@
 		4AD1809A16A57FBE00B97F61 /* SBSStaffViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SBSStaffViewController.xib; sourceTree = "<group>"; };
 		4AD416371723DEB400DA4777 /* SBSBaseEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBSBaseEditViewController.h; sourceTree = "<group>"; };
 		4AD416381723DEB400DA4777 /* SBSBaseEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBSBaseEditViewController.m; sourceTree = "<group>"; };
+		4AD4163A1723E87800DA4777 /* SBSEditAgendaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBSEditAgendaViewController.h; sourceTree = "<group>"; };
+		4AD4163B1723E87800DA4777 /* SBSEditAgendaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBSEditAgendaViewController.m; sourceTree = "<group>"; };
+		4AD4163F1723E8A600DA4777 /* SBSEditAgendaViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SBSEditAgendaViewController.xib; sourceTree = "<group>"; };
 		4ADC931E16A0050600DAA972 /* SBSSebastiaanSchoolAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = SBSSebastiaanSchoolAppDelegate.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4ADC931F16A0050600DAA972 /* SBSBulletinViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBSBulletinViewController.h; sourceTree = "<group>"; };
 		4ADC932016A0050600DAA972 /* SBSBulletinViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBSBulletinViewController.m; sourceTree = "<group>"; };
@@ -424,6 +429,8 @@
 				4ADC932016A0050600DAA972 /* SBSBulletinViewController.m */,
 				4A0124AC16FC9F2500F744D6 /* SBSBulletinCell.h */,
 				4A0124AD16FC9F2500F744D6 /* SBSBulletinCell.m */,
+				4AD4163A1723E87800DA4777 /* SBSEditAgendaViewController.h */,
+				4AD4163B1723E87800DA4777 /* SBSEditAgendaViewController.m */,
 				4A0124B616FCFDA600F744D6 /* SBSEditBulletinViewController.h */,
 				4A0124B716FCFDA600F744D6 /* SBSEditBulletinViewController.m */,
 				4A19669F16A086910011EFBF /* SBSNewsLetterTableViewController.h */,
@@ -455,6 +462,7 @@
 			children = (
 				4A2B5B5116C62D3A00A21460 /* icons */,
 				4A3B995F16A0830600241D4C /* MainWindow.xib */,
+				4AD4163F1723E8A600DA4777 /* SBSEditAgendaViewController.xib */,
 				4AA09BB3172304E6004630B4 /* SBSEditTeamMemberViewController.xib */,
 				4A0124BB16FCFE0100F744D6 /* SBSEditBulletinViewController.xib */,
 				4AD1809A16A57FBE00B97F61 /* SBSStaffViewController.xib */,
@@ -610,6 +618,7 @@
 				4A0124C716FD8FB600F744D6 /* greyButton@2x.png in Resources */,
 				4A0124C816FD8FB600F744D6 /* greyButton.png in Resources */,
 				4AA09BB4172304E6004630B4 /* SBSEditTeamMemberViewController.xib in Resources */,
+				4AD416401723E8A600DA4777 /* SBSEditAgendaViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -687,6 +696,7 @@
 				4A4997D516FEF6AB00B8A729 /* SBSContactItem.m in Sources */,
 				4A4997D816FEF6CF00B8A729 /* SBSNewsLetter.m in Sources */,
 				4AD416391723DEB400DA4777 /* SBSBaseEditViewController.m in Sources */,
+				4AD4163D1723E87800DA4777 /* SBSEditAgendaViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
