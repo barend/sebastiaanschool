@@ -13,6 +13,7 @@
 
 @interface SBSTeamTableViewController ()
 @property (nonatomic, strong) NSIndexPath *currentlyEditedIndexPath;
+@property (nonatomic, strong) NSMutableArray *editedObjects;
 @end
 
 @implementation SBSTeamTableViewController
@@ -56,18 +57,24 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated {
-    [self updateBarButtonItemAnimated:animated];
+    [self updateBarButtonItemsAnimated:animated editing:NO];
 }
 
--(void)updateBarButtonItemAnimated:(BOOL)animated {
+-(void)updateBarButtonItemsAnimated:(BOOL)animated editing:(BOOL)editing {
+    NSArray *buttons = nil;
+
     if ([[SBSSecurity instance] currentUserStaffUser]) {
-        if (self.navigationItem.rightBarButtonItem == nil) {
+        if (editing) {
+            UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneEditingTeamMembers)];
+            buttons = @[doneButton];
+            
+        } else {
             UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addTeamMember)];
-            [self.navigationItem setRightBarButtonItem:addButton animated:animated];
+            UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editTeamMembers)];
+            buttons = @[editButton, addButton];
         }
-    } else {
-        [self.navigationItem setRightBarButtonItem:nil animated:animated];
     }
+    [self.navigationItem setRightBarButtonItems:buttons animated:animated];
 }
 
 
@@ -91,6 +98,27 @@
     SBSEditTeamMemberViewController *addTeamMemberVC = [[SBSEditTeamMemberViewController alloc]init];
     addTeamMemberVC.delegate = self;
     [self.navigationController pushViewController:addTeamMemberVC animated:YES];
+}
+
+- (void)editTeamMembers {
+    NSAssert([[SBSSecurity instance] currentUserStaffUser], @"User has to be a staff user");
+    [self updateBarButtonItemsAnimated:YES editing:YES];
+    [self setEditing:YES animated:YES];
+}
+
+- (void) doneEditingTeamMembers {
+    if (self.editedObjects != nil) {
+        [[self.navigationItem rightBarButtonItems] makeObjectsPerformSelector:@selector(setEnabled:) withObject:@(NO)];
+        [PFObject saveAllInBackground:self.editedObjects block:^(BOOL succeeded, NSError *error) {
+            [self updateBarButtonItemsAnimated:YES editing:NO];
+            [self loadObjects];
+            [self setEditing:NO animated:YES];
+        }];
+        self.editedObjects = nil;
+    } else {
+        [self updateBarButtonItemsAnimated:YES editing:NO];
+        [self setEditing:NO animated:YES];
+    }
 }
 
 #pragma mark - SBSAddTeamMemberDelegate implementation
@@ -165,6 +193,30 @@
 {
     // Return NO if you do not want the specified item to be editable.
     return [SBSSecurity instance].currentUserStaffUser;
+}
+
+-(BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return UITableViewCellEditingStyleDelete;
+}
+
+-(void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath
+     toIndexPath:(NSIndexPath *)toIndexPath {
+    if (self.editedObjects == nil) {
+        self.editedObjects = [self.objects mutableCopy];
+    }
+    
+    id item = [self.editedObjects objectAtIndex:fromIndexPath.row];
+    [self.editedObjects removeObjectAtIndex:fromIndexPath.row];
+    [self.editedObjects insertObject:item atIndex:toIndexPath.row];
+    
+    [self.editedObjects enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        SBSContactItem *contact = obj;
+        contact.order = @(idx);
+    }];
 }
 
 // Override to support editing the table view.
@@ -288,7 +340,7 @@
 #pragma mark - Listen for security role changes
 
 -(void)userRoleChanged:(NSNotification *)notification {
-    [self updateBarButtonItemAnimated:YES];
+    [self updateBarButtonItemsAnimated:YES editing:NO];
 }
 
 @end
