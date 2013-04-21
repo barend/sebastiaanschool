@@ -10,16 +10,7 @@
 
 #import "UIView+JLFrameAdditions.h"
 
-static const CGFloat KEYBOARD_ANIMATION_DURATION = 0.3;
-static const CGFloat MINIMUM_SCROLL_FRACTION = 0.2;
-static const CGFloat MAXIMUM_SCROLL_FRACTION = 0.8;
-static const CGFloat PORTRAIT_KEYBOARD_HEIGHT = 216;
-static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
-
-@interface SBSEditTeamMemberViewController ()<UITextViewDelegate>
-{
-    CGFloat animatedDistance;
-}
+@interface SBSEditTeamMemberViewController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *displayNameLabel;
 @property (weak, nonatomic) IBOutlet UITextView *displayNameTextView;
@@ -48,24 +39,12 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveButtonPressed:)];
     
     self.displayNameLabel.text = NSLocalizedString(@"Name", nil);
-    
-    self.displayNameTextView.layer.borderWidth = 1.0f;
-    self.displayNameTextView.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    self.displayNameTextView.font = [SBSStyle titleFont];
-    
-    
     self.detailLabel.text = NSLocalizedString(@"Detail content", nil);
-    
-    self.detailTextView.layer.borderWidth = 1.0f;
-    self.detailTextView.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    self.detailTextView.font = [SBSStyle bodyFont];
-    
-    
     self.emailLabel.text = NSLocalizedString(@"Email", nil);
     
-    self.emailTextView.layer.borderWidth = 1.0f;
-    self.emailTextView.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    self.emailTextView.font = [SBSStyle bodyFont];
+    [SBSStyle applyStyleToTextView:self.displayNameTextView];
+    [SBSStyle applyStyleToTextView:self.detailTextView];
+    [SBSStyle applyStyleToTextView:self.emailTextView];
     
     [self updateLayout];
     
@@ -73,25 +52,12 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     self.detailTextView.text = self.contact.detailText;
     self.emailTextView.text = self.contact.email;
     
-    [self.deleteButton setBackgroundImage:[[UIImage imageNamed:@"redButton"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 16, 0, 16)] forState:UIControlStateNormal];
-    [self.deleteButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.deleteButton setTitleShadowColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
-    [self.deleteButton setTitleColor:[UIColor darkGrayColor] forState:UIControlStateHighlighted];
-    self.deleteButton.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    [self.deleteButton setTitle:NSLocalizedString(@"Delete", nil) forState:UIControlStateNormal];
-    
-    UIToolbar * accessoryView = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, [SBSStyle phoneWidth], 44.0)];
-    accessoryView.barStyle = UIBarStyleBlack;
-    accessoryView.translucent = YES;
-    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButtonPressed:)];
-    
-    accessoryView.items = @[[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], doneButton];
-    
-    self.displayNameTextView.inputAccessoryView = accessoryView;
-    self.detailTextView.inputAccessoryView = accessoryView;
-    self.emailTextView.inputAccessoryView = accessoryView;
-}
+    [SBSStyle applyStyleToDeleteButton:self.deleteButton];
 
+    self.displayNameTextView.inputAccessoryView = self.textViewAccessoryView;
+    self.detailTextView.inputAccessoryView = self.textViewAccessoryView;
+    self.emailTextView.inputAccessoryView = self.textViewAccessoryView;
+}
 
 - (void)setContact:(SBSContactItem *)contact {
     _contact = contact;
@@ -100,17 +66,8 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 }
 
 - (void) updateLayout {
-    if (self.contact == nil) {
-        self.deleteButton.hidden = YES;
-    } else {
-        self.deleteButton.hidden = NO;
-    }
+    self.deleteButton.hidden = self.contact == nil;
 }
-
--(void)doneButtonPressed:(id) sender {
-    [self.view endEditing:NO];
-}
-
 
 -(void)saveButtonPressed:(id) sender {
     SBSContactItem *contact = self.contact;
@@ -145,86 +102,6 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     
     [actionSheet showInView:[UIApplication sharedApplication].delegate.window.rootViewController.view];
 }
-
-#pragma mark - Text view delegate
-
-- (void)textViewDidBeginEditing:(UITextView *)textView
-{
-    CGRect textFieldRect =
-    [self.view.window convertRect:textView.bounds fromView:textView];
-    CGRect viewRect =
-    [self.view.window convertRect:self.view.bounds fromView:self.view];
-    
-    CGFloat midline = textFieldRect.origin.y + 0.5 * textFieldRect.size.height;
-    CGFloat numerator =
-    midline - viewRect.origin.y
-    - MINIMUM_SCROLL_FRACTION * viewRect.size.height;
-    CGFloat denominator =
-    (MAXIMUM_SCROLL_FRACTION - MINIMUM_SCROLL_FRACTION)
-    * viewRect.size.height;
-    CGFloat heightFraction = numerator / denominator;
-    
-    if (heightFraction < 0.0)
-    {
-        heightFraction = 0.0;
-    }
-    else if (heightFraction > 1.0)
-    {
-        heightFraction = 1.0;
-    }
-    
-    UIInterfaceOrientation orientation =
-    [[UIApplication sharedApplication] statusBarOrientation];
-    if (orientation == UIInterfaceOrientationPortrait ||
-        orientation == UIInterfaceOrientationPortraitUpsideDown)
-    {
-        animatedDistance = floor(PORTRAIT_KEYBOARD_HEIGHT * heightFraction);
-    }
-    else
-    {
-        animatedDistance = floor(LANDSCAPE_KEYBOARD_HEIGHT * heightFraction);
-    }
-    
-    CGRect viewFrame = self.view.frame;
-    viewFrame.origin.y -= animatedDistance;
-    
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationBeginsFromCurrentState:YES];
-    [UIView setAnimationDuration:KEYBOARD_ANIMATION_DURATION];
-    
-    [self.view setFrame:viewFrame];
-    
-    [UIView commitAnimations];
-}
-
-- (void)textViewDidEndEditing:(UITextView *)textView
-{
-    CGRect viewFrame = self.view.frame;
-    viewFrame.origin.y += animatedDistance;
-    
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationBeginsFromCurrentState:YES];
-    [UIView setAnimationDuration:KEYBOARD_ANIMATION_DURATION];
-    
-    [self.view setFrame:viewFrame];
-    
-    [UIView commitAnimations];
-}
-
-//- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-//#warning Implement
-//    if (textView == self.titleTextView) {
-//        const CGFloat availableWidth = [SBSStyle phoneWidth] - [SBSStyle standardMargin] *2;
-//        
-//        NSString *newText = [textView.text stringByReplacingCharactersInRange:range withString:text];
-//        
-//        CGSize size = [newText sizeWithFont:[SBSStyle titleFont]];
-//        BOOL result = availableWidth >= size.width;
-//        return result;
-//    }
-//    
-//    return YES;
-//}
 
 #pragma mark - Action sheet delegate
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {

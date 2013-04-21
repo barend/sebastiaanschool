@@ -65,4 +65,19 @@ static UIFont * bodyFont;
     return 10.0f;
 }
 
++ (void)applyStyleToTextView:(UITextView *)textView {
+    textView.layer.borderWidth = 1.0f;
+    textView.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    textView.font = [SBSStyle bodyFont];
+}
+
++ (void)applyStyleToDeleteButton:(UIButton *)deleteButton {
+    [deleteButton setBackgroundImage:[[UIImage imageNamed:@"redButton"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 16, 0, 16)] forState:UIControlStateNormal];
+    [deleteButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [deleteButton setTitleShadowColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+    [deleteButton setTitleColor:[UIColor darkGrayColor] forState:UIControlStateHighlighted];
+    deleteButton.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    [deleteButton setTitle:NSLocalizedString(@"Delete", nil) forState:UIControlStateNormal];
+}
+
 @end

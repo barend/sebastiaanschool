@@ -7,6 +7,7 @@
 //
 
 #import "SBSContactItem.h"
+#import "SBSBaseEditViewController.h"
 
 @protocol SBSAddTeamMemberDelegate <NSObject>
 
@@ -16,7 +17,7 @@
 
 @end
 
-@interface SBSEditTeamMemberViewController : UIViewController <UIActionSheetDelegate>
+@interface SBSEditTeamMemberViewController : SBSBaseEditViewController <UIActionSheetDelegate>
 
 @property (nonatomic, unsafe_unretained) id<SBSAddTeamMemberDelegate> delegate;
 @property (nonatomic, strong)SBSContactItem * contact;

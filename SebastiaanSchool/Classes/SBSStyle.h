@@ -19,4 +19,8 @@
 + (CGFloat)phoneWidth;
 + (CGFloat)standardMargin;
 
++ (void)applyStyleToTextView:(UITextView *)textView;
+
++ (void)applyStyleToDeleteButton:(UIButton *)deleteButton;
+
 @end

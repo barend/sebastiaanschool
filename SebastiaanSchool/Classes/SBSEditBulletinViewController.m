@@ -10,16 +10,7 @@
 
 #import "UIView+JLFrameAdditions.h"
 
-static const CGFloat KEYBOARD_ANIMATION_DURATION = 0.3;
-static const CGFloat MINIMUM_SCROLL_FRACTION = 0.2;
-static const CGFloat MAXIMUM_SCROLL_FRACTION = 0.8;
-static const CGFloat PORTRAIT_KEYBOARD_HEIGHT = 216;
-static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
-
-@interface SBSEditBulletinViewController ()<UITextViewDelegate>
-{
-    CGFloat animatedDistance;
-}
+@interface SBSEditBulletinViewController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UITextView *titleTextView;
@@ -47,38 +38,22 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     
     self.titleLabel.text = NSLocalizedString(@"Message", nil);
     
-    self.titleTextView.layer.borderWidth = 1.0f;
-    self.titleTextView.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    [SBSStyle applyStyleToTextView:self.titleTextView];
     self.titleTextView.font = [SBSStyle titleFont];
-    
 
     self.bodyLabel.text = NSLocalizedString(@"Message content", nil);
-
-    self.bodyTextView.layer.borderWidth = 1.0f;
-    self.bodyTextView.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    self.bodyTextView.font = [SBSStyle bodyFont];
+    
+    [SBSStyle applyStyleToTextView:self.bodyTextView];
 
     [self updateLayout];
     
     self.titleTextView.text = self.bulletin.title;
     self.bodyTextView.text = self.bulletin.body;
-
-    [self.deleteButton setBackgroundImage:[[UIImage imageNamed:@"redButton"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 16, 0, 16)] forState:UIControlStateNormal];
-    [self.deleteButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.deleteButton setTitleShadowColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
-    [self.deleteButton setTitleColor:[UIColor darkGrayColor] forState:UIControlStateHighlighted];
-    self.deleteButton.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    [self.deleteButton setTitle:NSLocalizedString(@"Delete", nil) forState:UIControlStateNormal];
-
-    UIToolbar * accessoryView = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, [SBSStyle phoneWidth], 44.0)];
-    accessoryView.barStyle = UIBarStyleBlack;
-    accessoryView.translucent = YES;
-    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButtonPressed:)];
     
-    accessoryView.items = @[[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], doneButton];
-    
-    self.titleTextView.inputAccessoryView = accessoryView;
-    self.bodyTextView.inputAccessoryView = accessoryView;
+    [SBSStyle applyStyleToDeleteButton:self.deleteButton];
+
+    self.titleTextView.inputAccessoryView = self.textViewAccessoryView;
+    self.bodyTextView.inputAccessoryView = self.textViewAccessoryView;
 }
 
 - (void)setBulletin:(SBSBulletin *)bulletin {
@@ -88,24 +63,8 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 }
 
 - (void) updateLayout {
-    if (self.bulletin == nil) {
-        self.deleteButton.hidden = YES;
-    } else {
-        self.deleteButton.hidden = NO;
-        self.bodyTextView._height = self.view._height - self.bodyTextView._y - self.deleteButton._height -30;
-    }
-    self.bodyTextView._height = self.view._height - self.bodyTextView._y - self.deleteButton._height -30;
+    self.deleteButton.hidden = self.bulletin == nil;
 }
-
--(void)doneButtonPressed:(id) sender {
-    if(self.titleTextView.isFirstResponder) {
-        [self.titleTextView resignFirstResponder];
-    }
-    if(self.bodyTextView.isFirstResponder) {
-        [self.bodyTextView resignFirstResponder];
-    }
-}
-
 
 -(void)saveButtonPressed:(id) sender {
     SBSBulletin *bulletin = self.bulletin;
@@ -141,69 +100,6 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 }
 
 #pragma mark - Text view delegate
-
-- (void)textViewDidBeginEditing:(UITextView *)textView
-{
-    CGRect textFieldRect =
-    [self.view.window convertRect:textView.bounds fromView:textView];
-    CGRect viewRect =
-    [self.view.window convertRect:self.view.bounds fromView:self.view];
-    
-    CGFloat midline = textFieldRect.origin.y + 0.5 * textFieldRect.size.height;
-    CGFloat numerator =
-    midline - viewRect.origin.y
-    - MINIMUM_SCROLL_FRACTION * viewRect.size.height;
-    CGFloat denominator =
-    (MAXIMUM_SCROLL_FRACTION - MINIMUM_SCROLL_FRACTION)
-    * viewRect.size.height;
-    CGFloat heightFraction = numerator / denominator;
-    
-    if (heightFraction < 0.0)
-    {
-        heightFraction = 0.0;
-    }
-    else if (heightFraction > 1.0)
-    {
-        heightFraction = 1.0;
-    }
-    
-    UIInterfaceOrientation orientation =
-    [[UIApplication sharedApplication] statusBarOrientation];
-    if (orientation == UIInterfaceOrientationPortrait ||
-        orientation == UIInterfaceOrientationPortraitUpsideDown)
-    {
-        animatedDistance = floor(PORTRAIT_KEYBOARD_HEIGHT * heightFraction);
-    }
-    else
-    {
-        animatedDistance = floor(LANDSCAPE_KEYBOARD_HEIGHT * heightFraction);
-    }
-    
-    CGRect viewFrame = self.view.frame;
-    viewFrame.origin.y -= animatedDistance;
-    
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationBeginsFromCurrentState:YES];
-    [UIView setAnimationDuration:KEYBOARD_ANIMATION_DURATION];
-    
-    [self.view setFrame:viewFrame];
-    
-    [UIView commitAnimations];
-}
-
-- (void)textViewDidEndEditing:(UITextView *)textView
-{
-    CGRect viewFrame = self.view.frame;
-    viewFrame.origin.y += animatedDistance;
-    
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationBeginsFromCurrentState:YES];
-    [UIView setAnimationDuration:KEYBOARD_ANIMATION_DURATION];
-    
-    [self.view setFrame:viewFrame];
-    
-    [UIView commitAnimations];
-}
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     if (textView == self.titleTextView) {
