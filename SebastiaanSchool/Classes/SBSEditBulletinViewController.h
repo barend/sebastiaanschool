@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 #import "SBSBulletin.h"
+#import "SBSBaseEditViewController.h"
 
 @protocol SBSEditBulletinDelegate <NSObject>
 
@@ -18,7 +19,7 @@
 
 @end
 
-@interface SBSEditBulletinViewController : UIViewController <UIActionSheetDelegate>
+@interface SBSEditBulletinViewController : SBSBaseEditViewController <UIActionSheetDelegate>
 
 @property (nonatomic, weak) id<SBSEditBulletinDelegate> delegate;
 @property (nonatomic, strong)SBSBulletin * bulletin;

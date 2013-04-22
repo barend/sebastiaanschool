@@ -11,7 +11,7 @@
 
 @implementation SBSAgendaItem
 
-@dynamic name, type, start, end;
+@dynamic name, start, end;
 
 + (NSString *)parseClassName {
     return @"AgendaItem";

@@ -11,7 +11,7 @@
 
 @implementation SBSContactItem
 
-@dynamic displayName, description, email, order;
+@dynamic displayName, detailText, email, order;
 
 + (NSString *)parseClassName {
     return @"ContactItem";

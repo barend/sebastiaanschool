@@ -7,12 +7,12 @@
 //
 
 #import "SBSTeamTableViewController.h"
-#import "SBSAddTeamMemberViewController.h"
+#import "SBSEditTeamMemberViewController.h"
 
 #import "SBSContactItem.h"
 
 @interface SBSTeamTableViewController ()
-@property (nonatomic, strong) NSIndexPath *currentlyEditedIndexPath;
+@property (nonatomic, strong) NSMutableArray *editedObjects;
 @end
 
 @implementation SBSTeamTableViewController
@@ -56,25 +56,29 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated {
-    [self updateBarButtonItemAnimated:animated];
+    [self updateBarButtonItemsAnimated:animated editing:NO];
 }
 
--(void)updateBarButtonItemAnimated:(BOOL)animated {
+-(void)updateBarButtonItemsAnimated:(BOOL)animated editing:(BOOL)editing {
+    NSArray *buttons = nil;
+
     if ([[SBSSecurity instance] currentUserStaffUser]) {
-        if (self.navigationItem.rightBarButtonItem == nil) {
+        if (editing) {
+            UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneEditingTeamMembers)];
+            buttons = @[doneButton];
+            
+        } else {
             UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addTeamMember)];
-            [self.navigationItem setRightBarButtonItem:addButton animated:animated];
+            UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editTeamMembers)];
+            buttons = @[editButton, addButton];
         }
-    } else {
-        [self.navigationItem setRightBarButtonItem:nil animated:animated];
     }
+    [self.navigationItem setRightBarButtonItems:buttons animated:animated];
 }
 
 
 #pragma mark - Parse
 
-// Override to customize what kind of query to perform on the class. The default is to query for
-// all objects ordered by createdAt descending.
 - (PFQuery *)queryForTable {
     PFQuery *query = [SBSContactItem query];
     
@@ -90,18 +94,67 @@
 }
 
 - (void)addTeamMember {
-    SBSAddTeamMemberViewController *addTeamMemberVC = [[SBSAddTeamMemberViewController alloc]init];
+    SBSEditTeamMemberViewController *addTeamMemberVC = [[SBSEditTeamMemberViewController alloc]init];
     addTeamMemberVC.delegate = self;
     [self.navigationController pushViewController:addTeamMemberVC animated:YES];
 }
 
--(void)createdTeamMember:(SBSContactItem *)newTeamMember {
+- (void)editTeamMembers {
+    NSAssert([[SBSSecurity instance] currentUserStaffUser], @"User has to be a staff user");
+    [self updateBarButtonItemsAnimated:YES editing:YES];
+    [self setEditing:YES animated:YES];
+}
+
+- (void) doneEditingTeamMembers {
+    if (self.editedObjects != nil) {
+        [[self.navigationItem rightBarButtonItems] makeObjectsPerformSelector:@selector(setEnabled:) withObject:@(NO)];
+        [PFObject saveAllInBackground:self.editedObjects block:^(BOOL succeeded, NSError *error) {
+            [self updateBarButtonItemsAnimated:YES editing:NO];
+            [self loadObjects];
+            [self setEditing:NO animated:YES];
+        }];
+        self.editedObjects = nil;
+    } else {
+        [self updateBarButtonItemsAnimated:YES editing:NO];
+        [self setEditing:NO animated:YES];
+    }
+}
+
+#pragma mark - SBSAddTeamMemberDelegate implementation
+
+-(void)createTeamMember:(SBSContactItem *)newTeamMember {
     [newTeamMember saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
             //Do a big reload since the framework VC doesn't support nice view insertions and removal.
             [self loadObjects];
         } else {
             ULog(@"Error while adding bulletin: %@", error);
+        }
+    }];
+    
+    [self.navigationController popToViewController:self animated:YES];
+}
+
+-(void)updateTeamMember:(SBSContactItem *)updatedTeamMember {
+    [updatedTeamMember saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            //Do a big reload since the framework VC doesn't support nice view insertions and removal.
+            [self loadObjects];
+        } else {
+            ULog(@"Error while updating team member: %@", error);
+        }
+    }];
+    
+    [self.navigationController popToViewController:self animated:YES];
+}
+
+-(void)deleteTeamMember:(SBSContactItem *)deletedTeamMember {
+    [deletedTeamMember deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            //Do a big reload since the framework VC doesn't support nice view insertions and removal.
+            [self loadObjects];
+        } else {
+            ULog(@"Error while deleting team member: %@", error);
         }
     }];
     
@@ -126,8 +179,7 @@
     
     // Configure the cell
     cell.textLabel.text = contactItem.displayName;
-#warning description is not a smart property name.
-    cell.detailTextLabel.text = [contactItem objectForKey:@"description"];
+    cell.detailTextLabel.text = contactItem.detailText;
     
     return cell;
 }
@@ -142,6 +194,30 @@
     return [SBSSecurity instance].currentUserStaffUser;
 }
 
+-(BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return UITableViewCellEditingStyleDelete;
+}
+
+-(void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath
+     toIndexPath:(NSIndexPath *)toIndexPath {
+    if (self.editedObjects == nil) {
+        self.editedObjects = [self.objects mutableCopy];
+    }
+    
+    id item = [self.editedObjects objectAtIndex:fromIndexPath.row];
+    [self.editedObjects removeObjectAtIndex:fromIndexPath.row];
+    [self.editedObjects insertObject:item atIndex:toIndexPath.row];
+    
+    [self.editedObjects enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        SBSContactItem *contact = obj;
+        contact.order = @(idx);
+    }];
+}
+
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -150,7 +226,6 @@
         NSString *contactItemName = contactItem.displayName;
         
         UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:[NSString stringWithFormat: NSLocalizedString(@"Are you sure you want to delete \"%@\"?", nil), contactItemName] delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) destructiveButtonTitle:NSLocalizedString(@"Delete", nil) otherButtonTitles:nil];
-        self.currentlyEditedIndexPath = indexPath;
         
         [actionSheet showInView:[UIApplication sharedApplication].delegate.window.rootViewController.view];
     }
@@ -158,12 +233,12 @@
 
 #pragma mark - Action sheet delegate
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == actionSheet.cancelButtonIndex || self.currentlyEditedIndexPath == nil) {
+    if (buttonIndex == actionSheet.cancelButtonIndex) {
         return;
     }
     
     // Delete the row from the data source
-    PFObject *deletedTeamMember = [self objectAtIndexPath:self.currentlyEditedIndexPath];
+    PFObject *deletedTeamMember = [self objectAtIndexPath:self.tableView.indexPathForSelectedRow];
     [deletedTeamMember deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
             //Do a big reload since the framework VC doesn't support nice view insertions and removal.
@@ -181,6 +256,16 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if ([[SBSSecurity instance] currentUserStaffUser]) {
+        SBSEditTeamMemberViewController *teamMemberVC = [[SBSEditTeamMemberViewController alloc]init];
+        teamMemberVC.delegate = self;
+        teamMemberVC.contact = (SBSContactItem *)[self objectAtIndexPath:indexPath];
+        [self.navigationController pushViewController:teamMemberVC animated:YES];
+        
+        return;
+    }
+
 
     SBSContactItem *selectedContactItem = (SBSContactItem *)[self objectAtIndexPath:indexPath];
     
@@ -253,7 +338,7 @@
 #pragma mark - Listen for security role changes
 
 -(void)userRoleChanged:(NSNotification *)notification {
-    [self updateBarButtonItemAnimated:YES];
+    [self updateBarButtonItemsAnimated:YES editing:NO];
 }
 
 @end

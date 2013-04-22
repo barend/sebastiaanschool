@@ -11,7 +11,6 @@
 @interface SBSAgendaItem : PFObject<PFSubclassing>
 
 @property (retain) NSString *name;
-@property (retain) NSString *type;
 @property (retain) NSDate *start;
 @property (retain) NSDate *end;
 

@@ -12,6 +12,5 @@
 
 @property (retain) NSString *name;
 @property (retain) NSString *url;
-@property (retain) NSDate *publishedAt;
 
 @end

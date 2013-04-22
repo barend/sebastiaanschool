@@ -80,7 +80,7 @@
         query.cachePolicy = kPFCachePolicyCacheThenNetwork;
     }
     
-    [query orderByDescending:@"publishedAt"];
+    [query orderByDescending:@"createdAt"];
     
     return query;
 }
@@ -150,7 +150,7 @@
     
     // Configure the cell
     cell.textLabel.text = bulletin.title;
-    cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Published: %@", nil), [[SBSStyle longStyleDateFormatter] stringFromDate:bulletin.publishedAt]];
+    cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Published: %@", nil), [[SBSStyle longStyleDateFormatter] stringFromDate:bulletin.createdAt]];
     cell.bodyLabel.text = bulletin.body;
     
     return cell;

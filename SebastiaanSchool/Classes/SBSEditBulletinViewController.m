@@ -34,33 +34,24 @@
 
 - (void)viewDidLoad{
     [super viewDidLoad];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(doneButtonPressed:)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveButtonPressed:)];
     
     self.titleLabel.text = NSLocalizedString(@"Message", nil);
-    
-    self.titleTextView.layer.borderWidth = 1.0f;
-    self.titleTextView.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    self.titleTextView.font = [SBSStyle titleFont];
-    
-
     self.bodyLabel.text = NSLocalizedString(@"Message content", nil);
-
-    self.bodyTextView.layer.borderWidth = 1.0f;
-    self.bodyTextView.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    self.bodyTextView.font = [SBSStyle bodyFont];
+    
+    [SBSStyle applyStyleToTextView:self.titleTextView];
+    self.titleTextView.font = [SBSStyle titleFont];
+    [SBSStyle applyStyleToTextView:self.bodyTextView];
 
     [self updateLayout];
     
     self.titleTextView.text = self.bulletin.title;
     self.bodyTextView.text = self.bulletin.body;
+    
+    [SBSStyle applyStyleToDeleteButton:self.deleteButton];
 
-    [self.deleteButton setBackgroundImage:[[UIImage imageNamed:@"redButton"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 16, 0, 16)] forState:UIControlStateNormal];
-    [self.deleteButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.deleteButton setTitleShadowColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
-    [self.deleteButton setTitleColor:[UIColor darkGrayColor] forState:UIControlStateHighlighted];
-    self.deleteButton.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    [self.deleteButton setTitle:NSLocalizedString(@"Delete", nil) forState:UIControlStateNormal];
-
+    self.titleTextView.inputAccessoryView = self.textViewAccessoryView;
+    self.bodyTextView.inputAccessoryView = self.textViewAccessoryView;
 }
 
 - (void)setBulletin:(SBSBulletin *)bulletin {
@@ -70,16 +61,10 @@
 }
 
 - (void) updateLayout {
-    if (self.bulletin == nil) {
-        self.deleteButton.hidden = YES;
-        self.bodyTextView._height = self.view._height - self.bodyTextView._y -20;
-    } else {
-        self.deleteButton.hidden = NO;
-        self.bodyTextView._height = self.view._height - self.bodyTextView._y - self.deleteButton._height -30;
-    }
+    self.deleteButton.hidden = self.bulletin == nil;
 }
 
--(void)doneButtonPressed:(id) sender {
+-(void)saveButtonPressed:(id) sender {
     SBSBulletin *bulletin = self.bulletin;
     if (self.bulletin == nil) {
         bulletin = [[SBSBulletin alloc]init];
@@ -110,6 +95,22 @@
     UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:NSLocalizedString(@"Delete Bulletin?", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) destructiveButtonTitle:NSLocalizedString(@"Delete", nil) otherButtonTitles: nil];
     
     [actionSheet showInView:[UIApplication sharedApplication].delegate.window.rootViewController.view];
+}
+
+#pragma mark - Text view delegate
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    if (textView == self.titleTextView) {
+        const CGFloat availableWidth = [SBSStyle phoneWidth] - [SBSStyle standardMargin] *2;
+        
+        NSString *newText = [textView.text stringByReplacingCharactersInRange:range withString:text];
+
+        CGSize size = [newText sizeWithFont:[SBSStyle titleFont]];
+        BOOL result = availableWidth >= size.width;
+        return result;
+    }
+    
+    return YES;
 }
 
 #pragma mark - Action sheet delegate
