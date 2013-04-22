@@ -45,11 +45,33 @@
     [SBSStyle applyStyleToTextView:self.startDateTextView];
     [SBSStyle applyStyleToTextView:self.endDateTextView];
     
-    self.nameTextView.text = self.agendaItem.name;
-    self.startDateTextView.text = self.agendaItem.start.description;
-    self.endDateTextView.text = self.agendaItem.end.description;
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+    [dateFormatter setDateStyle:NSDateFormatterLongStyle];
     
+    self.nameTextView.text = self.agendaItem.name;
+    self.startDateTextView.text = [dateFormatter stringFromDate:self.agendaItem.start];
+    self.endDateTextView.text = [dateFormatter stringFromDate:self.agendaItem.end];
+    
+    UIDatePicker *startPicker = [[UIDatePicker alloc] init];
+    startPicker.datePickerMode = UIDatePickerModeDate;
+    startPicker.date = (self.agendaItem.start != nil)?self.agendaItem.start:[NSDate date];
+    [startPicker addTarget:self action:@selector(startDatePickerChanged:) forControlEvents:UIControlEventValueChanged];
+    self.startDateTextView.inputView = startPicker;
+    [self startDatePickerChanged:startPicker];
+
+    
+    UIDatePicker *endPicker = [[UIDatePicker alloc] init];
+    endPicker.datePickerMode = UIDatePickerModeDate;
+    endPicker.date = (self.agendaItem.end != nil)?self.agendaItem.end:[NSDate date];
+    [endPicker addTarget:self action:@selector(endDatePickerChanged:) forControlEvents:UIControlEventValueChanged];
+    self.endDateTextView.inputView = endPicker;
+    [self endDatePickerChanged:endPicker];
+
+   
     [SBSStyle applyStyleToDeleteButton:self.deleteButton];
+    
+    [self updateLayout];
     
     self.nameTextView.inputAccessoryView = self.textViewAccessoryView;
     self.startDateTextView.inputAccessoryView = self.textViewAccessoryView;
@@ -72,10 +94,8 @@
         agendaItem = [[SBSAgendaItem alloc]init];
     }
     
-    if (self.nameTextView.text.length !=0 && self.startDateTextView.text.length != 0) {
+    if (self.nameTextView.text.length !=0 && self.startDateTextView.text.length != 0 && self.endDateTextView.text.length != 0) {
         agendaItem.name = self.nameTextView.text;
-        agendaItem.start = self.startDateTextView.text;
-        agendaItem.end = self.endDateTextView.text;
         if (self.agendaItem == nil) {
             [self.delegate createAgendaItem:agendaItem];
         } else {
@@ -99,6 +119,28 @@
     UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:NSLocalizedString(@"Delete Agenda Item?", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) destructiveButtonTitle:NSLocalizedString(@"Delete", nil) otherButtonTitles: nil];
     
     [actionSheet showInView:[UIApplication sharedApplication].delegate.window.rootViewController.view];
+}
+
+- (void)startDatePickerChanged:(id)sender {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+    [dateFormatter setDateStyle:NSDateFormatterLongStyle];
+
+    NSDate *newStartDate = [(UIDatePicker *)self.startDateTextView.inputView date];
+    self.agendaItem.start = newStartDate;
+    
+    self.startDateTextView.text = [dateFormatter stringFromDate:newStartDate];
+}
+
+- (void)endDatePickerChanged:(id)sender {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+    [dateFormatter setDateStyle:NSDateFormatterLongStyle];
+
+    NSDate *newEndDate = [(UIDatePicker *)self.endDateTextView.inputView date];
+    self.agendaItem.end = newEndDate;
+    
+    self.endDateTextView.text = [dateFormatter stringFromDate:[(UIDatePicker *)self.endDateTextView.inputView date]];
 }
 
 #pragma mark - Action sheet delegate
