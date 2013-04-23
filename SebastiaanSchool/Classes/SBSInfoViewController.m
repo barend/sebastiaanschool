@@ -37,11 +37,13 @@
     [self applyTitle:NSLocalizedString(@"Agenda", nil) andWithImageNamed:@"259-list" toButton:self.agendaButton];
     [self applyTitle:NSLocalizedString(@"Team", nil) andWithImageNamed:@"112-group" toButton:self.teamButton];
     
-    UITapGestureRecognizer * tapRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(doTapOnIcon:)];
-    tapRecognizer.numberOfTapsRequired = 3;
-    self.iconImageView.userInteractionEnabled = YES;
+    UILongPressGestureRecognizer * bonusLongPressRecognizer = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(doTapOnIcon:)];
+    [self.iconImageView addGestureRecognizer:bonusLongPressRecognizer];
+
+    UITapGestureRecognizer * tapRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(doBonusTapOnIcon:)];
     [self.iconImageView addGestureRecognizer:tapRecognizer];
 
+    self.iconImageView.userInteractionEnabled = YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -66,6 +68,11 @@
     self.yurlButton.frame = yurlFrame;
     
     self.iconImageView.center = CGPointMake(halfViewWidth, twitterFrame.origin.y / 2.0f);
+}
+
+-(void)doBonusTapOnIcon:(id)sender {
+    NSURL *url = [[NSURL alloc]initWithString: NSLocalizedString(@"http://www.sebastiaanschool.nl", nil)];
+    [[UIApplication sharedApplication] openURL:url];
 }
 
 -(void)doTapOnIcon:(id)sender {
