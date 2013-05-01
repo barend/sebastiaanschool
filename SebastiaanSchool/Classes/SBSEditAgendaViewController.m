@@ -98,6 +98,8 @@
     
     if (self.nameTextView.text.length !=0 && self.startDateTextView.text.length != 0 && self.endDateTextView.text.length != 0) {
         agendaItem.name = self.nameTextView.text;
+        agendaItem.start = [(UIDatePicker *)self.startDateTextView.inputView date];
+        agendaItem.end = [(UIDatePicker *)self.endDateTextView.inputView date];
         if (self.agendaItem == nil) {
             [self.delegate createAgendaItem:agendaItem];
         } else {
