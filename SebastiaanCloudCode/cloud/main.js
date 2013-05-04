@@ -5,6 +5,15 @@ Parse.Cloud.define("hello", function(request, response) {
   response.success("Hello world!");
 });
 
+Parse.Cloud.beforeSave("NewsLetter", function(request, response) {
+  var publishedAt = request.object.get("publishedAt");
+  if (publishedAt == null ) {
+    // set publishedAt if it's not set.
+    request.object.set("publishedAt", new Date());
+  }
+  response.success();  
+});
+
 Parse.Cloud.afterSave("NewsLetter", function(request) {
 	Parse.Push.send({
 	  channels: [ "" ],

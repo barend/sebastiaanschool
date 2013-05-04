@@ -11,7 +11,7 @@
 
 @implementation SBSNewsLetter
 
-@dynamic name, url;
+@dynamic name, url, publishedAt;
 
 + (NSString *)parseClassName {
     return @"NewsLetter";
