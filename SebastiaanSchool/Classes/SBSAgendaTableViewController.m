@@ -59,7 +59,7 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:YES];
+    [super viewWillAppear:animated];
     [self updateBarButtonItemAnimated:animated];
 }
 
