@@ -10,3 +10,5 @@ After setting your credentials in the said setEnv.sh file. Run all curl scripts 
 The cloudcode project contains a few hooks right now dealing with notifications. But those are not needed right now.
 
 Building the app requires CocoaPods.
+
+"sebastiaanschool" is licensed under the MIT license. See LICENCE file for details.
