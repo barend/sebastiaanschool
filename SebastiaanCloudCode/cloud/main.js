@@ -18,7 +18,9 @@ Parse.Cloud.afterSave("NewsLetter", function(request) {
 	Parse.Push.send({
 	  channels: [ "" ],
 	  data: {
-	    alert: "Er is een nieuwe nieuwsbrief: " + request.object.get("name")
+	    alert: "Er is een nieuwe nieuwsbrief: " + request.object.get("name"),
+            badge: "Increment",
+            t: 2
 	  }
 	}, {
 	  success: function() {
@@ -34,7 +36,9 @@ Parse.Cloud.afterSave("Bulletin", function(request) {
 	Parse.Push.send({
 	  channels: [ "" ],
 	  data: {
-	    alert: request.object.get("title")
+	    alert: request.object.get("title"),
+            badge: "Increment",
+            t: 1
 	  }
 	}, {
 	  success: function() {
