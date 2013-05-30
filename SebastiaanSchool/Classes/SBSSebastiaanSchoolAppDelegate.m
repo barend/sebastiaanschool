@@ -11,6 +11,12 @@
 #import "SBSContactItem.h"
 #import "SBSNewsLetter.h"
 
+typedef NS_ENUM (NSInteger, SBSNotificationType) {
+    SBSNotificationTypeInfo = 0,
+    SBSNotificationTypeBulletin = 1,
+    SBSNotificationTypeNewsletter = 2,
+    SBSNotificationTypeStaff = 4,
+};
 @implementation SBSSebastiaanSchoolAppDelegate
 
 #pragma mark - UIApplicationDelegate
@@ -50,6 +56,10 @@
     [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge|
                                                     UIRemoteNotificationTypeAlert|
                                                     UIRemoteNotificationTypeSound];
+    
+    NSDictionary *notificationPayload = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
+    [self handleRemoteNotification:notificationPayload];
+    
     return YES;
 }
 
@@ -73,6 +83,17 @@
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     [PFPush handlePush:userInfo];
+    [self handleRemoteNotification:userInfo];
+}
+
+- (void)handleRemoteNotification:(NSDictionary *) notificationPayload {
+    // Extract the notification data
+    NSNumber * notificationType = [notificationPayload objectForKey:@"t"];
+    switch ((SBSNotificationType)notificationType.intValue) {
+        case SBSNotificationTypeBulletin:
+            self.rootViewController.selectedIndex = 2;
+            break;
+    }
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
