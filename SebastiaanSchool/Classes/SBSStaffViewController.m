@@ -10,8 +10,6 @@
 
 @implementation SBSStaffViewController
 
-@synthesize welcomeLabel;
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
