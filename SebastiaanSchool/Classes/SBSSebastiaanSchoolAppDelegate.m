@@ -102,6 +102,7 @@ typedef NS_ENUM (NSInteger, SBSNotificationType) {
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     [self.rootViewController setViewControllers:[self getTabVCs] animated:YES];
+    application.applicationIconBadgeNumber = 0;
 }
 
 - (NSArray *)getTabVCs{
