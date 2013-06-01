@@ -91,7 +91,10 @@ typedef NS_ENUM (NSInteger, SBSNotificationType) {
     NSNumber * notificationType = [notificationPayload objectForKey:@"t"];
     switch ((SBSNotificationType)notificationType.intValue) {
         case SBSNotificationTypeBulletin:
-            self.rootViewController.selectedIndex = 2;
+            self.rootViewController.selectedIndex = SBSNotificationTypeBulletin;
+            break;
+        case SBSNotificationTypeNewsletter:
+            self.rootViewController.selectedIndex = SBSNotificationTypeNewsletter;
             break;
     }
 }
