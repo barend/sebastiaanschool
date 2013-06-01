@@ -36,7 +36,7 @@ Parse.Cloud.afterSave("Bulletin", function(request) {
 	Parse.Push.send({
 	  channels: [ "" ],
 	  data: {
-	    alert: request.object.get("title"),
+	    alert: "Nieuwe mededeling: " + request.object.get("title"),
             badge: "Increment",
             t: 2
 	  }
