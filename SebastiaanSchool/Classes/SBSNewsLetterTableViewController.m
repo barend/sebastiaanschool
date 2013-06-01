@@ -38,7 +38,7 @@
         self.textKey = @"name";
         
         // Whether the built-in pull-to-refresh is enabled
-        self.pullToRefreshEnabled = YES;
+        self.pullToRefreshEnabled = NO;
         
         // Whether the built-in pagination is enabled
         self.paginationEnabled = NO;
