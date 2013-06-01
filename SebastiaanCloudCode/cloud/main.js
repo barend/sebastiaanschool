@@ -20,7 +20,7 @@ Parse.Cloud.afterSave("NewsLetter", function(request) {
 	  data: {
 	    alert: "Er is een nieuwe nieuwsbrief: " + request.object.get("name"),
             badge: "Increment",
-            t: 2
+            t: 1
 	  }
 	}, {
 	  success: function() {
@@ -38,7 +38,7 @@ Parse.Cloud.afterSave("Bulletin", function(request) {
 	  data: {
 	    alert: request.object.get("title"),
             badge: "Increment",
-            t: 1
+            t: 2
 	  }
 	}, {
 	  success: function() {

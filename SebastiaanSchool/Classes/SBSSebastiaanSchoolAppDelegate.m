@@ -13,9 +13,9 @@
 
 typedef NS_ENUM (NSInteger, SBSNotificationType) {
     SBSNotificationTypeInfo = 0,
-    SBSNotificationTypeBulletin = 1,
-    SBSNotificationTypeNewsletter = 2,
-    SBSNotificationTypeStaff = 4,
+    SBSNotificationTypeNewsletter = 1,
+    SBSNotificationTypeBulletin = 2,
+    SBSNotificationTypeStaff = 3,
 };
 @implementation SBSSebastiaanSchoolAppDelegate
 
