@@ -84,6 +84,9 @@ typedef NS_ENUM (NSInteger, SBSNotificationType) {
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     [PFPush handlePush:userInfo];
     [self handleRemoteNotification:userInfo];
+
+    //When we are in app and receive a push, we reset the badge to kick the notification out of notification center.
+    application.applicationIconBadgeNumber = 0;
 }
 
 - (void)handleRemoteNotification:(NSDictionary *) notificationPayload {
@@ -105,6 +108,8 @@ typedef NS_ENUM (NSInteger, SBSNotificationType) {
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     [self.rootViewController setViewControllers:[self getTabVCs] animated:YES];
+    
+    //When we activate the app, no matter why, we always reset the notification center.
     application.applicationIconBadgeNumber = 0;
 }
 
