@@ -1,10 +1,5 @@
 #import "SBSSebastiaanSchoolAppDelegate.h"
-#import "SBSBulletinViewController.h"
-#import "SBSNewsLetterTableViewController.h"
-#import "SBSTeamTableViewController.h"
-#import "SBSAgendaTableViewController.h"
 #import "SBSInfoViewController.h"
-#import "SBSStaffViewController.h"
 
 #import "SBSAgendaItem.h"
 #import "SBSBulletin.h"
@@ -17,6 +12,11 @@ typedef NS_ENUM (NSInteger, SBSNotificationType) {
     SBSNotificationTypeBulletin = 2,
     SBSNotificationTypeStaff = 3,
 };
+
+@interface SBSSebastiaanSchoolAppDelegate ()
+@property (strong, readonly) SBSInfoViewController* infoViewController;
+@end
+
 @implementation SBSSebastiaanSchoolAppDelegate
 
 #pragma mark - UIApplicationDelegate
@@ -48,8 +48,7 @@ typedef NS_ENUM (NSInteger, SBSNotificationType) {
     [[UIButton appearance] setTintColor:[SBSStyle sebastiaanBlueColor]];
     [[UINavigationBar appearance] setTintColor:[SBSStyle sebastiaanBlueColor]];
 
-    [self.rootViewController setViewControllers:[self getTabVCs] animated:NO];
-    
+
     self.window.rootViewController = self.rootViewController;
     [self.window makeKeyAndVisible];
     
@@ -94,10 +93,12 @@ typedef NS_ENUM (NSInteger, SBSNotificationType) {
     NSNumber * notificationType = [notificationPayload objectForKey:@"t"];
     switch ((SBSNotificationType)notificationType.intValue) {
         case SBSNotificationTypeBulletin:
-            self.rootViewController.selectedIndex = SBSNotificationTypeBulletin;
+            [self.rootViewController popToRootViewControllerAnimated:NO];
+            [self.infoViewController buttonTapped:self.infoViewController.bulletinButton];
             break;
         case SBSNotificationTypeNewsletter:
-            self.rootViewController.selectedIndex = SBSNotificationTypeNewsletter;
+            [self.rootViewController popToRootViewControllerAnimated:NO];
+            [self.infoViewController buttonTapped:self.infoViewController.newsButton];
             break;
     }
 }
@@ -107,76 +108,16 @@ typedef NS_ENUM (NSInteger, SBSNotificationType) {
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    [self.rootViewController setViewControllers:[self getTabVCs] animated:YES];
-    
+    [self.infoViewController updateBarButtonItemAnimated:YES];
     //When we activate the app, no matter why, we always reset the notification center.
     application.applicationIconBadgeNumber = 0;
 }
 
-- (NSArray *)getTabVCs{
-    static NSArray *allTabs;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        allTabs = @[[self createInfoViewController],
-                    [self createNewsLetterController],
-                    [self createBulletinViewController],
-                    [self createStaffViewController]];
-    });
+- (SBSInfoViewController *) infoViewController {
+    UIViewController * topViewController = [self.rootViewController topViewController];
     
-    if ([NSUserDefaults enableStaffLogin]) {
-        return allTabs;
-    } else {
-        return [allTabs subarrayWithRange:NSMakeRange(0, allTabs.count -1)];
-    }
-}
-
-#pragma mark - UIViewController creation
-
--(UIViewController *) createInfoViewController {
-    SBSInfoViewController *controller = [[SBSInfoViewController alloc] init];
-    controller.title = NSLocalizedString(@"Seb@stiaan", nil);
-    
-    UINavigationController * navController =  [self createNavControllerWithRootController:controller];
-    navController.tabBarItem.title = controller.title;
-    navController.tabBarItem.image = [UIImage imageNamed:@"287-at"];
-    return navController;
-}
-
-
--(UIViewController *) createNewsLetterController {
-    SBSNewsLetterTableViewController *controller = [[SBSNewsLetterTableViewController alloc] initWithStyle:UITableViewStylePlain];
-    controller.title = NSLocalizedString(@"Newsletter", nil);
-    
-    UINavigationController * navController =  [self createNavControllerWithRootController:controller];
-    navController.tabBarItem.title = controller.title;
-    navController.tabBarItem.image = [UIImage imageNamed:@"162-receipt"];
-    return navController;
-}
-
--(UIViewController *) createBulletinViewController {
-    SBSBulletinViewController *controller = [[SBSBulletinViewController alloc] init];
-    controller.title = NSLocalizedString(@"Bulletin", nil);
-    
-    UINavigationController * navController =  [self createNavControllerWithRootController:controller];
-    navController.tabBarItem.title = controller.title;
-    navController.tabBarItem.image = [UIImage imageNamed:@"275-broadcast"];
-    return navController;
-}
-
--(UIViewController *) createStaffViewController {
-    SBSStaffViewController *controller = [[SBSStaffViewController alloc] init];
-    controller.title = NSLocalizedString(@"Staff", nil);
-    
-    UINavigationController * navController = [self createNavControllerWithRootController:controller];
-    navController.tabBarItem.title = controller.title;
-    navController.tabBarItem.image = [UIImage imageNamed:@"237-key"];
-    return navController;
-}
-
--(UINavigationController *) createNavControllerWithRootController:(UIViewController *)rootController {
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:rootController];
-
-    return navController;
+    NSAssert([topViewController isKindOfClass:[SBSInfoViewController class]], @"Top view controller in the navigation hierarchy should always be a SBSInfoViewController.");
+    return (SBSInfoViewController *)topViewController;
 }
 
 

@@ -10,8 +10,12 @@
 
 #import "SBSAgendaTableViewController.h"
 #import "SBSTeamTableViewController.h"
+#import "SBSNewsLetterTableViewController.h"
+#import "SBSBulletinViewController.h"
+#import "SBSStaffViewController.h"
 
 @interface SBSInfoViewController ()
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *staffBarButton;
 
 @end
 
@@ -36,6 +40,8 @@
     [self applyTitle:NSLocalizedString(@"Yurl site", nil) andWithImageNamed:@"yurl-logo" toButton:self.yurlButton];
     [self applyTitle:NSLocalizedString(@"Agenda", nil) andWithImageNamed:@"259-list" toButton:self.agendaButton];
     [self applyTitle:NSLocalizedString(@"Team", nil) andWithImageNamed:@"112-group" toButton:self.teamButton];
+    [self applyTitle:NSLocalizedString(@"Newsletter", nil) andWithImageNamed:@"162-receipt" toButton:self.newsButton];
+    [self applyTitle:NSLocalizedString(@"Bulletin", nil) andWithImageNamed:@"275-broadcast" toButton:self.bulletinButton];
     
     UILongPressGestureRecognizer * bonusLongPressRecognizer = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(doTapOnIcon:)];
     [self.iconImageView addGestureRecognizer:bonusLongPressRecognizer];
@@ -49,6 +55,18 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self updateLayout];
+}
+
+-(void)updateBarButtonItemAnimated:(BOOL)animated {
+    if ([NSUserDefaults enableStaffLogin]) {
+        if (self.staffBarButton == nil) {
+            self.staffBarButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Staff", nil) style:UIBarButtonItemStylePlain target:self action:@selector(buttonTapped:)];
+            [self.navigationItem setRightBarButtonItem:self.staffBarButton animated:animated];
+        }
+    } else {
+        self.staffBarButton = nil;
+        [self.navigationItem setRightBarButtonItem:nil animated:animated];
+    }
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation duration:(NSTimeInterval)duration {
@@ -100,7 +118,7 @@
 }
 
 - (IBAction)buttonTapped:(id)sender {
-    DLog(@"Button %@ tapped.", [sender currentTitle]);
+    DLog(@"Button %@ tapped.", [sender title]);
     
     if (sender == self.callButton) {
         NSURL *url = [NSURL URLWithString:@"telprompt://+31555335355"];
@@ -132,6 +150,21 @@
         [self.navigationController pushViewController:contactController animated:YES];
     } else if (sender == self.yurlButton) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://sebastiaan.yurls.net"]];
+    } else if(sender == self.newsButton) {
+        SBSNewsLetterTableViewController *newsController = [[SBSNewsLetterTableViewController alloc] init];
+        newsController.title = NSLocalizedString(@"Newsletter", nil);
+        
+        [self.navigationController pushViewController:newsController animated:YES];
+    } else if(sender == self.bulletinButton) {
+        SBSBulletinViewController *bulletingController = [[SBSBulletinViewController alloc] init];
+        bulletingController.title = NSLocalizedString(@"Bulletin", nil);
+        
+        [self.navigationController pushViewController:bulletingController animated:YES];
+    } else if(sender == self.staffBarButton) {
+        SBSStaffViewController *staffController = [[SBSStaffViewController alloc] init];
+        staffController.title = NSLocalizedString(@"Staff", nil);
+        
+        [self.navigationController pushViewController:staffController animated:YES];
     } else {
         NSAssert(NO, @"Unknown button tapped.");
     }
