@@ -43,7 +43,7 @@
 				<int key="NSvFlags">292</int>
 				<string key="NSFrameSize">{320, 480}</string>
 				<reference key="NSSuperview"/>
-				<reference key="NSNextKeyView"/>
+				<reference key="NSWindow"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">1</int>
 					<bytes key="NSRGB">MSAxIDEAA</bytes>
@@ -89,11 +89,14 @@
 				</object>
 				<array class="NSMutableArray" key="IBUIViewControllers">
 					<object class="IBUIViewController" id="570223999">
+						<string key="IBUITitle">Info</string>
 						<object class="IBUINavigationItem" key="IBUINavigationItem" id="141719324">
+							<reference key="IBUINavigationBar"/>
 							<string key="IBUITitle">Seb@stiaan</string>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						</object>
 						<reference key="IBUIParentViewController" ref="143398895"/>
+						<string key="IBUINibName">SBSInfoViewController</string>
 						<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
 							<int key="IBUIInterfaceOrientation">1</int>
 							<int key="interfaceOrientation">1</int>
@@ -284,13 +287,13 @@
 					<string key="className">SBSSebastiaanSchoolAppDelegate</string>
 					<string key="superclassName">NSObject</string>
 					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="rootViewController">SBSInfoViewController</string>
+						<string key="rootViewController">UINavigationController</string>
 						<string key="window">UIWindow</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<object class="IBToOneOutletInfo" key="rootViewController">
 							<string key="name">rootViewController</string>
-							<string key="candidateClassName">SBSInfoViewController</string>
+							<string key="candidateClassName">UINavigationController</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="window">
 							<string key="name">window</string>
