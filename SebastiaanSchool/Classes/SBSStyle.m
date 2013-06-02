@@ -6,8 +6,6 @@
 //
 //
 
-#import "SBSStyle.h"
-
 static UIColor * sebastiaanBlueColor;
 static NSDateFormatter * longStyleDateFormatter;
 

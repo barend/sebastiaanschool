@@ -38,7 +38,7 @@
         self.textKey = @"name";
         
         // Whether the built-in pull-to-refresh is enabled
-        self.pullToRefreshEnabled = YES;
+        self.pullToRefreshEnabled = NO;
         
         // Whether the built-in pagination is enabled
         self.paginationEnabled = NO;
@@ -64,6 +64,7 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [self updateBarButtonItemAnimated:animated];
 }
 
@@ -169,7 +170,7 @@
         query.cachePolicy = kPFCachePolicyCacheThenNetwork;
     }
     
-    [query orderByDescending:@"createdAt"];
+    [query orderByDescending:@"publishedAt"];
     
     return query;
 }
@@ -190,7 +191,7 @@
     
     // Configure the cell
     cell.textLabel.text = [newsletter.name capitalizedString];
-    cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Published: %@", nil), [[SBSStyle longStyleDateFormatter] stringFromDate:newsletter.createdAt]];
+    cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Published: %@", nil), [[SBSStyle longStyleDateFormatter] stringFromDate:newsletter.publishedAt]];
     
     return cell;
 }

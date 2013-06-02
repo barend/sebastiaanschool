@@ -8,6 +8,8 @@
 
 #import "SBSEditAgendaViewController.h"
 
+#import "NSDate+JLDateAdditions.h"
+
 @interface SBSEditAgendaViewController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
@@ -55,7 +57,7 @@
     
     UIDatePicker *startPicker = [[UIDatePicker alloc] init];
     startPicker.datePickerMode = UIDatePickerModeDate;
-    startPicker.date = (self.agendaItem.start != nil)?self.agendaItem.start:[NSDate date];
+    startPicker.date = (self.agendaItem.start != nil)?self.agendaItem.start:[NSDate midnightDate];
     [startPicker addTarget:self action:@selector(startDatePickerChanged:) forControlEvents:UIControlEventValueChanged];
     self.startDateTextView.inputView = startPicker;
     [self startDatePickerChanged:startPicker];
@@ -63,7 +65,7 @@
     
     UIDatePicker *endPicker = [[UIDatePicker alloc] init];
     endPicker.datePickerMode = UIDatePickerModeDate;
-    endPicker.date = (self.agendaItem.end != nil)?self.agendaItem.end:[NSDate date];
+    endPicker.date = (self.agendaItem.end != nil)?self.agendaItem.end:[NSDate midnightDate];
     [endPicker addTarget:self action:@selector(endDatePickerChanged:) forControlEvents:UIControlEventValueChanged];
     self.endDateTextView.inputView = endPicker;
     [self endDatePickerChanged:endPicker];
@@ -96,6 +98,8 @@
     
     if (self.nameTextView.text.length !=0 && self.startDateTextView.text.length != 0 && self.endDateTextView.text.length != 0) {
         agendaItem.name = self.nameTextView.text;
+        agendaItem.start = [(UIDatePicker *)self.startDateTextView.inputView date];
+        agendaItem.end = [(UIDatePicker *)self.endDateTextView.inputView date];
         if (self.agendaItem == nil) {
             [self.delegate createAgendaItem:agendaItem];
         } else {
