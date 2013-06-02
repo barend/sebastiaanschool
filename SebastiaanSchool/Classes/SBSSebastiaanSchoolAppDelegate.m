@@ -114,7 +114,7 @@ typedef NS_ENUM (NSInteger, SBSNotificationType) {
 }
 
 - (SBSInfoViewController *) infoViewController {
-    UIViewController * topViewController = [self.rootViewController topViewController];
+    UIViewController * topViewController = self.rootViewController.viewControllers[0];
     
     NSAssert([topViewController isKindOfClass:[SBSInfoViewController class]], @"Top view controller in the navigation hierarchy should always be a SBSInfoViewController.");
     return (SBSInfoViewController *)topViewController;
