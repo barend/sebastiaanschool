@@ -45,12 +45,19 @@ typedef NS_ENUM (NSInteger, SBSNotificationType) {
 
 
     // Apply UIAppearance
-    [[UIButton appearance] setTintColor:[SBSStyle sebastiaanBlueColor]];
-    [[UINavigationBar appearance] setTintColor:[SBSStyle sebastiaanBlueColor]];
-
+    if (IS_IOS_7) {
+        self.window.tintColor = [SBSStyle sebastiaanBlueColor];
+        [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+        [[UINavigationBar appearance] setBarTintColor:[SBSStyle sebastiaanBlueColor]];
+        [[UINavigationBar appearance] setTitleTextAttributes:@{UITextAttributeTextColor: [UIColor whiteColor] }];
+    } else {
+        [[UIButton appearance] setTintColor:[SBSStyle sebastiaanBlueColor]];
+        [[UINavigationBar appearance] setTintColor:[SBSStyle sebastiaanBlueColor]];
+    }
 
     self.window.rootViewController = self.rootViewController;
     [self.window makeKeyAndVisible];
+    
     
     [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge|
                                                     UIRemoteNotificationTypeAlert|

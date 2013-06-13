@@ -41,7 +41,17 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.textLabel.font = [SBSStyle titleFont];
+        if (IS_IOS_7) {
+            [self.textLabel setTextColor:[UIColor blackColor]];
+            [self.textLabel setHighlightedTextColor:[UIColor whiteColor]];
+        }
+        
         self.detailTextLabel.font = [SBSStyle subtitleFont];
+        if (IS_IOS_7) {
+        [self.detailTextLabel setTextColor:[UIColor blackColor]];
+        [self.detailTextLabel setHighlightedTextColor:[UIColor whiteColor]];
+        }
+        
         // Initialization code
         _bodyLabel = [[UILabel alloc]initWithFrame:CGRectZero];
         [_bodyLabel setTextColor:[UIColor blackColor]];
@@ -64,9 +74,9 @@
     } else {
         self.bodyLabel.frame = self.bounds;
         self.bodyLabel._y = self.detailTextLabel._bottom;
-        self.bodyLabel._left = [SBSStyle standardMargin];
-        self.bodyLabel._width = self.bodyLabel._width - [SBSStyle standardMargin];
-        self.bodyLabel._height = self.bounds.size.height - self.bodyLabel._y - [SBSStyle standardMargin];
+        self.bodyLabel._left = self.textLabel._left;
+        self.bodyLabel._width = self.bodyLabel._width - self.textLabel._left;
+        self.bodyLabel._height = self.bounds.size.height - self.bodyLabel._y - self.textLabel._left;
     }
 }
 
