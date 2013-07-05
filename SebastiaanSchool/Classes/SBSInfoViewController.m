@@ -34,7 +34,9 @@
 {
     [super viewDidLoad];
     [TestFlight passCheckpoint:[NSString stringWithFormat:@"Loaded VC %@", self.title]];
-    self.view.backgroundColor = [SBSStyle sebastiaanBlueColor];
+    if (!IS_IOS_7) {
+        self.view.backgroundColor = [SBSStyle sebastiaanBlueColor];
+    }
     [self applyTitle:NSLocalizedString(@"Call", nil) andWithImageNamed:@"75-phone" toButton:self.callButton];
     [self applyTitle:NSLocalizedString(@"@KBSebastiaan", nil) andWithImageNamed:@"twitter-bird" toButton:self.twitterButton];
     [self applyTitle:NSLocalizedString(@"Yurl site", nil) andWithImageNamed:@"yurl-logo" toButton:self.yurlButton];
@@ -104,14 +106,19 @@
 
 - (void)applyTitle:(NSString *)title andWithImageNamed:(NSString *)imageName toButton:(UIButton*)button {
     UIImage *image = [UIImage imageNamed:imageName];
-    UIImage *whiteImage = [UIImage imageNamed:[NSString stringWithFormat:@"%@-white", imageName]];
-    
     [button setImage:image forState:UIControlStateNormal];
-    [button setImage:whiteImage forState:UIControlStateHighlighted];
+
     [button setTitle:title forState:UIControlStateNormal];
-    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     
-    button.tintColor = [SBSStyle sebastiaanBlueColor];
+    if (!IS_IOS_7) {
+        UIImage *whiteImage = [UIImage imageNamed:[NSString stringWithFormat:@"%@-white", imageName]];
+        [button setImage:whiteImage forState:UIControlStateHighlighted];
+        [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        button.tintColor = [SBSStyle sebastiaanBlueColor];
+    } else {
+        [button setTitleColor:[SBSStyle sebastiaanBlueColor] forState:UIControlStateNormal];
+    }
+    
     
     [button setTitleEdgeInsets:UIEdgeInsetsMake(0.0, -image.size.width, -25.0, 0.0)]; // Left inset is the negative of image width.
     [button setImageEdgeInsets:UIEdgeInsetsMake(-15.0, 0.0, 0.0, -button.titleLabel.bounds.size.width)]; // Right inset is the negative of text bounds width.
