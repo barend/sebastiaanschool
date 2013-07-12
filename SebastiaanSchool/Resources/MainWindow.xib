@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4457.9" systemVersion="13A497d" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4471.1" systemVersion="13A510d" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1280" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3682.9"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3697.3"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UIApplication">
@@ -32,6 +32,7 @@
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
             <navigationBar key="navigationBar" opaque="NO" contentMode="scaleToFill" id="50">
                 <autoresizingMask key="autoresizingMask"/>
+                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             </navigationBar>
             <viewControllers>
                 <viewController title="Info" nibName="SBSInfoViewController" id="51" customClass="SBSInfoViewController">
@@ -46,28 +47,4 @@
             </viewControllers>
         </navigationController>
     </objects>
-    <classes>
-        <class className="SBSInfoViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SBSInfoViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="buttonTapped:"/>
-                <relationship kind="outlet" name="agendaButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="bulletinButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="callButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="iconImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="newsButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="staffBarButton" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="teamButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="twitterButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="yurlButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="SBSSebastiaanSchoolAppDelegate" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SBSSebastiaanSchoolAppDelegate.h"/>
-            <relationships>
-                <relationship kind="outlet" name="rootViewController" candidateClass="UINavigationController"/>
-                <relationship kind="outlet" name="window" candidateClass="UIWindow"/>
-            </relationships>
-        </class>
-    </classes>
 </document>

@@ -47,8 +47,6 @@ typedef NS_ENUM (NSInteger, SBSNotificationType) {
     // Apply UIAppearance
     if (IS_IOS_7) {
         self.window.tintColor = [SBSStyle sebastiaanBlueColor];
-#warning crashes
-//        [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
         [[UINavigationBar appearance] setBarTintColor:[SBSStyle sebastiaanBlueColor]];
         [[UINavigationBar appearance] setTitleTextAttributes:@{UITextAttributeTextColor: [UIColor whiteColor] }];
     } else {
