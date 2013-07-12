@@ -17,7 +17,7 @@ static UIFont * bodyFont;
 
 + (void)initialize {
     if ([SBSStyle class] == self) {
-        sebastiaanBlueColor = [UIColor colorWithRed:0.0f green:0.67058823499999998f blue:0.90196078400000002f alpha:1.0];
+        sebastiaanBlueColor = [UIColor colorWithRed:49/255.0f green:181/255.0f blue:231/255.0f alpha:1.0];
         
         longStyleDateFormatter = [[NSDateFormatter alloc] init];
         [longStyleDateFormatter setDateStyle:NSDateFormatterLongStyle];

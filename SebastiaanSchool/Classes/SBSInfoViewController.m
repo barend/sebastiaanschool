@@ -34,8 +34,11 @@
 {
     [super viewDidLoad];
     [TestFlight passCheckpoint:[NSString stringWithFormat:@"Loaded VC %@", self.title]];
-    if (!IS_IOS_7) {
+    if (IS_IOS_7) {
+        self.iconImageView.image = [UIImage imageNamed:@"big-logo"];
+    } else {
         self.view.backgroundColor = [SBSStyle sebastiaanBlueColor];
+        self.iconImageView.image = [UIImage imageNamed:@"big-logo-white"];
     }
     [self applyTitle:NSLocalizedString(@"Call", nil) andWithImageNamed:@"75-phone" toButton:self.callButton];
     [self applyTitle:NSLocalizedString(@"@KBSebastiaan", nil) andWithImageNamed:@"twitter-bird" toButton:self.twitterButton];
