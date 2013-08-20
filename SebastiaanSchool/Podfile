@@ -1,5 +1,5 @@
 platform :ios
-pod 'TestFlightSDK', '1.2.6'
+pod 'TestFlightSDK', '2.0.0'
 pod 'Facebook-iOS-SDK', '~> 3.2'
 pod 'Parse', '~> 1.2'
 pod 'hpple', '~> 0.1'
