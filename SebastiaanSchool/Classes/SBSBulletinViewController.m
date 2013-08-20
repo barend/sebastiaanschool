@@ -4,8 +4,6 @@
 
 #import "SBSBulletin.h"
 
-#import "UIView+JLFrameAdditions.h"
-
 @implementation SBSBulletinViewController
 
 - (void)dealloc

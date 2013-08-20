@@ -8,8 +8,6 @@
 
 #import "SBSBulletinCell.h"
 
-#import "UIView+JLFrameAdditions.h"
-
 @implementation SBSBulletinCell
 
 + (CGFloat)heightForWidth:(CGFloat)width withItem:(SBSBulletin *)object

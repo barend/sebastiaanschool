@@ -8,8 +8,6 @@
 
 #import "SBSEditBulletinViewController.h"
 
-#import "UIView+JLFrameAdditions.h"
-
 @interface SBSEditBulletinViewController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
