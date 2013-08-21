@@ -42,6 +42,8 @@ typedef NS_ENUM (NSInteger, SBSNotificationType) {
     [defaultACL setReadAccess:YES forRoleWithName:@"staff"];
     
     [PFACL setDefaultACL:defaultACL withAccessForCurrentUser:YES];
+	
+	[PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
 
 
     // Apply UIAppearance
@@ -88,6 +90,7 @@ typedef NS_ENUM (NSInteger, SBSNotificationType) {
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     [PFPush handlePush:userInfo];
+	[PFAnalytics trackAppOpenedWithRemoteNotificationPayload:userInfo];
     [self handleRemoteNotification:userInfo];
 
     //When we are in app and receive a push, we reset the badge to kick the notification out of notification center.
