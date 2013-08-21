@@ -109,6 +109,10 @@ typedef NS_ENUM (NSInteger, SBSNotificationType) {
             [self.rootViewController popToRootViewControllerAnimated:NO];
             [self.infoViewController buttonTapped:self.infoViewController.newsButton];
             break;
+        case SBSNotificationTypeInfo:
+        case SBSNotificationTypeStaff:
+            NSLog(@"Unhandled notification: %i", notificationType.intValue);
+            break;
     }
 }
 
