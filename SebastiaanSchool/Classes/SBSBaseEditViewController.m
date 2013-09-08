@@ -8,8 +8,6 @@
 
 #import "SBSBaseEditViewController.h"
 
-#import "UIView+JLFrameAdditions.h"
-
 static const CGFloat KEYBOARD_ANIMATION_DURATION = 0.3;
 static const CGFloat MINIMUM_SCROLL_FRACTION = 0.2;
 static const CGFloat MAXIMUM_SCROLL_FRACTION = 0.8;
@@ -37,6 +35,9 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 
 - (void)viewDidLoad{
     [super viewDidLoad];
+    if (IS_IOS_7) {
+        self.edgesForExtendedLayout = UIRectEdgeNone;
+    }
 }
 
 - (void)viewDidUnload {

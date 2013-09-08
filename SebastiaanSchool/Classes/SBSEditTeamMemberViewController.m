@@ -8,8 +8,6 @@
 
 #import "SBSEditTeamMemberViewController.h"
 
-#import "UIView+JLFrameAdditions.h"
-
 @interface SBSEditTeamMemberViewController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *displayNameLabel;
