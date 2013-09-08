@@ -4,8 +4,6 @@
 
 #import "SBSBulletin.h"
 
-#import "UIView+JLFrameAdditions.h"
-
 @implementation SBSBulletinViewController
 
 - (void)dealloc
@@ -140,9 +138,10 @@
     SBSBulletinCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[SBSBulletinCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-        
-        cell.selectedBackgroundView = [SBSStyle selectedBackgroundView];
-        cell.selectedBackgroundView.frame = cell.bounds;
+        if (!IS_IOS_7) {
+            cell.selectedBackgroundView = [SBSStyle selectedBackgroundView];
+            cell.selectedBackgroundView.frame = cell.bounds;
+        }
     }
     
     // Configure the cell

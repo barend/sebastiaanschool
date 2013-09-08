@@ -47,12 +47,18 @@ typedef NS_ENUM (NSInteger, SBSNotificationType) {
 
 
     // Apply UIAppearance
-    [[UIButton appearance] setTintColor:[SBSStyle sebastiaanBlueColor]];
-    [[UINavigationBar appearance] setTintColor:[SBSStyle sebastiaanBlueColor]];
-
+    if (IS_IOS_7) {
+        self.window.tintColor = [SBSStyle sebastiaanBlueColor];
+        [[UINavigationBar appearance] setBarTintColor:[SBSStyle sebastiaanBlueColor]];
+        [[UINavigationBar appearance] setTitleTextAttributes:@{UITextAttributeTextColor: [UIColor whiteColor] }];
+    } else {
+        [[UIButton appearance] setTintColor:[SBSStyle sebastiaanBlueColor]];
+        [[UINavigationBar appearance] setTintColor:[SBSStyle sebastiaanBlueColor]];
+    }
 
     self.window.rootViewController = self.rootViewController;
     [self.window makeKeyAndVisible];
+    
     
     [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge|
                                                     UIRemoteNotificationTypeAlert|
@@ -102,6 +108,10 @@ typedef NS_ENUM (NSInteger, SBSNotificationType) {
         case SBSNotificationTypeNewsletter:
             [self.rootViewController popToRootViewControllerAnimated:NO];
             [self.infoViewController buttonTapped:self.infoViewController.newsButton];
+            break;
+        case SBSNotificationTypeInfo:
+        case SBSNotificationTypeStaff:
+            NSLog(@"Unhandled notification: %i", notificationType.intValue);
             break;
     }
 }
