@@ -10,10 +10,6 @@
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFile</key>
 	<string></string>
-	<key>CFBundleIcons</key>
-	<dict/>
-	<key>CFBundleIcons~ipad</key>
-	<dict/>
 	<key>CFBundleIdentifier</key>
 	<string>nl.sebastiaanschool.contact.app</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -43,11 +39,11 @@
 			<key>TintColor</key>
 			<dict>
 				<key>Blue</key>
-				<real>0.90196078400000002</real>
+				<real>0.901960784</real>
 				<key>Green</key>
-				<real>0.67058823499999998</real>
+				<real>0.670588235</real>
 				<key>Red</key>
-				<real>0.0</real>
+				<real>0</real>
 			</dict>
 			<key>Translucent</key>
 			<false/>
