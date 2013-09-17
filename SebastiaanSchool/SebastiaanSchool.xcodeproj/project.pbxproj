@@ -25,6 +25,7 @@
 		4A1966A816A08DAE0011EFBF /* SBSNewsLetterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A1966A716A08DAE0011EFBF /* SBSNewsLetterViewController.m */; };
 		4A2B5BD416C639F000A21460 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A2B5BD216C639F000A21460 /* EventKit.framework */; };
 		4A2B5BD516C639F000A21460 /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A2B5BD316C639F000A21460 /* EventKitUI.framework */; };
+		4A31C73517E870FA005FB021 /* SBSButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A31C73417E870FA005FB021 /* SBSButton.m */; };
 		4A3B996016A0830600241D4C /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A3B995F16A0830600241D4C /* MainWindow.xib */; };
 		4A3F5B5916A87BB9005F742E /* NSUserDefaults+SBS.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A3F5B5816A87BB9005F742E /* NSUserDefaults+SBS.m */; };
 		4A3F6A3616C58FB700FC066D /* SBSInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A3F6A3516C58FB700FC066D /* SBSInfoViewController.xib */; };
@@ -92,6 +93,8 @@
 		4A1966A716A08DAE0011EFBF /* SBSNewsLetterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBSNewsLetterViewController.m; sourceTree = "<group>"; };
 		4A2B5BD216C639F000A21460 /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
 		4A2B5BD316C639F000A21460 /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKitUI.framework; path = System/Library/Frameworks/EventKitUI.framework; sourceTree = SDKROOT; };
+		4A31C73317E870FA005FB021 /* SBSButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBSButton.h; sourceTree = "<group>"; };
+		4A31C73417E870FA005FB021 /* SBSButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBSButton.m; sourceTree = "<group>"; };
 		4A3B995B16A0781900241D4C /* SebastiaanSchool.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = SebastiaanSchool.entitlements; sourceTree = "<group>"; };
 		4A3B995F16A0830600241D4C /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		4A3F5B5716A87BB9005F742E /* NSUserDefaults+SBS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaults+SBS.h"; sourceTree = "<group>"; };
@@ -297,6 +300,8 @@
 				4A0124B016FCA71D00F744D6 /* UIView+JLFrameAdditions.m */,
 				4A69268B17C360E100C1C9A8 /* UIView+AF1.h */,
 				4A69268C17C360E100C1C9A8 /* UIView+AF1.m */,
+				4A31C73317E870FA005FB021 /* SBSButton.h */,
+				4A31C73417E870FA005FB021 /* SBSButton.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -478,6 +483,7 @@
 				4A0124B916FCFDA700F744D6 /* SBSEditBulletinViewController.m in Sources */,
 				4A4997CF16FEF65400B8A729 /* SBSAgendaItem.m in Sources */,
 				4A4997D216FEF68600B8A729 /* SBSBulletin.m in Sources */,
+				4A31C73517E870FA005FB021 /* SBSButton.m in Sources */,
 				4A4997D516FEF6AB00B8A729 /* SBSContactItem.m in Sources */,
 				4A4997D816FEF6CF00B8A729 /* SBSNewsLetter.m in Sources */,
 				4AD416391723DEB400DA4777 /* SBSBaseEditViewController.m in Sources */,
@@ -574,7 +580,8 @@
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)\"",
+					"$(SRCROOT)",
+					/Users/jeroenleenarts/code/sebastiaanschool/SebastiaanSchool,
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -600,7 +607,8 @@
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)\"",
+					"$(SRCROOT)",
+					/Users/jeroenleenarts/code/sebastiaanschool/SebastiaanSchool,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SBSSebastiaanSchool-Prefix.pch";

@@ -114,6 +114,8 @@
     [button setTitle:title forState:UIControlStateNormal];
     
     if (!IS_IOS_7) {
+        button.backgroundColor = [UIColor whiteColor];
+        button.layer.cornerRadius = 5.0f;
         UIImage *whiteImage = [UIImage imageNamed:[NSString stringWithFormat:@"%@-white", imageName]];
         [button setImage:whiteImage forState:UIControlStateHighlighted];
         [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -121,10 +123,6 @@
     } else {
         [button setTitleColor:[SBSStyle sebastiaanBlueColor] forState:UIControlStateNormal];
     }
-    
-    
-    [button setTitleEdgeInsets:UIEdgeInsetsMake(0.0, -image.size.width, -25.0, 0.0)]; // Left inset is the negative of image width.
-    [button setImageEdgeInsets:UIEdgeInsetsMake(-15.0, 0.0, 0.0, -button.titleLabel.bounds.size.width)]; // Right inset is the negative of text bounds width.
 }
 
 - (IBAction)buttonTapped:(id)sender {
