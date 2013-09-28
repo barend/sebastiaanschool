@@ -28,12 +28,11 @@
 }
 
 - (void)loadView{
-    [super loadView];
-    self.webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
+    self.webView = [[UIWebView alloc] initWithFrame:CGRectZero];
     self.webView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     self.webView.scalesPageToFit = YES;
     self.webView.delegate = self;
-    [self.view addSubview:self.webView];
+    self.view = self.webView;
     
     self.activityIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     self.activityIndicator.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleLeftMargin;
@@ -70,6 +69,12 @@
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     ALog(@"Finish web");
     [self.activityIndicator stopAnimating];
+    __weak SBSNewsLetterViewController * weakSelf = self;
+    if (IS_IOS_7) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.01 * NSEC_PER_SEC), dispatch_get_current_queue(), ^{
+            [weakSelf.webView.scrollView setContentOffset:CGPointMake(0.0f,-weakSelf.topLayoutGuide.length) animated:YES];
+        });
+    }
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView {
