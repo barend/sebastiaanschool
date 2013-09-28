@@ -26,6 +26,9 @@ Parse.Cloud.afterSave("NewsLetter", function(request) {
 });
 
 Parse.Cloud.afterSave("Bulletin", function(request) {
+    if (request.object.existed()) {
+		return;
+	}
 	Parse.Push.send({
 	  channels: [ "" ],
 	  data: {
