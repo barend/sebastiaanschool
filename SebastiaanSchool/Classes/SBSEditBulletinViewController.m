@@ -103,7 +103,12 @@
         
         NSString *newText = [textView.text stringByReplacingCharactersInRange:range withString:text];
 
-        CGSize size = [newText sizeWithFont:[SBSStyle titleFont]];
+        CGSize size;
+        if (IS_IOS_7) {
+            size = [newText sizeWithAttributes:@{NSFontAttributeName: [SBSStyle titleFont]}];
+        } else {
+            size = [newText sizeWithFont:[SBSStyle titleFont]];
+        }
         BOOL result = availableWidth >= size.width;
         return result;
     }

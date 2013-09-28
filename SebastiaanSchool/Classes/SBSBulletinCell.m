@@ -22,11 +22,19 @@
     NSString *body = object.body;
     
     CGFloat height = [SBSStyle standardMargin];
-    
-    height += [title sizeWithFont:[SBSStyle titleFont] constrainedToSize:CGSizeMake(availableWidth, CGFLOAT_MAX)].height;
-    height += [createdAt sizeWithFont:[SBSStyle subtitleFont] constrainedToSize:CGSizeMake(availableWidth, CGFLOAT_MAX)].height;
-    if (body != nil) {
-        height += [body sizeWithFont:[SBSStyle bodyFont] constrainedToSize:CGSizeMake(availableWidth, CGFLOAT_MAX)].height;
+    if (IS_IOS_7) {
+        
+        height += ceilf([title boundingRectWithSize:CGSizeMake(availableWidth, CGFLOAT_MAX) options:NSStringDrawingUsesFontLeading |NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [SBSStyle titleFont]} context:nil].size.height);
+        height += ceilf([createdAt boundingRectWithSize:CGSizeMake(availableWidth, CGFLOAT_MAX) options:NSStringDrawingUsesFontLeading |NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [SBSStyle subtitleFont]} context:nil].size.height);
+        if (body != nil) {
+            height += ceilf([body boundingRectWithSize:CGSizeMake(availableWidth, CGFLOAT_MAX) options:NSStringDrawingUsesFontLeading |NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [SBSStyle bodyFont]} context:nil].size.height);
+        }
+    } else {
+        height += [title sizeWithFont:[SBSStyle titleFont] constrainedToSize:CGSizeMake(availableWidth, CGFLOAT_MAX)].height;
+        height += [createdAt sizeWithFont:[SBSStyle subtitleFont] constrainedToSize:CGSizeMake(availableWidth, CGFLOAT_MAX)].height;
+        if (body != nil) {
+            height += [body sizeWithFont:[SBSStyle bodyFont] constrainedToSize:CGSizeMake(availableWidth, CGFLOAT_MAX)].height;
+        }
     }
     
     height += [SBSStyle standardMargin];
@@ -46,8 +54,8 @@
         
         self.detailTextLabel.font = [SBSStyle subtitleFont];
         if (IS_IOS_7) {
-        [self.detailTextLabel setTextColor:[UIColor blackColor]];
-        [self.detailTextLabel setHighlightedTextColor:[UIColor whiteColor]];
+            [self.detailTextLabel setTextColor:[UIColor blackColor]];
+            [self.detailTextLabel setHighlightedTextColor:[UIColor whiteColor]];
         }
         
         // Initialization code
@@ -65,7 +73,9 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     self.textLabel._y = [SBSStyle standardMargin];
+    [self.textLabel makeRectIntegral];
     self.detailTextLabel._y = self.textLabel._bottom;
+    [self.detailTextLabel makeRectIntegral];
     
     if (self.bodyLabel.text == nil) {
         self.bodyLabel.frame = CGRectZero;
@@ -74,7 +84,8 @@
         self.bodyLabel._y = self.detailTextLabel._bottom;
         self.bodyLabel._left = self.textLabel._left;
         self.bodyLabel._width = self.bodyLabel._width - self.textLabel._left;
-        self.bodyLabel._height = self.bounds.size.height - self.bodyLabel._y - self.textLabel._left;
+        self.bodyLabel._height = self.bounds.size.height - self.bodyLabel._y - [SBSStyle standardMargin];
+        [self.bodyLabel makeRectIntegral];
     }
 }
 

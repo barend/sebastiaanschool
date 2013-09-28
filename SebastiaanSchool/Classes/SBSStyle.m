@@ -60,7 +60,11 @@ static UIFont * bodyFont;
 }
 
 + (CGFloat)standardMargin {
-    return 10.0f;
+    if (IS_IOS_7) {
+        return 15.0f;
+    } else {
+        return 10.0f;
+    }
 }
 
 + (void)applyStyleToTextView:(UITextView *)textView {

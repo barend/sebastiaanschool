@@ -49,4 +49,6 @@
 - (CGFloat)_bottom { return self.frame.origin.y + self.frame.size.height; }
 - (void)set_bottom:(CGFloat)bottom { self.frame = (CGRect){ .origin=self.frame.origin, .size.width=self.frame.size.width, .size.height=fmaxf(bottom-self.frame.origin.y,0) }; }
 
+-(void) makeRectIntegral { self.frame = CGRectIntegral(self.frame); }
+
 @end

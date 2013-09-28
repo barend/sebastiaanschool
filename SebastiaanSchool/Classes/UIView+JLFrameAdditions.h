@@ -15,4 +15,5 @@
 @property (nonatomic, assign) CGFloat _x, _y, _width, _height; // normal rect properties
 @property (nonatomic, assign) CGFloat _left, _top, _right, _bottom; // these will stretch the rect
 
+-(void) makeRectIntegral;
 @end
