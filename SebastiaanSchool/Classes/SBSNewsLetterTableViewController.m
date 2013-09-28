@@ -56,11 +56,9 @@
     [super viewDidLoad];
     [TestFlight passCheckpoint:[NSString stringWithFormat:@"Loaded VC %@", self.title]];
 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    if (IS_IOS_7) {
+        self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    }
 }
 
 -(void)viewWillAppear:(BOOL)animated {

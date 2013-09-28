@@ -13,6 +13,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    if (IS_IOS_7) {
+        self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    }
+
     [TestFlight passCheckpoint:[NSString stringWithFormat:@"Loaded VC %@", self.title]];
 	// Do any additional setup after loading the view.
 }

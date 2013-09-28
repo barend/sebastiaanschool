@@ -53,6 +53,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    if (IS_IOS_7) {
+        self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    }
+
     self.eventStore = [[EKEventStore alloc]init];
 	// Do any additional setup after loading the view.
     [TestFlight passCheckpoint:[NSString stringWithFormat:@"Loaded VC %@", self.title]];
