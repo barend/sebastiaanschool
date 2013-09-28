@@ -87,7 +87,14 @@
 }
 
 - (void) updateLayout {
-    self.deleteButton.hidden = self.agendaItem == nil;
+    if (self.agendaItem == nil) {
+        self.deleteButton.hidden = YES;
+        self.title = NSLocalizedString(@"Add Agenda Item", nil);
+    } else {
+        self.deleteButton.hidden = NO;
+        self.title = NSLocalizedString(@"Edit Agenda Item", nil);
+        
+    }
 }
 
 -(void)saveButtonPressed:(id) sender {

@@ -64,7 +64,14 @@
 }
 
 - (void) updateLayout {
-    self.deleteButton.hidden = self.contact == nil;
+    if (self.contact == nil) {
+        self.deleteButton.hidden = YES;
+        self.title = NSLocalizedString(@"Add Team Member", nil);
+    } else {
+        self.deleteButton.hidden = NO;
+        self.title = NSLocalizedString(@"Edit Team Member", nil);
+        
+    }
 }
 
 -(void)saveButtonPressed:(id) sender {

@@ -59,7 +59,14 @@
 }
 
 - (void) updateLayout {
-    self.deleteButton.hidden = self.bulletin == nil;
+    if (self.bulletin == nil) {
+        self.deleteButton.hidden = YES;
+        self.title = NSLocalizedString(@"Add Bulletin", nil);
+    } else {
+        self.deleteButton.hidden = NO;
+        self.title = NSLocalizedString(@"Edit Bulletin", nil);
+        
+    }
 }
 
 -(void)saveButtonPressed:(id) sender {
