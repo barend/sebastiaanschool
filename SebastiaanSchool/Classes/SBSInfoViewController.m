@@ -126,8 +126,6 @@
 }
 
 - (IBAction)buttonTapped:(id)sender {
-    DLog(@"Button %@ tapped.", [sender title]);
-    
     if (sender == self.callButton) {
         NSURL *url = [NSURL URLWithString:@"telprompt://+31555335355"];
         if([[UIApplication sharedApplication] canOpenURL:url]) {
@@ -141,40 +139,36 @@
     } else if(sender == self.twitterButton) {
         NSURL *twitterAppUrl = [NSURL URLWithString:@"twitter://user?id=424159127"];
         if([[UIApplication sharedApplication] canOpenURL:twitterAppUrl]) {
+            [TestFlight passCheckpoint:@"Twitter button tapped with Twitter App."];
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"twitter://user?id=424159127"]];
         } else {
+            [TestFlight passCheckpoint:@"Twitter button tapped without Twitter App."];
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://twitter.com/KBSebastiaan"]];
         }
-    } else if(sender == self.agendaButton) {
-        [TestFlight passCheckpoint:@"Agenda button tapped on phone."];
-        SBSAgendaTableViewController *agendaController = [[SBSAgendaTableViewController alloc] init];
-        agendaController.title = NSLocalizedString(@"Agenda", nil);
-        
-        [self.navigationController pushViewController:agendaController animated:YES];
-    } else if(sender == self.teamButton) {
-        SBSTeamTableViewController *contactController = [[SBSTeamTableViewController alloc] init];
-        contactController.title = NSLocalizedString(@"Team", nil);
-
-        [self.navigationController pushViewController:contactController animated:YES];
     } else if (sender == self.yurlButton) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://sebastiaan.yurls.net"]];
-    } else if(sender == self.newsButton) {
-        SBSNewsLetterTableViewController *newsController = [[SBSNewsLetterTableViewController alloc] init];
-        newsController.title = NSLocalizedString(@"Newsletter", nil);
-        
-        [self.navigationController pushViewController:newsController animated:YES];
-    } else if(sender == self.bulletinButton) {
-        SBSBulletinViewController *bulletingController = [[SBSBulletinViewController alloc] init];
-        bulletingController.title = NSLocalizedString(@"Bulletin", nil);
-        
-        [self.navigationController pushViewController:bulletingController animated:YES];
-    } else if(sender == self.staffBarButton) {
-        SBSStaffViewController *staffController = [[SBSStaffViewController alloc] init];
-        staffController.title = NSLocalizedString(@"Staff", nil);
-        
-        [self.navigationController pushViewController:staffController animated:YES];
     } else {
-        NSAssert(NO, @"Unknown button tapped.");
+        UIViewController *vc;
+        if(sender == self.agendaButton) {
+            vc = [[SBSAgendaTableViewController alloc] init];
+            vc.title = NSLocalizedString(@"Agenda", nil);
+        } else if(sender == self.teamButton) {
+            vc = [[SBSTeamTableViewController alloc] init];
+            vc.title = NSLocalizedString(@"Team", nil);
+        } else if(sender == self.newsButton) {
+            vc = [[SBSNewsLetterTableViewController alloc] init];
+            vc.title = NSLocalizedString(@"Newsletter", nil);
+        } else if(sender == self.bulletinButton) {
+            vc = [[SBSBulletinViewController alloc] init];
+            vc.title = NSLocalizedString(@"Bulletin", nil);
+        } else if(sender == self.staffBarButton) {
+            vc = [[SBSStaffViewController alloc] init];
+            vc.title = NSLocalizedString(@"Staff", nil);
+        } else {
+            NSAssert(NO, @"Unknown button tapped.");
+        }
+        [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@ button tapped on phone.", vc.title]];
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 
