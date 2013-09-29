@@ -7,6 +7,7 @@
 
 #import "SBSNewsLetterTableViewController.h"
 #import "SBSNewsLetterViewController.h"
+#import "SBSConfig.h"
 
 #import "SBSNewsLetter.h"
 
@@ -83,36 +84,71 @@
     NSData * data = [NSData dataWithContentsOfURL:[NSURL URLWithString:@"http://www.sebastiaanschool.nl"]];
     TFHpple *doc = [[TFHpple alloc]initWithHTMLData:data];
 
-	NSArray *hrefElements = [doc searchWithXPathQuery:@"//li[@id='cat_1098']/ul/li/a/@href"];
-    NSArray *spanElements = [doc searchWithXPathQuery:@"//li[@id='cat_1098']/ul/li/a/span"];
-    NSString * baseUrlString = @"http://www.sebastiaanschool.nl";
-
-    if (hrefElements.count != spanElements.count) {
-		NSLog(@"Refreshing newsletters failed: non matching href and span counts.");
-        return;
-    }
+    PFQuery * configQuery = [SBSConfig query];
     
-    NSMutableArray *newsLetterUrls = [NSMutableArray array];
-    [hrefElements enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        TFHppleElement * element = obj;
-        NSString * url = [baseUrlString stringByAppendingPathComponent:element.firstChild.content];
-        url = [url stringByReplacingOccurrencesOfString:@"http:/" withString:@"http://"];
-        [newsLetterUrls addObject:url];
-    }];
-    
-    NSMutableArray *newsLetterNames = [NSMutableArray array];
-    [spanElements enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        TFHppleElement * element = obj;
-        [newsLetterNames addObject:element.firstChild.content];
-    }];
+    [configQuery findObjectsInBackgroundWithBlock:^(NSArray *configObjects, NSError *error) {
+        if (error) {
+            // Log details of the failure
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+            return;
+        }
 
-	PFQuery * query = [self queryForTable];
-	[query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-	  if (!error) {
+        NSString *newsletterDiscoveryBaseUrl; // Example: @"http://www.sebastiaanschool.nl"
+        NSString *newsletterDiscoveryTitleXpath; // Example: @"//li[@id='cat_1098']/ul/li/a/span"
+        NSString *newsletterDiscoveryUrlXpath; // Example: @"//li[@id='cat_1098']/ul/li/a/@href"
+        for (SBSConfig *obj in configObjects) {
+            NSString *key = obj.key;
+            if ([SBSNewsletterDiscoveryBaseUrl isEqual:key]) {
+                newsletterDiscoveryBaseUrl = obj.value;
+            } else if ([SBSNewsletterDiscoveryTitleXpath isEqual:key]) {
+                newsletterDiscoveryTitleXpath = obj.value;
+            } else if ([SBSNewsletterDiscoveryUrlXpath isEqual:key]) {
+                newsletterDiscoveryUrlXpath = obj.value;
+            }
+        }
+        
+        if (newsletterDiscoveryUrlXpath == nil || newsletterDiscoveryTitleXpath == nil || newsletterDiscoveryBaseUrl == nil) {
+            NSLog(@"Error missing parameter for newsletter refresh. newsletterDiscoveryBaseUrl: %@ newsletterDiscoveryTitleXpath:%@ newsletterDiscoveryUrlXpath: %@", newsletterDiscoveryBaseUrl, newsletterDiscoveryTitleXpath, newsletterDiscoveryUrlXpath);
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:NSLocalizedString(@"Newsletter config is incomplete.", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil];
+            [alert show];
+
+            return;
+        }
+    
+        NSArray *hrefElements = [doc searchWithXPathQuery:newsletterDiscoveryUrlXpath];
+        NSArray *spanElements = [doc searchWithXPathQuery:newsletterDiscoveryTitleXpath];
+        NSString * baseUrlString = newsletterDiscoveryBaseUrl;
+
+        if (hrefElements.count != spanElements.count) {
+            NSLog(@"Refreshing newsletters failed: non matching href and span counts.");
+            return;
+        }
+        
+        NSMutableArray *newsLetterUrls = [NSMutableArray array];
+        [hrefElements enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            TFHppleElement * element = obj;
+            NSString * url = [baseUrlString stringByAppendingPathComponent:element.firstChild.content];
+            url = [url stringByReplacingOccurrencesOfString:@"http:/" withString:@"http://"];
+            [newsLetterUrls addObject:url];
+        }];
+        
+        NSMutableArray *newsLetterNames = [NSMutableArray array];
+        [spanElements enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            TFHppleElement * element = obj;
+            [newsLetterNames addObject:element.firstChild.content];
+        }];
+
+        PFQuery * query = [self queryForTable];
+        [query findObjectsInBackgroundWithBlock:^(NSArray *newsletterObjects, NSError *error) {
+          if (error) {
+              // Log details of the failure
+              NSLog(@"Error: %@ %@", error, [error userInfo]);
+              return;
+          }
           // The find succeeded.
-          NSLog(@"Successfully retrieved %d newsletters.", objects.count);
+          NSLog(@"Successfully retrieved %d newsletters.", newsletterObjects.count);
           
-          for (SBSNewsLetter * obj in objects) {
+          for (SBSNewsLetter * obj in newsletterObjects) {
               if([newsLetterNames containsObject:obj.name] && [newsLetterUrls containsObject:obj.url]) {
                   //This one is not updated
                   NSUInteger index = [newsLetterNames indexOfObject:obj.name];
@@ -148,11 +184,10 @@
 
               [obj saveInBackground];
           }
-    } else {
-	    // Log details of the failure
-	    NSLog(@"Error: %@ %@", error, [error userInfo]);
-	  }
-	}];
+          [self loadObjects];
+        }];
+    }];
+
 }
 
 #pragma mark - Parse
