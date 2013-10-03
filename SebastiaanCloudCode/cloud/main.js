@@ -8,6 +8,9 @@ Parse.Cloud.beforeSave("NewsLetter", function(request, response) {
 });
 
 Parse.Cloud.afterSave("NewsLetter", function(request) {
+    if (request.object.existed()) {
+		return;
+	}
 	Parse.Push.send({
 	  channels: [ "" ],
 	  data: {
