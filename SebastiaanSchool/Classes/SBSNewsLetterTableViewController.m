@@ -81,9 +81,6 @@
 - (void)refreshNewsletters {
     [TestFlight passCheckpoint:@"Refreshing newsletters"];
 
-    NSData * data = [NSData dataWithContentsOfURL:[NSURL URLWithString:@"http://www.sebastiaanschool.nl"]];
-    TFHpple *doc = [[TFHpple alloc]initWithHTMLData:data];
-
     PFQuery * configQuery = [SBSConfig query];
     
     [configQuery findObjectsInBackgroundWithBlock:^(NSArray *configObjects, NSError *error) {
@@ -92,14 +89,17 @@
             NSLog(@"Error: %@ %@", error, [error userInfo]);
             return;
         }
-
+        
         NSString *newsletterDiscoveryBaseUrl; // Example: @"http://www.sebastiaanschool.nl"
+        NSString *newsletterDiscoveryPageUrl; // Example: @"http://www.sebastiaanschool.nl/sebastiaanschool.nl/nieuwsbrief.html"
         NSString *newsletterDiscoveryTitleXpath; // Example: @"//li[@id='cat_1098']/ul/li/a/span"
         NSString *newsletterDiscoveryUrlXpath; // Example: @"//li[@id='cat_1098']/ul/li/a/@href"
         for (SBSConfig *obj in configObjects) {
             NSString *key = obj.key;
             if ([SBSNewsletterDiscoveryBaseUrl isEqual:key]) {
                 newsletterDiscoveryBaseUrl = obj.value;
+            } else if ([SBSNewsletterDiscoveryPageUrl isEqual:key]) {
+                newsletterDiscoveryPageUrl = obj.value;
             } else if ([SBSNewsletterDiscoveryTitleXpath isEqual:key]) {
                 newsletterDiscoveryTitleXpath = obj.value;
             } else if ([SBSNewsletterDiscoveryUrlXpath isEqual:key]) {
@@ -107,13 +107,17 @@
             }
         }
         
-        if (newsletterDiscoveryUrlXpath == nil || newsletterDiscoveryTitleXpath == nil || newsletterDiscoveryBaseUrl == nil) {
-            NSLog(@"Error missing parameter for newsletter refresh. newsletterDiscoveryBaseUrl: %@ newsletterDiscoveryTitleXpath:%@ newsletterDiscoveryUrlXpath: %@", newsletterDiscoveryBaseUrl, newsletterDiscoveryTitleXpath, newsletterDiscoveryUrlXpath);
+        if (newsletterDiscoveryUrlXpath == nil || newsletterDiscoveryTitleXpath == nil || newsletterDiscoveryBaseUrl == nil || newsletterDiscoveryPageUrl == nil) {
+            NSLog(@"Error missing parameter for newsletter refresh. newsletterDiscoveryPageUrl: %@ newsletterDiscoveryBaseUrl: %@ newsletterDiscoveryTitleXpath:%@ newsletterDiscoveryUrlXpath: %@", newsletterDiscoveryPageUrl, newsletterDiscoveryBaseUrl, newsletterDiscoveryTitleXpath, newsletterDiscoveryUrlXpath);
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:NSLocalizedString(@"Newsletter config is incomplete.", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil];
             [alert show];
 
             return;
         }
+        
+        NSData * data = [NSData dataWithContentsOfURL:[NSURL URLWithString:newsletterDiscoveryPageUrl]];
+        TFHpple *doc = [[TFHpple alloc]initWithHTMLData:data];
+
     
         NSArray *hrefElements = [doc searchWithXPathQuery:newsletterDiscoveryUrlXpath];
         NSArray *spanElements = [doc searchWithXPathQuery:newsletterDiscoveryTitleXpath];

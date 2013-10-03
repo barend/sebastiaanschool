@@ -10,6 +10,7 @@
 
 
 extern NSString * const SBSNewsletterDiscoveryBaseUrl;
+extern NSString * const SBSNewsletterDiscoveryPageUrl;
 extern NSString * const SBSNewsletterDiscoveryTitleXpath;
 extern NSString * const SBSNewsletterDiscoveryUrlXpath;
 

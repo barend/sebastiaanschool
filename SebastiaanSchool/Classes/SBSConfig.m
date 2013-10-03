@@ -10,6 +10,7 @@
 #import "SBSConfig.h"
 
 NSString * const SBSNewsletterDiscoveryBaseUrl = @"newsletterDiscoveryBaseUrl";
+NSString * const SBSNewsletterDiscoveryPageUrl = @"newsletterDiscoveryPageUrl";
 NSString * const SBSNewsletterDiscoveryTitleXpath = @"newsletterDiscoveryTitleXpath";
 NSString * const SBSNewsletterDiscoveryUrlXpath = @"newsletterDiscoveryUrlXpath";
 
