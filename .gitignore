@@ -24,7 +24,7 @@ derived-sources/
 
 # ignore App Code project
 .idea/
-SebastiaanSchool/Pods
+Pods
 global.json
 Podfile.lock
 setEnv.sh
