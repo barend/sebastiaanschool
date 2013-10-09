@@ -26,6 +26,5 @@ derived-sources/
 .idea/
 Pods
 global.json
-Podfile.lock
 setEnv.sh
 derived-sources
