@@ -1,0 +1,7 @@
+language: objective-c
+before_install:
+    - "brew update"
+    - "brew uninstall xctool && brew install xctool --HEAD"
+    - "gem update cocoapods"
+    - "cd $TRAVIS_BUILD_DIR/iOS/SebastiaanSchool/ && pod install"
+script: "xctool test"
