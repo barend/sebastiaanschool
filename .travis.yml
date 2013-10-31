@@ -4,4 +4,4 @@ before_install:
     - "brew uninstall xctool && brew install xctool --HEAD"
     - "gem update cocoapods"
     - "cd $TRAVIS_BUILD_DIR/iOS/SebastiaanSchool/ && pod install"
-script: "xctool test -sdk iphonesimulator"
+script: "xctool test -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO"
