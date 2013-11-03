@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Seb@stiaan</string>
+    <string name="call_url" translatable="false">tel:+31%2055%20533%2053%2055</string>
+    <string name="call_failed_dialog_body">Could not initiate call. Please call manually. The number is:\n\n+31 55 533 53 55</string>
+    <string name="close_button">Close</string>
+    <string name="home_url" translatable="false">http://www.sebastiaanschool.nl/</string>
+    <string name="twitter_url" translatable="false">http://www.twitter.com/KBSebastiaan</string>
+    <string name="yurls_url" translatable="false">http://sebastiaan.yurls.net/</string>
+    <string name="navigation__homepage">Homepage</string>
+    <string name="navigation__twitter">\@KBSebastiaan</string>
+    <string name="navigation__yurl">Yurl site</string>
+    <string name="navigation__agenda">Agenda</string>
+    <string name="navigation__team">Team</string>
+    <string name="navigation__call">Call</string>
+    <string name="navigation__newsletter">Newsletter</string>
+    <string name="navigation__bulletin">Bulletin</string>
+</resources>
