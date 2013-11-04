@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ../../SebastiaanSchool/bin/setEnv.sh
+source ../../iOS/SebastiaanSchool/bin/setEnv.sh
 
 if [ "$1" = 'PROD' ];
 then
