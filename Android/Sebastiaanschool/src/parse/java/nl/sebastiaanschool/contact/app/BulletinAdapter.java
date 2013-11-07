@@ -13,17 +13,17 @@ import java.util.List;
 /**
  * Created by barend on 3-11-13.
  */
-public class AgendaAdapter extends ParseQueryAdapter<AgendaItem> implements SebListAdapter, ParseQueryAdapter.OnQueryLoadListener<AgendaItem> {
+public class BulletinAdapter extends ParseQueryAdapter<Bulletin> implements SebListAdapter, ParseQueryAdapter.OnQueryLoadListener<Bulletin> {
 
     private DataLoadingCallback dataLoadingCallback;
     private LayoutInflater inflater;
 
-    public AgendaAdapter(Context context) {
-        super(context, new QueryFactory<AgendaItem>() {
+    public BulletinAdapter(Context context) {
+        super(context, new QueryFactory<Bulletin>() {
             @Override
-            public ParseQuery<AgendaItem> create() {
-                ParseQuery<AgendaItem> query = new ParseQuery<AgendaItem>(AgendaItem.class);
-                query.addAscendingOrder("start");
+            public ParseQuery<Bulletin> create() {
+                ParseQuery<Bulletin> query = new ParseQuery<Bulletin>(Bulletin.class);
+                query.orderByDescending("createdAt");
                 query.setCachePolicy(ParseQuery.CachePolicy.CACHE_THEN_NETWORK);
                 return query;
             }
@@ -38,11 +38,11 @@ public class AgendaAdapter extends ParseQueryAdapter<AgendaItem> implements SebL
     }
 
     @Override
-    public View getItemView(AgendaItem item, View convertView, ViewGroup parent) {
-        AgendaItemView view = (AgendaItemView) (convertView != null
+    public View getItemView(Bulletin item, View convertView, ViewGroup parent) {
+        BulletinItemView view = (BulletinItemView) (convertView != null
                 ? convertView
-                : inflater.inflate(R.layout.view_agenda_item, parent, false));
-        view.setEvent(item);
+                : inflater.inflate(R.layout.view_bulletin_item, parent, false));
+        view.setBulletin(item);
         return view;
     }
 
@@ -54,7 +54,7 @@ public class AgendaAdapter extends ParseQueryAdapter<AgendaItem> implements SebL
     }
 
     @Override
-    public void onLoaded(List<AgendaItem> agendaItems, Exception e) {
+    public void onLoaded(List<Bulletin> bulletins, Exception e) {
         if (dataLoadingCallback != null) {
             dataLoadingCallback.onStopLoading(e);
         }

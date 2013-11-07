@@ -27,25 +27,35 @@ public class MainActivity extends Activity implements NavigationFragment.Callbac
         setContentView(R.layout.activity_main);
         getFragmentManager().addOnBackStackChangedListener(this);
         getFragmentManager().beginTransaction().add(R.id.main__content_container, new NavigationFragment()).commit();
+        Analytics.trackAppOpened(getIntent());
     }
 
     @Override
     public void onItemSelected(int item) {
         switch (item) {
             case ITEM_AGENDA:
-                pushFragment(new AgendaFragment(), "Agenda");
+                pushFragment(new AgendaFragment(), getString(R.string.navigation__agenda));
+                break;
+            case ITEM_BULLETIN:
+                pushFragment(new BulletinFragment(), getString(R.string.navigation__bulletin));
                 break;
             case ITEM_CALL:
                 callSebastiaan();
                 break;
             case ITEM_HOME:
-                openUrl(getString(R.string.home_url));
+                GrabBag.openUri(this, getString(R.string.home_url));
+                break;
+            case ITEM_NEWSLETTER:
+                pushFragment(new NewsletterFragment(), getString(R.string.navigation__newsletter));
+                break;
+            case ITEM_TEAM:
+                pushFragment(new TeamFragment(), getString(R.string.navigation__team));
                 break;
             case ITEM_TWITTER:
-                openUrl(getString(R.string.twitter_url));
+                GrabBag.openUri(this, getString(R.string.twitter_url));
                 break;
             case ITEM_YURLS:
-                openUrl(getString(R.string.yurls_url));
+                GrabBag.openUri(this, getString(R.string.yurls_url));
                 break;
         }
     }
@@ -73,31 +83,17 @@ public class MainActivity extends Activity implements NavigationFragment.Callbac
         }
     }
 
-    private void openUrl(String uri) {
-        Intent browse = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
-        browse.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        // Need to check if a browser is present, as it can be disabled entirely using child safety features on a tablet.
-        List<ResolveInfo> handlers = getPackageManager().queryIntentActivities(browse, 0);
-        if (!handlers.isEmpty()) {
-            startActivity(browse);
-        } else {
-            new AlertDialog.Builder(this)
-                    .setCancelable(true)
-                    .setMessage(uri)
-                    .setNegativeButton(R.string.close_button, null)
-                    .show();
-        }
-    }
-
     private void pushFragment(HorizontalSlidingFragment fragment, String label) {
         if (detailFragmentVisible)
             return;
+        Analytics.trackEvent("Navigate to " + label);
         FragmentTransaction tx = getFragmentManager().beginTransaction();
         fragment.addWithAnimation(tx, R.id.main__content_container, label);
         tx.commit();
     }
 
     private void popFragment() {
+        Analytics.trackEvent("Navigate to home");
         getFragmentManager().popBackStack();
     }
 
@@ -137,6 +133,7 @@ public class MainActivity extends Activity implements NavigationFragment.Callbac
 
     @Override
     public void onStopLoading(Exception e) {
+        // TODO report exceptions to analytics
         this.setProgressBarIndeterminateVisibility(false);
     }
 }

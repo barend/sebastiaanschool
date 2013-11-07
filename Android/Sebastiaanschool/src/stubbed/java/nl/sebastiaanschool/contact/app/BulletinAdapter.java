@@ -9,17 +9,16 @@ import android.widget.ArrayAdapter;
 /**
  * Created by barend on 3-11-13.
  */
-public class AgendaAdapter extends ArrayAdapter<AgendaItem> implements SebListAdapter {
+public class BulletinAdapter extends ArrayAdapter<Bulletin> implements SebListAdapter {
 
     private LayoutInflater inflater;
 
-    public AgendaAdapter(Context context) {
+    public BulletinAdapter(Context context) {
         super(context, R.layout.view_agenda_item);
         this.inflater = LayoutInflater.from(context);
         this.addAll(
-            new AgendaItem("Kerstvakantie 2013", 1387756800000L, 1388707200000L),
-            new AgendaItem("Voorjaarsvakantie 2014", 1392595200000L, 1392940800000L),
-            new AgendaItem("Goede Vrijdag 2014", 1397779200000L));
+            new Bulletin("Eerste bulletin", "Dit is een lang verhaal over van alles en nog wat. Het voornaamste is dat het ook op grote telefoons niet op één scherm te vatten is.", 1387756800000L),
+            new Bulletin("Tweede bulletin", "Dit is alweer zo'n lang verhaal, maar wel iets minder oeverloos.", 1388707200000L));
     }
 
     public void setDataLoadingCallback(DataLoadingCallback ignored) {
@@ -28,11 +27,11 @@ public class AgendaAdapter extends ArrayAdapter<AgendaItem> implements SebListAd
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        AgendaItem item = getItem(position);
-        AgendaItemView view = (AgendaItemView) (convertView != null
+        Bulletin item = getItem(position);
+        BulletinItemView view = (BulletinItemView) (convertView != null
                 ? convertView
-                : inflater.inflate(R.layout.view_agenda_item, parent, false));
-        view.setEvent(item);
+                : inflater.inflate(R.layout.view_bulletin_item, parent, false));
+        view.setBulletin(item);
         return view;
     }
 

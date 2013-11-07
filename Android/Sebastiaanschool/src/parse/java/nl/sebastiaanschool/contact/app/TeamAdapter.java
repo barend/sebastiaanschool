@@ -13,17 +13,16 @@ import java.util.List;
 /**
  * Created by barend on 3-11-13.
  */
-public class AgendaAdapter extends ParseQueryAdapter<AgendaItem> implements SebListAdapter, ParseQueryAdapter.OnQueryLoadListener<AgendaItem> {
+public class TeamAdapter extends ParseQueryAdapter<TeamMember> implements SebListAdapter, ParseQueryAdapter.OnQueryLoadListener<TeamMember> {
 
     private DataLoadingCallback dataLoadingCallback;
     private LayoutInflater inflater;
 
-    public AgendaAdapter(Context context) {
-        super(context, new QueryFactory<AgendaItem>() {
+    public TeamAdapter(Context context) {
+        super(context, new QueryFactory<TeamMember>() {
             @Override
-            public ParseQuery<AgendaItem> create() {
-                ParseQuery<AgendaItem> query = new ParseQuery<AgendaItem>(AgendaItem.class);
-                query.addAscendingOrder("start");
+            public ParseQuery<TeamMember> create() {
+                ParseQuery<TeamMember> query = new ParseQuery<TeamMember>(TeamMember.class);
                 query.setCachePolicy(ParseQuery.CachePolicy.CACHE_THEN_NETWORK);
                 return query;
             }
@@ -38,10 +37,10 @@ public class AgendaAdapter extends ParseQueryAdapter<AgendaItem> implements SebL
     }
 
     @Override
-    public View getItemView(AgendaItem item, View convertView, ViewGroup parent) {
-        AgendaItemView view = (AgendaItemView) (convertView != null
+    public View getItemView(TeamMember item, View convertView, ViewGroup parent) {
+        TeamMemberView view = (TeamMemberView) (convertView != null
                 ? convertView
-                : inflater.inflate(R.layout.view_agenda_item, parent, false));
+                : inflater.inflate(R.layout.view_team_member, parent, false));
         view.setEvent(item);
         return view;
     }
@@ -54,7 +53,7 @@ public class AgendaAdapter extends ParseQueryAdapter<AgendaItem> implements SebL
     }
 
     @Override
-    public void onLoaded(List<AgendaItem> agendaItems, Exception e) {
+    public void onLoaded(List<TeamMember> teamMembers, Exception e) {
         if (dataLoadingCallback != null) {
             dataLoadingCallback.onStopLoading(e);
         }

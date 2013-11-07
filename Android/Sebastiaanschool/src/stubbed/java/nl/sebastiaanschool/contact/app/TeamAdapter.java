@@ -9,17 +9,16 @@ import android.widget.ArrayAdapter;
 /**
  * Created by barend on 3-11-13.
  */
-public class AgendaAdapter extends ArrayAdapter<AgendaItem> implements SebListAdapter {
+public class TeamAdapter extends ArrayAdapter<TeamMember> implements SebListAdapter {
 
     private LayoutInflater inflater;
 
-    public AgendaAdapter(Context context) {
+    public TeamAdapter(Context context) {
         super(context, R.layout.view_agenda_item);
         this.inflater = LayoutInflater.from(context);
         this.addAll(
-            new AgendaItem("Kerstvakantie 2013", 1387756800000L, 1388707200000L),
-            new AgendaItem("Voorjaarsvakantie 2014", 1392595200000L, 1392940800000L),
-            new AgendaItem("Goede Vrijdag 2014", 1397779200000L));
+            new TeamMember("Jan Klaassen", "Poppenkastpop", "jan.klaassen@example.com"),
+            new TeamMember("Katrijn Klaassen", "Poppenkastpop", "katrijn@example.com"));
     }
 
     public void setDataLoadingCallback(DataLoadingCallback ignored) {
@@ -28,10 +27,10 @@ public class AgendaAdapter extends ArrayAdapter<AgendaItem> implements SebListAd
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        AgendaItem item = getItem(position);
-        AgendaItemView view = (AgendaItemView) (convertView != null
+        TeamMember item = getItem(position);
+        TeamMemberView view = (TeamMemberView) (convertView != null
                 ? convertView
-                : inflater.inflate(R.layout.view_agenda_item, parent, false));
+                : inflater.inflate(R.layout.view_team_member, parent, false));
         view.setEvent(item);
         return view;
     }

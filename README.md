@@ -11,7 +11,9 @@ After setting your credentials in the said setEnv.sh file, run all curl scripts 
 
 ## Building the Android app
 
-The setEnv.sh covers the Parse.com credentials for cloudcode and iOS. To get your Parse.com credentials into the Android app, you need to edit the `SebApp.java` file in the `parse` product flavor (for the time being). In addition, you need to download the Parse.com Android library and put it into the `libs/` directory.
+You need to download the Parse.com Android library and put it into the `libs/` directory.
+
+Your Parse.com credentials are merged into the Android app by means of a `ParseConfig.java` generated alongside `BuildConfig.java`.
 
 ## Other notes
 

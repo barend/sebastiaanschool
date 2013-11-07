@@ -6,6 +6,7 @@
     <string name="home_url" translatable="false">http://www.sebastiaanschool.nl/</string>
     <string name="twitter_url" translatable="false">http://www.twitter.com/KBSebastiaan</string>
     <string name="yurls_url" translatable="false">http://sebastiaan.yurls.net/</string>
+    <string name="menu_refresh">Reload data</string>
     <string name="navigation__homepage">Homepage</string>
     <string name="navigation__twitter">\@KBSebastiaan</string>
     <string name="navigation__yurl">Yurl site</string>
@@ -14,4 +15,5 @@
     <string name="navigation__call">Call</string>
     <string name="navigation__newsletter">Newsletter</string>
     <string name="navigation__bulletin">Bulletin</string>
+    <string name="team_email_body">Dear %1$s,</string>
 </resources>

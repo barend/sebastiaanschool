@@ -6,20 +6,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
+import nl.sebastiaanschool.contact.app.Newsletter;
+
 /**
  * Created by barend on 3-11-13.
  */
-public class AgendaAdapter extends ArrayAdapter<AgendaItem> implements SebListAdapter {
+public class NewsletterAdapter extends ArrayAdapter<Newsletter> implements SebListAdapter {
 
     private LayoutInflater inflater;
 
-    public AgendaAdapter(Context context) {
+    public NewsletterAdapter(Context context) {
         super(context, R.layout.view_agenda_item);
         this.inflater = LayoutInflater.from(context);
         this.addAll(
-            new AgendaItem("Kerstvakantie 2013", 1387756800000L, 1388707200000L),
-            new AgendaItem("Voorjaarsvakantie 2014", 1392595200000L, 1392940800000L),
-            new AgendaItem("Goede Vrijdag 2014", 1397779200000L));
+            new Newsletter("Eerste nieuwsbrief", "https://github.com/jeroenleenarts/sebastiaanschool", 1387756800000L),
+            new Newsletter("Tweede nieuwsbrief", "https://github.com/barend/sebastiaanschool", 1388707200000L));
     }
 
     public void setDataLoadingCallback(DataLoadingCallback ignored) {
@@ -28,10 +29,10 @@ public class AgendaAdapter extends ArrayAdapter<AgendaItem> implements SebListAd
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        AgendaItem item = getItem(position);
-        AgendaItemView view = (AgendaItemView) (convertView != null
+        Newsletter item = getItem(position);
+        NewsletterView view = (NewsletterView) (convertView != null
                 ? convertView
-                : inflater.inflate(R.layout.view_agenda_item, parent, false));
+                : inflater.inflate(R.layout.view_newsletter_item, parent, false));
         view.setEvent(item);
         return view;
     }
