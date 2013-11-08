@@ -13,7 +13,7 @@ After setting your credentials in the said setEnv.sh file, run all curl scripts 
 
 ## Building the Android app
 
-You need to download the Parse.com Android library and put it into the `libs/` directory.
+You need to download the Parse.com Android library and put it into the `Android/Sebastiaanschool/libs/` directory.
 
 Your Parse.com credentials are merged into the Android app by means of a `ParseConfig.java` generated alongside `BuildConfig.java`.
 
