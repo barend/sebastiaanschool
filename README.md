@@ -21,4 +21,8 @@ Your Parse.com credentials are merged into the Android app by means of a `ParseC
 
 The cloudcode project contains a few hooks right now dealing with notifications. But those are not needed right now.
 
-"sebastiaanschool" is licensed under the MIT license. See LICENCE file for details.
+## Terms of use
+
+"sebastiaanschool" is copyright Jeroen Leenarts, except for the Android app which is copyright Barend Garvelink. Both parts can be used in accordance with the MIT license. See LICENCE file for details.
+
+All brand names and icons are trademarks of their respective owners.
