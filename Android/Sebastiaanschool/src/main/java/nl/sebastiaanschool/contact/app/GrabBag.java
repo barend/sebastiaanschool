@@ -1,3 +1,8 @@
+/**
+ Copyright (c) 2013 Barend Garvelink
+
+ This program code can be used subject to the MIT license. See the LICENSE file for details.
+ */
 package nl.sebastiaanschool.contact.app;
 
 import android.app.AlertDialog;
@@ -23,6 +28,7 @@ public final class GrabBag {
     }
 
     public static void openUri(Context context, String uriString) {
+        Analytics.trackEvent("Navigate to " + uriString);
         Intent browse = new Intent(Intent.ACTION_VIEW, Uri.parse(uriString));
         browse.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         // Need to check if a browser is present, as it can be disabled entirely using child safety features on a tablet.

@@ -1,3 +1,8 @@
+/**
+ Copyright (c) 2013 Barend Garvelink
+
+ This program code can be used subject to the MIT license. See the LICENSE file for details.
+ */
 package nl.sebastiaanschool.contact.app;
 
 import android.animation.Animator;
@@ -102,7 +107,7 @@ public abstract class HorizontalSlidingFragment extends Fragment implements Anim
     }
 
     public interface Callback {
-        void onSlidingFragmentBeginAnimation(HorizontalSlidingFragment source, boolean willOpen);
-        void onSlidingFragmentEndAnimation(HorizontalSlidingFragment source, boolean hasOpened);
+        void onSlidingFragmentBeginAnimation(HorizontalSlidingFragment source, boolean willSlideIntoView);
+        void onSlidingFragmentEndAnimation(HorizontalSlidingFragment source, boolean didSlideIntoView);
     }
 }

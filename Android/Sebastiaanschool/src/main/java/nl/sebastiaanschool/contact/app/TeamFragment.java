@@ -1,3 +1,8 @@
+/**
+ Copyright (c) 2013 Barend Garvelink
+
+ This program code can be used subject to the MIT license. See the LICENSE file for details.
+ */
 package nl.sebastiaanschool.contact.app;
 
 import android.content.Context;
@@ -20,6 +25,7 @@ public class TeamFragment extends SebListFragment<TeamMember> {
     }
 
     private void composeEmail(TeamMember item) {
+        Analytics.trackEvent("Navigate to email client");
         Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", item.getEmail(), null));
         intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.team_email_body, item.getDisplayName()));
         try {

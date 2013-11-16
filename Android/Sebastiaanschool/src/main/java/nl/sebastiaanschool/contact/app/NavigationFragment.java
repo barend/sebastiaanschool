@@ -1,3 +1,8 @@
+/**
+ Copyright (c) 2013 Barend Garvelink
+
+ This program code can be used subject to the MIT license. See the LICENSE file for details.
+ */
 package nl.sebastiaanschool.contact.app;
 
 import android.app.Activity;
@@ -46,6 +51,13 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
     public void onDetach() {
         this.callback = null;
         super.onDetach();
+    }
+
+    void setVisible(boolean visible) {
+        View view = getView();
+        if (view != null) {
+            view.setVisibility(visible ? View.VISIBLE : View.INVISIBLE);
+        }
     }
 
     @Override

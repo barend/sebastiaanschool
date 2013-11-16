@@ -1,3 +1,8 @@
+/**
+ Copyright (c) 2013 Barend Garvelink
+
+ This program code can be used subject to the MIT license. See the LICENSE file for details.
+ */
 package nl.sebastiaanschool.contact.app;
 
 import android.app.ActionBar;
@@ -16,6 +21,8 @@ import java.util.List;
 
 public class MainActivity extends Activity implements NavigationFragment.Callback, FragmentManager.OnBackStackChangedListener, HorizontalSlidingFragment.Callback, DataLoadingCallback {
 
+    private String NAVIGATION_FRAGMENT_TAG = "navFrag";
+    private NavigationFragment navigationFragment;
     private boolean detailFragmentVisible;
 
     @Override
@@ -26,7 +33,12 @@ public class MainActivity extends Activity implements NavigationFragment.Callbac
         getActionBar().setIcon(R.drawable.ic_sebastiaan_48dp_white);
         setContentView(R.layout.activity_main);
         getFragmentManager().addOnBackStackChangedListener(this);
-        getFragmentManager().beginTransaction().add(R.id.main__content_container, new NavigationFragment()).commit();
+        if (savedInstanceState == null) {
+            navigationFragment = new NavigationFragment();
+            getFragmentManager().beginTransaction().add(R.id.main__content_container, navigationFragment, NAVIGATION_FRAGMENT_TAG).commit();
+        } else {
+            navigationFragment = (NavigationFragment) getFragmentManager().findFragmentByTag(NAVIGATION_FRAGMENT_TAG);
+        }
         Analytics.trackAppOpened(getIntent());
     }
 
@@ -61,6 +73,7 @@ public class MainActivity extends Activity implements NavigationFragment.Callbac
     }
 
     private void callSebastiaan() {
+        Analytics.trackEvent("Navigate to dialer");
         final String number = getResources().getString(R.string.call_url);
         final Intent dial = new Intent(Intent.ACTION_DIAL, Uri.parse(number));
         dial.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -86,6 +99,7 @@ public class MainActivity extends Activity implements NavigationFragment.Callbac
     private void pushFragment(HorizontalSlidingFragment fragment, String label) {
         if (detailFragmentVisible)
             return;
+        detailFragmentVisible = true;
         Analytics.trackEvent("Navigate to " + label);
         FragmentTransaction tx = getFragmentManager().beginTransaction();
         fragment.addWithAnimation(tx, R.id.main__content_container, label);
@@ -112,18 +126,25 @@ public class MainActivity extends Activity implements NavigationFragment.Callbac
     }
 
     @Override
-    public void onSlidingFragmentBeginAnimation(HorizontalSlidingFragment source, boolean willOpen) {
+    public void onSlidingFragmentBeginAnimation(HorizontalSlidingFragment source, boolean willSlideIntoView) {
         ActionBar actionBar = getActionBar();
         actionBar.setHomeButtonEnabled(false);
         actionBar.setDisplayHomeAsUpEnabled(false);
-        // TODO optimize GPU overdraw: -> toggle navigationFragment's view visibility before/after sliding animation.
+        if (!willSlideIntoView) {
+            // Before the detail fragment begins moving out of screen, make the underlying navigation fragment visible.
+            navigationFragment.setVisible(true);
+        }
     }
 
     @Override
-    public void onSlidingFragmentEndAnimation(HorizontalSlidingFragment source, boolean hasOpened) {
+    public void onSlidingFragmentEndAnimation(HorizontalSlidingFragment source, boolean didSlideIntoView) {
         ActionBar actionBar = getActionBar();
-        actionBar.setHomeButtonEnabled(hasOpened);
-        actionBar.setDisplayHomeAsUpEnabled(hasOpened);
+        actionBar.setHomeButtonEnabled(didSlideIntoView);
+        actionBar.setDisplayHomeAsUpEnabled(didSlideIntoView);
+        if (didSlideIntoView) {
+            // After the detail fragment has appeared on top of the navigation fragment, hide the latter to reduce GPU overdraw.
+            navigationFragment.setVisible(false);
+        }
     }
 
     @Override
