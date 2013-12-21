@@ -6,4 +6,4 @@ before_install:
     - "gem install cocoapods"
     - "gem update cocoapods"
     - "cd $TRAVIS_BUILD_DIR/iOS/SebastiaanSchool/ && pod install"
-script: "xctool test -sdk iphonesimulator -arch i386"
+script: "xctool test -sdk iphonesimulator -arch i386 -freshSimulator -freshInstall"
