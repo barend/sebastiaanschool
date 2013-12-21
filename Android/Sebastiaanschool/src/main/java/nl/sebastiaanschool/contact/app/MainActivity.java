@@ -13,15 +13,21 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.view.accessibility.AccessibilityEventCompat;
+import android.support.v4.view.accessibility.AccessibilityRecordCompat;
 import android.view.MenuItem;
 import android.view.Window;
+import android.view.accessibility.AccessibilityEvent;
+import android.view.accessibility.AccessibilityManager;
 
 import java.util.List;
 
 public class MainActivity extends Activity implements NavigationFragment.Callback, FragmentManager.OnBackStackChangedListener, HorizontalSlidingFragment.Callback, DataLoadingCallback {
 
     private String NAVIGATION_FRAGMENT_TAG = "navFrag";
+    private AccessibilityManager accessibilityManager;
     private NavigationFragment navigationFragment;
     private boolean detailFragmentVisible;
 
@@ -31,6 +37,9 @@ public class MainActivity extends Activity implements NavigationFragment.Callbac
         getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
         getWindow().requestFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         getActionBar().setIcon(R.drawable.ic_sebastiaan_48dp_white);
+        if (Build.VERSION.SDK_INT >= 18) {
+            getActionBar().setHomeActionContentDescription(R.string.navigation__home_as_up_desc);
+        }
         setContentView(R.layout.activity_main);
         getFragmentManager().addOnBackStackChangedListener(this);
         if (savedInstanceState == null) {
@@ -39,6 +48,7 @@ public class MainActivity extends Activity implements NavigationFragment.Callbac
         } else {
             navigationFragment = (NavigationFragment) getFragmentManager().findFragmentByTag(NAVIGATION_FRAGMENT_TAG);
         }
+        accessibilityManager = (AccessibilityManager) getSystemService(ACCESSIBILITY_SERVICE);
         Analytics.trackAppOpened(getIntent());
     }
 
@@ -46,10 +56,10 @@ public class MainActivity extends Activity implements NavigationFragment.Callbac
     public void onItemSelected(int item) {
         switch (item) {
             case ITEM_AGENDA:
-                pushFragment(new AgendaFragment(), getString(R.string.navigation__agenda));
+                pushFragment(new AgendaFragment());
                 break;
             case ITEM_BULLETIN:
-                pushFragment(new BulletinFragment(), getString(R.string.navigation__bulletin));
+                pushFragment(new BulletinFragment());
                 break;
             case ITEM_CALL:
                 callSebastiaan();
@@ -58,10 +68,10 @@ public class MainActivity extends Activity implements NavigationFragment.Callbac
                 GrabBag.openUri(this, getString(R.string.home_url));
                 break;
             case ITEM_NEWSLETTER:
-                pushFragment(new NewsletterFragment(), getString(R.string.navigation__newsletter));
+                pushFragment(new NewsletterFragment());
                 break;
             case ITEM_TEAM:
-                pushFragment(new TeamFragment(), getString(R.string.navigation__team));
+                pushFragment(new TeamFragment());
                 break;
             case ITEM_TWITTER:
                 GrabBag.openUri(this, getString(R.string.twitter_url));
@@ -96,10 +106,11 @@ public class MainActivity extends Activity implements NavigationFragment.Callbac
         }
     }
 
-    private void pushFragment(HorizontalSlidingFragment fragment, String label) {
+    private void pushFragment(HorizontalSlidingFragment fragment) {
         if (detailFragmentVisible)
             return;
         detailFragmentVisible = true;
+        String label = getString(fragment.getTitleResId());
         Analytics.trackEvent("Navigate to " + label);
         FragmentTransaction tx = getFragmentManager().beginTransaction();
         fragment.addWithAnimation(tx, R.id.main__content_container, label);
@@ -130,6 +141,7 @@ public class MainActivity extends Activity implements NavigationFragment.Callbac
         ActionBar actionBar = getActionBar();
         actionBar.setHomeButtonEnabled(false);
         actionBar.setDisplayHomeAsUpEnabled(false);
+        actionBar.setSubtitle(null);
         if (!willSlideIntoView) {
             // Before the detail fragment begins moving out of screen, make the underlying navigation fragment visible.
             navigationFragment.setVisible(true);
@@ -144,7 +156,36 @@ public class MainActivity extends Activity implements NavigationFragment.Callbac
         if (didSlideIntoView) {
             // After the detail fragment has appeared on top of the navigation fragment, hide the latter to reduce GPU overdraw.
             navigationFragment.setVisible(false);
+            final int titleResId = source.getTitleResId();
+            if (titleResId != 0) {
+                final String title = getString(titleResId);
+                actionBar.setSubtitle(title);
+                announce(getString(R.string.accessibility__announce_open_page, title));
+            }
+        } else {
+            announce(getString(R.string.accessibility__announce_return_home));
         }
+    }
+
+    /**
+     * AccessibilityService voodoo lifted from http://stackoverflow.com/a/18502185/49489.
+     */
+    private void announce(final CharSequence announcement) {
+        if (!accessibilityManager.isEnabled()) {
+            return;
+        }
+        final int eventType = Build.VERSION.SDK_INT < 16
+                ? AccessibilityEvent.TYPE_VIEW_FOCUSED
+                : AccessibilityEventCompat.TYPE_ANNOUNCEMENT;
+        AccessibilityEvent event = AccessibilityEvent.obtain(eventType);
+        event.setEventTime(System.currentTimeMillis());
+        event.setEnabled(true);
+        event.setClassName(MainActivity.class.getName());
+        event.setPackageName(getPackageName());
+        event.getText().add(announcement);
+        final AccessibilityRecordCompat record = new AccessibilityRecordCompat(event);
+        record.setSource(this.findViewById(android.R.id.content));
+        accessibilityManager.sendAccessibilityEvent(event);
     }
 
     @Override
