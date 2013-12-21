@@ -11,6 +11,8 @@ When looking into running this code yourself, you will need a Parse.com account.
 
 After setting your credentials in the said setEnv.sh file, run all curl scripts in the cloudcode project.
 
+Continous integration is available on Travis-CI: https://travis-ci.org/jeroenleenarts/sebastiaanschool/
+
 ## Building the Android app
 
 You need to download the Parse.com Android library and put it into the `Android/Sebastiaanschool/libs/` directory.
