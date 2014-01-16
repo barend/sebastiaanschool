@@ -61,7 +61,7 @@ Parse.Cloud.afterSave("Bulletin", function(request) {
 	iosQuery.equalTo('deviceType', 'ios');
 	
 	Parse.Push.send({
-	  channels: [ "bulletin" ],
+	  channels: [ "" ],
 	  where: iosQuery,
 	  data: {
 	    alert: "Nieuwe mededeling: " + request.object.get("title"),
@@ -81,7 +81,7 @@ Parse.Cloud.afterSave("Bulletin", function(request) {
 	androidQuery.equalTo('deviceType', 'android');
 	
 	Parse.Push.send({
-	  channels: [ "" ],
+	  channels: [ "bulletin" ],
 	  where: androidQuery,
 	  data: {
 	    alert: "Nieuwe mededeling: " + request.object.get("title")
