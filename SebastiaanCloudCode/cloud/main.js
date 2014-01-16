@@ -40,6 +40,7 @@ Parse.Cloud.afterSave("NewsLetter", function(request) {
 	  where: androidQuery,
 	  data: {
 	    alert: "Er is een nieuwe nieuwsbrief: " + request.object.get("name")
+	  , action: "nl.sebastiaanschool.contact.app.OPEN_PAGE"
 	  }
 	}, {
   	  success: function() {
@@ -85,6 +86,7 @@ Parse.Cloud.afterSave("Bulletin", function(request) {
 	  where: androidQuery,
 	  data: {
 	    alert: "Nieuwe mededeling: " + request.object.get("title")
+	  , action: "nl.sebastiaanschool.contact.app.OPEN_PAGE"
 	  }
 	}, {
 	  success: function() {
