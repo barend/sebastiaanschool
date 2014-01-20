@@ -16,7 +16,6 @@ Parse.Cloud.afterSave("NewsLetter", function(request) {
 	iosQuery.equalTo('deviceType', 'ios');
 	
 	Parse.Push.send({
-	  channels: [ "" ],
 	  where: iosQuery,
 	  data: {
 	    alert: "Er is een nieuwe nieuwsbrief: " + request.object.get("name"),
@@ -35,9 +34,9 @@ Parse.Cloud.afterSave("NewsLetter", function(request) {
 	
 	var androidQuery = new Parse.Query(Parse.Installation);
 	androidQuery.equalTo('deviceType', 'android');
+	androidQuery.equalTo('channels', 'newsletter');
 	
 	Parse.Push.send({
-	  channels: [ "newsletter" ],
 	  where: androidQuery,
 	  data: {
   		action: "nl.sebastiaanschool.contact.app.OPEN_PAGE",
@@ -65,7 +64,6 @@ Parse.Cloud.afterSave("Bulletin", function(request) {
 	iosQuery.equalTo('deviceType', 'ios');
 	
 	Parse.Push.send({
-	  channels: [ "" ],
 	  where: iosQuery,
 	  data: {
 	    alert: "Nieuwe mededeling: " + request.object.get("title"),
@@ -84,9 +82,9 @@ Parse.Cloud.afterSave("Bulletin", function(request) {
 	
 	var androidQuery = new Parse.Query(Parse.Installation);
 	androidQuery.equalTo('deviceType', 'android');
+	androidQuery.equalTo('channels', 'bulletin');
 	
 	Parse.Push.send({
-	  channels: [ "bulletin" ],
 	  where: androidQuery,
 	  data: {
 		action: "nl.sebastiaanschool.contact.app.OPEN_PAGE",
