@@ -39,7 +39,7 @@ Parse.Cloud.afterSave("NewsLetter", function(request) {
 	Parse.Push.send({
 	  where: androidQuery,
 	  data: {
-  		action: "nl.sebastiaanschool.contact.app.OPEN_PAGE",
+ 		action: "nl.sebastiaanschool.contact.app.OPEN_NEWSLETTER",
 		title: "Nieuwe nieuwsbrief",
 	    alert: request.object.get("name")
 	  }
@@ -86,7 +86,7 @@ Parse.Cloud.afterSave("Bulletin", function(request) {
 	Parse.Push.send({
 	  where: androidQuery,
 	  data: {
-		action: "nl.sebastiaanschool.contact.app.OPEN_PAGE",
+		action: "nl.sebastiaanschool.contact.app.OPEN_BULLETIN",
 		title: "Nieuwe mededeling",
 	    alert: request.object.get("title")
 	  }
