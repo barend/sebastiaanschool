@@ -32,12 +32,8 @@ Parse.Cloud.afterSave("NewsLetter", function(request) {
   	  }
 	});
 	
-	var androidQuery = new Parse.Query(Parse.Installation);
-	androidQuery.equalTo('deviceType', 'android');
-	androidQuery.equalTo('channels', 'newsletter');
-	
 	Parse.Push.send({
-	  where: androidQuery,
+      channels: [ "newsletter-android" ],
 	  data: {
  		action: "nl.sebastiaanschool.contact.app.OPEN_NEWSLETTER",
 		title: "Nieuwe nieuwsbrief",
@@ -80,12 +76,8 @@ Parse.Cloud.afterSave("Bulletin", function(request) {
 	  }
 	});
 	
-	var androidQuery = new Parse.Query(Parse.Installation);
-	androidQuery.equalTo('deviceType', 'android');
-	androidQuery.equalTo('channels', 'bulletin');
-	
 	Parse.Push.send({
-	  where: androidQuery,
+      channels: [ "bulletin-android" ],
 	  data: {
 		action: "nl.sebastiaanschool.contact.app.OPEN_BULLETIN",
 		title: "Nieuwe mededeling",
