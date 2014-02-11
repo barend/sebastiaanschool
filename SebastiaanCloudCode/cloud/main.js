@@ -38,7 +38,6 @@ Parse.Cloud.afterSave("NewsLetter", function(request) {
  		action: "nl.sebastiaanschool.contact.app.OPEN_NEWSLETTER",
 		title: "Nieuwe nieuwsbrief",
 	    alert: request.object.get("name")
-		
 	  }
 	}, {
   	  success: function() {
