@@ -33,3 +33,16 @@ exports.create = function(req, res) {
     res,send(500, 'Failed saving newsletter');
   });
 };
+
+// Delete a post corresponding to the specified id.
+exports.delete = function(req, res) {
+  var newsletter = new Newsletter();
+  newsletter.id = req.params.id;
+
+  newsletter.destroy().then(function(results) {
+    res.redirect('/newsletters');
+  },
+  function() {
+    res.send(500, 'Failed deleting post');
+  });
+};

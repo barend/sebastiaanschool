@@ -16,6 +16,7 @@ app.use(express.bodyParser());    // Middleware for reading request body
 app.use(express.cookieParser('Ns66$yQmAs{6R>9O6CFFOg40PoZeJh'));
 app.use(parseExpressCookieSession({ cookie: { maxAge: 3600000 } }));
 app.use(parseExpressHttpsRedirect()); // Middleware to redirect all requests to use https.
+app.use(express.methodOverride());
 
 // RESTful routes
 app.get('/', newslettersController.index);
@@ -24,6 +25,6 @@ app.get('/logout', loginController.logout);
 app.post('/login', loginController.login);
 app.get('/newsletters', newslettersController.index);
 app.post('/newsletters', newslettersController.create);
-
+app.del('/newsletters/:id', newslettersController.delete);
 // Attach the Express app to Cloud Code.
 app.listen();

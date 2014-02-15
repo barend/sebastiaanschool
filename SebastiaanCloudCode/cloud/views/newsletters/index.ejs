@@ -4,8 +4,14 @@
 <div class="main_content">
   	<% newsletters.forEach(function(newsletter) { %>
   		<div class="post_link">
-	  		<h1><a href="<%= newsletter.get("url") %>"><%= newsletter.get("name") %></a></h1>
-  		</div>
+                  <h3><a href="<%= newsletter.get("url") %>"><%= newsletter.get("name") %></a></h3>
+                    <form action="<%= '/newsletters/' + newsletter.id %>" method="post">
+                      <!-- This hidden element causes express.methodOverride middleware to override
+                           the HTTP method from post to delete for a truly RESTful interface. -->
+                      <input type='hidden' name='_method' value='delete' />
+                      <input type='submit' value='delete' />
+                    </form>
+                </div>
     <% }) %>
 </div>
 
@@ -15,7 +21,7 @@
     <input name='name' />
   </div>
   <div>
-    <label>Body</label>
+    <label>URL</label>
     <input name='url'/>
   </div>
   <div>
