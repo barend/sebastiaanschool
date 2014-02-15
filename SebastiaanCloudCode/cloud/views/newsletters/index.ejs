@@ -9,5 +9,19 @@
     <% }) %>
 </div>
 
+<form class='new_post' method='post' action='/newsletters'>
+  <div>
+    <label>Naam</label>
+    <input name='name' />
+  </div>
+  <div>
+    <label>Body</label>
+    <input name='url'/>
+  </div>
+  <div>
+    <input class='button' type='submit' value='Publish' />
+  </div>
+</form>
+
 <!-- Include the footer partial -->
 <% include ../_footer %>
