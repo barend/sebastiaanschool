@@ -6,6 +6,8 @@
 // You should have received a copy of the license along with this
 // work.  If not, see <http://creativecommons.org/licenses/by-nc/3.0/>.
 
+require('cloud/app.js');
+
 Parse.Cloud.beforeSave("NewsLetter", function(request, response) {
   var publishedAt = request.object.get("publishedAt");
   if (publishedAt == null ) {

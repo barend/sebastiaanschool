@@ -1,0 +1,13 @@
+<!-- Include the header partial -->
+<% include ../_header %>
+
+<div class="main_content">
+  	<% newsletters.forEach(function(newsletter) { %>
+  		<div class="post_link">
+	  		<h1><a href="<%= newsletter.get("url") %>"><%= newsletter.get("name") %></a></h1>
+  		</div>
+    <% }) %>
+</div>
+
+<!-- Include the footer partial -->
+<% include ../_footer %>
