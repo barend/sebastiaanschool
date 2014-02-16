@@ -1,33 +1,30 @@
-<!-- Include the header partial -->
 <% include ../_header %>
 
-<div class="main_content">
-  	<% newsletters.forEach(function(newsletter) { %>
-  		<div class="post_link">
-                  <h3><a href="<%= newsletter.get("url") %>"><%= newsletter.get("name") %></a></h3>
-                    <form action="<%= '/newsletters/' + newsletter.id %>" method="post">
-                      <!-- This hidden element causes express.methodOverride middleware to override
-                           the HTTP method from post to delete for a truly RESTful interface. -->
-                      <input type='hidden' name='_method' value='delete' />
-                      <input type='submit' value='delete' />
-                    </form>
-                </div>
-    <% }) %>
+<div class="row">
+	<h2>
+		Niewsbrief Toevoegen
+	</h2>
+	<form class="navbar-form" role="form" action="/newsletters" method="post">
+		<div class="form-group">
+			<input name="name" placeholder="Naam" class="form-control">
+		</div>
+		<div class="form-group">
+			<input name="url" placeholder="URL" class="form-control">
+		</div>
+		<button type="submit" class="btn btn-success">Toevoegen</button>
+	</form>
 </div>
 
-<form class='new_post' method='post' action='/newsletters'>
-  <div>
-    <label>Naam</label>
-    <input name='name' />
-  </div>
-  <div>
-    <label>URL</label>
-    <input name='url'/>
-  </div>
-  <div>
-    <input class='button' type='submit' value='Publish' />
-  </div>
-</form>
+<% newsletters.forEach(function(newsletter) { %>
+<div class="row">
+	<h2><a href="<%= newsletter.get("url") %>"><%= newsletter.get("name") %></a></h3>
+	<form action="<%= '/newsletters/' + newsletter.id %>" method="post">
+		<!-- This hidden element causes express.methodOverride middleware to override
+			the HTTP method from post to delete for a truly RESTful interface. -->
+		<input type='hidden' name='_method' value='delete' />
+		<button type="submit" class="btn btn-danger">Verwijderen</button>
+	</form>
+</div>
+<% }) %>
 
-<!-- Include the footer partial -->
 <% include ../_footer %>
