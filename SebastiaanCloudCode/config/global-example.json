@@ -1,11 +1,18 @@
 {
     "applications": {
-        "Seb@stiaan School": {
+        "production": {
             "applicationId": "your_app_id", 
             "masterKey": "your_master_key"
         }, 
         "_default": {
-            "link": "Seb@stiaan School"
+            "link": "development"
+        }, 
+        "development": {
+            "applicationId": "your_dev_app_id", 
+            "masterKey": "your_dev_master_key"
         }
+    }, 
+    "global": {
+        "parseVersion": "1.2.16"
     }
 }
