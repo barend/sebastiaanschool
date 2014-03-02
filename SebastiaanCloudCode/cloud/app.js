@@ -11,6 +11,7 @@ var express = require('express');
 var parseExpressHttpsRedirect = require('parse-express-https-redirect');
 var parseExpressCookieSession = require('parse-express-cookie-session');
 
+var bulletinsController = require('cloud/controllers/bulletins.js')
 var newslettersController = require('cloud/controllers/newsletters.js');
 var loginController = require('cloud/controllers/login.js');
 
@@ -30,8 +31,14 @@ app.get('/', newslettersController.index);
 app.get('/login', loginController.index);
 app.get('/logout', loginController.logout);
 app.post('/login', loginController.login);
+
 app.get('/newsletters', newslettersController.index);
 app.post('/newsletters', newslettersController.create);
 app.del('/newsletters/:id', newslettersController.delete);
+
+app.get('/bulletins', bulletinsController.index);
+app.post('/bulletins', bulletinsController.create);
+app.del('/bulletins/:id', bulletinsController.delete);
+
 // Attach the Express app to Cloud Code.
 app.listen();

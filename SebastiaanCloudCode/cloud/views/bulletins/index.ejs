@@ -4,8 +4,8 @@
 	<div class="container-fluid">
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				<li><a href="/bulletins">Mededelingen</a></li>
-				<li class="active"><a href="/newsletters">Nieuwsbrieven</a></li>
+				<li class="active"><a href="/bulletins">Mededelingen</a></li>
+				<li><a href="/newsletters">Nieuwsbrieven</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><div class="btn-group"><a class="btn btn-default navbar-btn" href="/logout" role="button">Afmelden</a></div></li>
@@ -16,23 +16,30 @@
 
 <div class="row">
 	<h2>
-		Niewsbrief Toevoegen
+		Mededeling Toevoegen
 	</h2>
-	<form class="navbar-form" role="form" action="/newsletters" method="post">
+	<form class="form-horizontal" role="form" action="/bulletins" method="post">
 		<div class="form-group">
-			<input name="name" placeholder="Naam" class="form-control">
+			<input name="title" placeholder="Naam mededeling" class="form-control">
 		</div>
+		<!--div class="form-group">
+			<input name="body" placeholder="Mededeling tekst" class="form-control">
+		</div>-->
+		
 		<div class="form-group">
-			<input name="url" placeholder="URL" class="form-control">
+		  <label class="control-label" for="body">Mededeling tekst</label>
+		    <textarea class="form-control" id="body" name="body"></textarea>
 		</div>
 		<button type="submit" class="btn btn-success">Toevoegen</button>
 	</form>
 </div>
 
-<% newsletters.forEach(function(newsletter) { %>
+<hr>
+<% bulletins.forEach(function(bulletin) { %>
 <div class="row">
-	<h2><a href="<%= newsletter.get("url") %>"><%= newsletter.get("name") %></a></h3>
-	<form action="<%= '/newsletters/' + newsletter.id %>" method="post">
+	<h2><%= bulletin.get("title") %></h3>
+	<p><%= bulletin.get("body") %></p>
+	<form action="<%= '/bulletins/' + bulletin.id %>" method="post">
 		<!-- This hidden element causes express.methodOverride middleware to override
 			the HTTP method from post to delete for a truly RESTful interface. -->
 		<input type='hidden' name='_method' value='delete' />
