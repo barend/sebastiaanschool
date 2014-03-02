@@ -19,7 +19,7 @@ exports.index = function(req, res) {
     query.descending('publishedAt');
     query.find().then(function(newsletters) {
         res.render('newsletters/index', {
-            newsletters: newsletters, test: "This is a test."
+            newsletters: newsletters
         });
     },
     function () {
